@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private float Vertical;
     private float MouseX;
     private float MouseY;
-
+    private PlayerWeapon playerWeapon;
 
     public GameObject PlayerCamera;
     bool LockRotation;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerAnimator = GetComponent<Animator>();
         LockRotation = false;
+        playerWeapon = GetComponent<PlayerWeapon>();
     }
 
     // Update is called once per frame
@@ -38,7 +39,8 @@ public class PlayerController : MonoBehaviour
                 Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
                 MouseX = CrossPlatformInputManager.GetAxis("Mouse X");
                 MouseY = CrossPlatformInputManager.GetAxis("Mouse Y");
-                StartCoroutine(RotatePlayerTowardsCamera(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0 , CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
+                if(!playerWeapon.Aiming)
+                    StartCoroutine(RotatePlayerTowardsCamera(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0 , CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
                 if (PlayerAnimator.GetFloat("Speed") < 1f && !MovementSpeedChanging)
                 {
                     MovementSpeedChanging = true;

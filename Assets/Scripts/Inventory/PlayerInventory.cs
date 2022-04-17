@@ -61,6 +61,7 @@ public class PlayerInventory : MonoBehaviour
     }
     public void PickUpItem(PickableInventoryItem ItemtoPick)
     {
+        PickIndicator.SetActive(false);
         PlayerAnimator.SetTrigger("Pick");
         if (ItemtoPick.itemData.itemType == ItemType.BuildingMaterials)
             AddBuildingMaterials(ItemtoPick);
@@ -84,7 +85,7 @@ public class PlayerInventory : MonoBehaviour
         GameObject newItem = Instantiate(ItemPrefab, BuildingMaterials.transform);
         newItem.GetComponent<Item>().CreateItem(ItemtoPick.itemData);
         BuildingItems.Add(newItem.GetComponent<Item>());
-        PickIndicator.SetActive(false);
+        
     }
     void AddWeapons(PickableInventoryItem ItemtoPick)
     {
@@ -101,7 +102,6 @@ public class PlayerInventory : MonoBehaviour
         GameObject newItem = Instantiate(ItemPrefab, Weapons.transform);
         newItem.GetComponent<Item>().CreateItem(ItemtoPick.itemData);
         BuildingItems.Add(newItem.GetComponent<Item>());
-        PickIndicator.SetActive(false);
     }
     void AddEssentials(PickableInventoryItem ItemtoPick)
     {
@@ -117,6 +117,5 @@ public class PlayerInventory : MonoBehaviour
         GameObject newItem = Instantiate(ItemPrefab, Essentials.transform);
         newItem.GetComponent<Item>().CreateItem(ItemtoPick.itemData);
         EssentialItems.Add(newItem.GetComponent<Item>());
-        PickIndicator.SetActive(false);
     }
 }

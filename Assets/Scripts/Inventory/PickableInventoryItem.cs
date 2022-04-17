@@ -27,7 +27,8 @@ public class PickableInventoryItem : MonoBehaviour
     {
         if(other.gameObject.tag=="Player")
         {
-            PlayerInventory.InventoryReference.InventoryItemInRange(true);
+            if(!InInventory)
+                PlayerInventory.InventoryReference.InventoryItemInRange(true);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -37,6 +38,7 @@ public class PickableInventoryItem : MonoBehaviour
             if(Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButton("Pick"))
             {
                 PlayerInventory.InventoryReference.PickUpItem(this);
+                InInventory = true;
             }
         }
     }

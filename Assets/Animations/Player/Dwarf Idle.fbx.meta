@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: abb6038de86d169438e31a35562017e8
+guid: 9fd0a7d1ccfaed947ae75431691c6f01
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Jogging
+    second: Dwarf Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,21 +35,21 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jogging
+      name: Dwarf Idle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 42
+      lastFrame: 265
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
@@ -510,23 +510,23 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Emma T-Pose(Clone)
+    - name: Emma(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftPlatform
-      parentName: Emma T-Pose(Clone)
+      parentName: Emma(Clone)
       position: {x: -0.17501634, y: -0.000000013998998, z: 0.013675372}
       rotation: {x: 0.5213339, y: -0.5213339, z: -0.47771436, w: 0.47771436}
       scale: {x: 1, y: 1.0000001, z: 1.0000001}
     - name: RightPlatform
-      parentName: Emma T-Pose(Clone)
+      parentName: Emma(Clone)
       position: {x: 0.17501634, y: -0.000000009824899, z: 0.013675469}
       rotation: {x: 0.47771448, y: -0.47771448, z: -0.52133375, w: 0.52133375}
       scale: {x: 1, y: 1, z: 1}
     - name: Root
-      parentName: Emma T-Pose(Clone)
+      parentName: Emma(Clone)
       position: {x: 0.0000021965, y: 0.00480731, z: 0.00013329042}
       rotation: {x: -0.5000008, y: 0.50000095, z: 0.49999923, w: -0.49999905}
       scale: {x: 1, y: 1, z: 1}
@@ -700,6 +700,16 @@ ModelImporter:
       position: {x: -0.026476387, y: 0.000000024223327, z: 0}
       rotation: {x: -0.0000083165705, y: 0.000005706332, z: 0.06986393, w: 0.99755657}
       scale: {x: 0.9999955, y: 1.0000043, z: 1.0000002}
+    - name: Neck
+      parentName: Chest
+      position: {x: -0.1377692, y: -0.025584212, z: -0.000000030259823}
+      rotation: {x: -0.0000006791392, y: 0.0000054136567, z: -0.1811088, w: 0.9834631}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Neck
+      position: {x: -0.09212655, y: -0.0061135804, z: 0.00000003475746}
+      rotation: {x: 0.00000047523613, y: -0.0000049878095, z: 0.1638987, w: 0.9864772}
+      scale: {x: 1, y: 1, z: 1}
     - name: RightShoulder
       parentName: Chest
       position: {x: -0.09914172, y: -0.0102978675, z: -0.041098546}
@@ -820,18 +830,23 @@ ModelImporter:
       position: {x: -0.02647663, y: 0, z: 0.000000048446655}
       rotation: {x: 0.00000952211, y: -0.000003829337, z: 0.06986335, w: 0.99755657}
       scale: {x: 1.0000051, y: 0.99999523, z: 0.9999996}
-    - name: Neck
-      parentName: Chest
-      position: {x: -0.1377692, y: -0.025584212, z: -0.000000030259823}
-      rotation: {x: -0.0000006791392, y: 0.0000054136567, z: -0.1811088, w: 0.9834631}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Head
-      parentName: Neck
-      position: {x: -0.09212655, y: -0.0061135804, z: 0.00000003475746}
-      rotation: {x: 0.00000047523613, y: -0.0000049878095, z: 0.1638987, w: 0.9864772}
-      scale: {x: 1, y: 1, z: 1}
     - name: Girl_01
-      parentName: Emma T-Pose(Clone)
+      parentName: Emma(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Girl_002
+      parentName: Emma(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Girl_003
+      parentName: Emma(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Girl_004
+      parentName: Emma(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
@@ -847,7 +862,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 39a96bdef8786a3428961438efa31da4, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 62034760ee684ea4e8219cd3a0f6df22, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
