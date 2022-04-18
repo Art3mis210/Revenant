@@ -20,6 +20,9 @@ public class PlayerInventory : MonoBehaviour
     public GameObject KeyboardPickIndicator;
     public GameObject MobilePickIndicator;
 
+    int Health=10;
+    int MaxHealth=100;
+
     public enum ItemType
     {
         BuildingMaterials = 0,
@@ -117,5 +120,29 @@ public class PlayerInventory : MonoBehaviour
         GameObject newItem = Instantiate(ItemPrefab, Essentials.transform);
         newItem.GetComponent<Item>().CreateItem(ItemtoPick.itemData);
         EssentialItems.Add(newItem.GetComponent<Item>());
+        AssignItemFunction(newItem.GetComponent<Item>());
     }
+    void AssignItemFunction(Item item)
+    {
+        if (item.ID == 0)
+            item.UseItem = Medkit;
+        else if (item.ID == 1)
+            item.UseItem = Bandage;
+    }
+    void Medkit()
+    {
+        Debug.Log("Health increased to Max");
+        Health = MaxHealth;
+    }
+    void Bandage()
+    {
+        Debug.Log("Health Increase by 25");
+        if (MaxHealth - Health > 25)
+        {
+            Health += 25;
+        }
+        else
+            Health = MaxHealth;
+    }
+
 }

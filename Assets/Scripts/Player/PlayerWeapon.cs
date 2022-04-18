@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Cinemachine;
 
 public class PlayerWeapon : MonoBehaviour
 {
@@ -29,7 +30,12 @@ public class PlayerWeapon : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             Aiming = !Aiming;
-            //AimCamera.SetActive(Aiming);
+            AimCamera.SetActive(Aiming);
+            if (Aiming == true)
+            {
+               // AimCamera.GetComponent<CinemachineVirtualCamera>().LookAt = CurrentWeapon.transform;
+               // AimCamera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentWeapon.transform;
+            }
         }
         if (Aiming)
         {

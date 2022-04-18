@@ -11,6 +11,8 @@ public class Item : MonoBehaviour
     public Text QuantityText;
     public Image ItemImage;
     public GameObject UseDropButton;
+    public delegate void Itemfunction();
+    public Itemfunction UseItem;
     public void CreateItem(InventoryItems itemData)
     {
         this.ID = itemData.ID;
@@ -45,9 +47,13 @@ public class Item : MonoBehaviour
     {
         if (Quantity == 1)
         {
-            Destroy(this);
+            Destroy(transform.gameObject);
         }
         else
             DecreaseQuantity();
+    }
+    public void OnUseItem()
+    {
+        UseItem();
     }
 }
