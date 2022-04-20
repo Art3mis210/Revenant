@@ -8,17 +8,24 @@ public class PlayerWeapon : MonoBehaviour
 {
     public Weapon CurrentWeapon;
     public float AimSensitivity;
+
     private Animator playerAnimator;
     public GameObject WeaponIK;
+
     public Vector3 Offset;
     public bool Aiming;
+
     Transform Chest;
     public GameObject AimCamera;
     float Turn;
+
+    PlayerController playerController;
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
         Chest = playerAnimator.GetBoneTransform(HumanBodyBones.Spine);
+        playerController = GetComponent<PlayerController>();
+
     }
     private void OnAnimatorIK()
     {
@@ -39,8 +46,11 @@ public class PlayerWeapon : MonoBehaviour
         }
         if (Aiming)
         {
-            Turn += CrossPlatformInputManager.GetAxis("Mouse X") * AimSensitivity;
-            transform.localRotation = Quaternion.Euler(0, Turn, 0);
+            if (!playerController.InCover)
+            {
+                Turn += CrossPlatformInputManager.GetAxis("Mouse X") * AimSensitivity;
+                transform.localRotation = Quaternion.Euler(0, Turn, 0);
+            }
         }
     }
     void LateUpdate()
