@@ -71,4 +71,13 @@ public class Weapon : MonoBehaviour
             t += Time.deltaTime;
         }
     }
+    /*IEnumerator ChangeHandWeight(float targetfloat Duration)
+    {
+        float t = 0;
+        while(t<Duration)
+        {
+
+            yield return null;
+        }
+    }*/
 }

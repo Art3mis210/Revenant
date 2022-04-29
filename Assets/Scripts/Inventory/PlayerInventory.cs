@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -42,9 +43,12 @@ public class PlayerInventory : MonoBehaviour
                 PickIndicator = KeyboardPickIndicator;
         #endif
     }
-    private void Update()
+    void Update()
     {
-        Inventory.SetActive(Input.GetKey(KeyCode.Tab));
+        if(CrossPlatformInputManager.GetButtonDown("Inventory"))
+        {
+            Inventory.SetActive(!Inventory.activeInHierarchy);
+        }
     }
     public static PlayerInventory InventoryReference
     { 

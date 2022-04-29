@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class WeaponIK : MonoBehaviour
 {
-    public Camera MainCamera;
-    // Update is called once per frame
+    public float Speed;
+    float YPos;
     void Update()
     {
-        float YPos = transform.localPosition.y + Input.GetAxis("Mouse Y") / 8;
-        YPos = Mathf.Clamp(YPos, -0.23f, 5f);
-        transform.localPosition = new Vector3(transform.localPosition.x, YPos, transform.localPosition.z);
+     //   if (!CameraLocker.instance.CameraLock)
+        {
+            YPos = transform.localPosition.y + (CrossPlatformInputManager.GetAxis("AimUp") / 8)*Speed*Time.deltaTime;
+            YPos = Mathf.Clamp(YPos, -0.23f, 5f);
+            transform.localPosition = new Vector3(transform.localPosition.x, YPos, transform.localPosition.z);
+        }
     }
 }

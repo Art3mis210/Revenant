@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Walkable
+  - IaCar
+  - Stop
+  - Blocks
+  - Fire
+  - ExecutionTrigger
   layers:
   - Default
   - TransparentFX
@@ -13,8 +18,8 @@ TagManager:
   - Water
   - UI
   - Cover
-  - 
-  - 
+  - ExecutionLayer
+  - Player
   - 
   - 
   - 

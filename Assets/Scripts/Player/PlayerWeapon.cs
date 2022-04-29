@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using Cinemachine;
 
@@ -10,13 +11,17 @@ public class PlayerWeapon : MonoBehaviour
     public float AimSensitivity;
 
     private Animator playerAnimator;
+    public AvatarMask PlayerAvatarMask;
     public GameObject WeaponIK;
 
     public Vector3 Offset;
+    public Vector3 HeadOffset;
     public bool Aiming;
 
     Transform Chest;
+    Transform Head;
     public GameObject AimCamera;
+    public Image TouchJoystick;
     float Turn;
 
     PlayerController playerController;
@@ -24,32 +29,40 @@ public class PlayerWeapon : MonoBehaviour
     {
         playerAnimator = GetComponent<Animator>();
         Chest = playerAnimator.GetBoneTransform(HumanBodyBones.Spine);
+        Head = playerAnimator.GetBoneTransform(HumanBodyBones.Head);
         playerController = GetComponent<PlayerController>();
 
     }
     private void OnAnimatorIK()
     {
-        if(CurrentWeapon!=null && CurrentWeapon.transform.gameObject.activeInHierarchy)
+        if (CurrentWeapon != null && CurrentWeapon.transform.gameObject.activeInHierarchy)
+        {
             CurrentWeapon.WeaponIK(Aiming);
+        }
     }
     private void Update()
     {
-        if(Input.GetMouseButtonDown(1))
+        if((CrossPlatformInputManager.GetButtonDown("Aim")) && !playerController.InCover && CurrentWeapon.transform.gameObject.activeInHierarchy)
         {
             Aiming = !Aiming;
             AimCamera.SetActive(Aiming);
             if (Aiming == true)
             {
+                Turn = transform.rotation.eulerAngles.y;
+                TouchJoystick.enabled = Aiming ;
                // AimCamera.GetComponent<CinemachineVirtualCamera>().LookAt = CurrentWeapon.transform;
                // AimCamera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentWeapon.transform;
             }
         }
         if (Aiming)
         {
-            if (!playerController.InCover)
+            if (!playerController.InCover || playerController.DisableCoverMovement)
             {
-                Turn += CrossPlatformInputManager.GetAxis("Mouse X") * AimSensitivity;
-                transform.localRotation = Quaternion.Euler(0, Turn, 0);
+                //if (!CameraLocker.instance.CameraLock)
+                {
+                    Turn += CrossPlatformInputManager.GetAxis("AimSide") * AimSensitivity * Time.deltaTime;
+                    transform.localRotation = Quaternion.Euler(0, Turn, 0);
+                }
             }
         }
     }
@@ -59,6 +72,32 @@ public class PlayerWeapon : MonoBehaviour
         {
             Chest.LookAt(WeaponIK.transform);
             Chest.rotation = Chest.rotation * Quaternion.Euler(Offset);
+            if(playerController.InCover)
+            {
+                
+                Head.LookAt(WeaponIK.transform);
+                Head.rotation = Head.rotation * Quaternion.Euler(HeadOffset);
+            }
         }
+    }
+    public void CoverAim()
+    {
+        if (CurrentWeapon.gameObject.activeInHierarchy)
+        {
+            Aiming = !Aiming;
+            TouchJoystick.enabled = Aiming;
+            AimCamera.SetActive(Aiming);
+            if (Aiming == true)
+            {
+                Turn = transform.rotation.eulerAngles.y;
+            }
+        }
+    }
+    public void DisableCurrentWeapon()
+    {
+        Aiming = false;
+        AimCamera.SetActive(false);
+        CurrentWeapon.gameObject.SetActive(false);
+        TouchJoystick.enabled = Aiming;
     }
 }

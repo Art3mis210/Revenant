@@ -35,7 +35,7 @@ public class PickableInventoryItem : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if(Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButton("Pick"))
+            if(Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Pick"))
             {
                 PlayerInventory.InventoryReference.PickUpItem(this);
                 InInventory = true;

@@ -5,19 +5,32 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour
 {
+    #region MovementVariables
     private Animator PlayerAnimator;
     private bool MovementSpeedChanging;
     private float Horizontal;
     private float Vertical;
     private float MouseX;
     private float MouseY;
-    private PlayerWeapon playerWeapon;
+    #endregion
 
+    private PlayerWeapon playerWeapon;
     public GameObject PlayerCamera;
+
+    #region CoverVariables
     public LayerMask CoverLayer;
     bool LockRotation;
-
+    bool ChangingCoverDir;
+    float CoverDir;
+    Vector3 CoverPos;
+    Quaternion CoverRot;
+    bool CoverMovement;
+    bool CoverAimLock;
+    float PlayerSpeed;
+    [HideInInspector] public bool DisableCoverMovement;
     [HideInInspector] public bool InCover;
+    public bool EnableMovement;
+    #endregion
 
     private CapsuleCollider playerCollider;
     RaycastHit hit;
@@ -28,13 +41,19 @@ public class PlayerController : MonoBehaviour
         LockRotation = false;
         playerWeapon = GetComponent<PlayerWeapon>();
         playerCollider = GetComponent<CapsuleCollider>();
+        EnableMovement = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Cover();
+        if(EnableMovement)
+        {   if (!InCover)
+                Movement();
+            else
+                CoverMove();
+            Cover();
+        }
     }
     void Movement()
     {
@@ -47,7 +66,7 @@ public class PlayerController : MonoBehaviour
                 Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
                 MouseX = CrossPlatformInputManager.GetAxis("Mouse X");
                 MouseY = CrossPlatformInputManager.GetAxis("Mouse Y");
-                if(!playerWeapon.Aiming && !InCover)
+                if(!playerWeapon.Aiming)
                     StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0 , CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
                 if (PlayerAnimator.GetFloat("Speed") < 1f && !MovementSpeedChanging)
                 {
@@ -65,13 +84,17 @@ public class PlayerController : MonoBehaviour
             }
             LockRotation = false;
         }
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift) || CrossPlatformInputManager.GetButton("Sprint"))
         {
-            PlayerAnimator.SetBool("Sprint", true);
-            if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
+            if (PlayerSpeed > 0)
             {
-                MovementSpeedChanging = true;
-                StartCoroutine(ChangeMovementSpeed(2, 1f));
+                PlayerAnimator.SetBool("Sprint", true);
+                NoiseManager.Noise.CreateNoise(transform.position);
+                if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
+                {
+                    MovementSpeedChanging = true;
+                    StartCoroutine(ChangeMovementSpeed(2, 1f));
+                }
             }
         }    
         else
@@ -87,41 +110,140 @@ public class PlayerController : MonoBehaviour
     }
     void Cover()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (!playerWeapon.Aiming)
         {
-            if (!PlayerAnimator.GetBool("Cover"))
+            if (Input.GetKeyDown(KeyCode.Q) || CrossPlatformInputManager.GetButtonDown("Cover"))
             {
-                Debug.DrawRay(transform.position, transform.forward, Color.red);
-                if (Physics.Raycast(transform.position, transform.forward, out hit, 2f, CoverLayer))
+                if (!PlayerAnimator.GetBool("Cover"))
                 {
-                    InCover = true;
+                    Debug.DrawRay(transform.position, transform.forward, Color.red);
+                    if (Physics.Raycast(transform.position, transform.forward, out hit, 2f, CoverLayer))
+                    {
+                        InCover = true;
+                    }
+                    else if (Physics.Raycast(transform.position, transform.right, out hit, 2f, CoverLayer))
+                    {
+                        InCover = true;
+                    }
+                    else if (Physics.Raycast(transform.position, -transform.right, out hit, 2f, CoverLayer))
+                    {
+                        InCover = true;
+                    }
+                    else if (Physics.Raycast(transform.position, -transform.forward, out hit, 2f, CoverLayer))
+                    {
+                        InCover = true;
+                    }
+                    if (InCover == true)
+                    {
+                        Vector3 CoverLocation = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                        PlayerAnimator.SetBool("Cover", true);
+                        //PlayerAnimator.applyRootMotion = false;
+                        StartCoroutine(MovePlayerToTarget(CoverLocation - (playerCollider.radius * (CoverLocation - transform.position).normalized), 1f));
+                        StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(-hit.normal), 0.2f));
+                        CoverMovement = true;
+                    }
                 }
-                else if (Physics.Raycast(transform.position, transform.right, out hit, 2f, CoverLayer))
+                else
                 {
-                    InCover = true;
+                    //PlayerAnimator.applyRootMotion = true;
+                    PlayerAnimator.SetBool("Cover", false);
+                    PlayerAnimator.SetBool("CoverAim", false);
+                    InCover = false;
+
                 }
-                else if (Physics.Raycast(transform.position, -transform.right, out hit, 2f, CoverLayer))
+            }
+        }
+    }
+    void CoverMove()
+    {
+        if (CoverMovement)
+        {
+            Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+            if (Horizontal > 0)
+            {
+                if (CoverDir <= 0 && !ChangingCoverDir)
                 {
-                    InCover = true;
+                    ChangingCoverDir = true;
+                    StartCoroutine(ChangeCoverDir(1, 1f));
                 }
-                else if (Physics.Raycast(transform.position, -transform.forward, out hit, 2f, CoverLayer))
+                Debug.DrawRay(transform.position + 0.25f * transform.right, transform.forward, Color.red, 1f);
+                if (Physics.Raycast(transform.position + 0.25f * transform.right, transform.forward, out hit, 2f, CoverLayer))
                 {
-                    InCover = true;
+                    if (DisableCoverMovement)
+                        DisableCoverMovement = false;
+                    PlayerAnimator.SetFloat("CoverPos", Horizontal);
                 }
-                if (InCover == true)
+                else
                 {
-                    Vector3 CoverLocation = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-                    PlayerAnimator.SetBool("Cover", true);
-                    StartCoroutine(MovePlayerToTarget(CoverLocation - (playerCollider.radius * (CoverLocation - transform.position).normalized), 1f));
-                    StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation,Quaternion.LookRotation(-hit.normal), 0.2f));
+                    if (!DisableCoverMovement)
+                    {
+                        DisableCoverMovement = true;
+                        StartCoroutine(StopCoverMovement(1f));
+                    }
+                }
+            }
+            else if (Horizontal < 0)
+            {
+                if (CoverDir >= 0 && !ChangingCoverDir)
+                {
+                    ChangingCoverDir = true;
+                    StartCoroutine(ChangeCoverDir(-1, 1f));
+                }
+                Debug.DrawRay(transform.position - 0.25f * transform.right, transform.forward, Color.red, 1f);
+                if (Physics.Raycast(transform.position - 0.25f * transform.right, transform.forward, out hit, 2f, CoverLayer))
+                {
+                    if (DisableCoverMovement)
+                        DisableCoverMovement = false;
+                    PlayerAnimator.SetFloat("CoverPos", Horizontal);
+                }
+                else
+                {
+                    if (!DisableCoverMovement)
+                    {
+                        DisableCoverMovement = true;
+                        StartCoroutine(StopCoverMovement(1f));
+                    }
                 }
             }
             else
             {
-                PlayerAnimator.SetBool("Cover", false);
-                InCover = false;
+                PlayerAnimator.SetFloat("CoverPos", Horizontal);
+            }
+            PlayerAnimator.SetFloat("CoverDir", CoverDir);
+        }
+        if(DisableCoverMovement)
+        {
+            
+            if(CrossPlatformInputManager.GetButtonDown("Aim") && !CoverAimLock)
+            {
+                if (playerWeapon.CurrentWeapon.gameObject.activeInHierarchy)
+                {
+                    CoverAimLock = true;
+                    PlayerAnimator.SetBool("CoverAim", !PlayerAnimator.GetBool("CoverAim"));
+                    if (PlayerAnimator.GetBool("CoverAim"))
+                    {
+                        CoverPos = transform.position;
+                        CoverRot = transform.rotation;
+                        CoverMovement = false;
+                    }
+                    else
+                    {
+                        Invoke("ReturnToCover", 0.4f);
+                    }
+                }
             }
         }
+
+    }
+    void ReturnToCover()
+    {
+        StartCoroutine(RotatePlayerTowardsTarget(transform.rotation, CoverRot, 1f));
+        StartCoroutine(MovePlayerToTarget(CoverPos, 1f));
+        CoverMovement = true;
+    }
+    public void DisableCoverAimLock()
+    {
+        CoverAimLock = false;
     }
     IEnumerator RotatePlayerTowardsTarget(Quaternion start,Quaternion end,float Duration)
     {
@@ -148,15 +270,44 @@ public class PlayerController : MonoBehaviour
     IEnumerator ChangeMovementSpeed(float RequiredSpeed,float Duration)
     {
         float t = 0f;
-        float CurrentSpeed;
+        float CurrentSpeed=PlayerAnimator.GetFloat("Speed");
         while(t<Duration)
         {
-            CurrentSpeed = PlayerAnimator.GetFloat("Speed");
-            PlayerAnimator.SetFloat("Speed", Mathf.Lerp(CurrentSpeed, RequiredSpeed, t / Duration));
+            //CurrentSpeed = ;
+            PlayerAnimator.SetFloat("Speed",CurrentSpeed=Mathf.Lerp(CurrentSpeed, RequiredSpeed, t / Duration));
             yield return null;
             t += Time.deltaTime;
         }
+        PlayerSpeed = RequiredSpeed;
         MovementSpeedChanging = false;
-
+    }
+    public void ChangeMovement(int Status)
+    {
+        if (Status == 0)
+            EnableMovement = false;
+        else
+            EnableMovement = true;
+    }
+    IEnumerator ChangeCoverDir(float NewDir,float Duration)
+    {
+        float t = 0f;
+        while (t < Duration)
+        {
+            CoverDir=Mathf.Lerp(CoverDir,NewDir,t/Duration);
+            yield return null;
+            t += Time.deltaTime;
+        }
+        ChangingCoverDir = false;
+    }
+    IEnumerator StopCoverMovement(float Duration)
+    {
+        float t = 0f;
+        float CoverPos = PlayerAnimator.GetFloat("CoverPos");
+        while (t < Duration)
+        {
+            PlayerAnimator.SetFloat("CoverPos", CoverPos = Mathf.Lerp(CoverPos, 0, t / Duration));
+            yield return null;
+            t += Time.deltaTime;
+        }
     }
 }
