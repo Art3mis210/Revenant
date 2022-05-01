@@ -74,6 +74,12 @@ public class PlayerController : MonoBehaviour
                 MouseY = CrossPlatformInputManager.GetAxis("Mouse Y");
                 if(!playerWeapon.Aiming)
                     StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0 , CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
+                else
+                {
+                    PlayerAnimator.SetFloat("Vertical", Vertical);
+                    PlayerAnimator.SetFloat("Horizontal", Horizontal);
+                    PlayerAnimator.SetFloat("MoveDir", Vertical + Horizontal);
+                }
                 if (PlayerAnimator.GetFloat("Speed") < 1f && !MovementSpeedChanging)
                 {
                     MovementSpeedChanging = true;

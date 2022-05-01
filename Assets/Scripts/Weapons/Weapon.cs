@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public int LoadedBullets;
+    public int MagLength;
+    public int TotalBullets;
+    public float Recoil;
+    public float TimeToShoot;
+    bool Shooting;
+
+    public Transform Muzzle;
+    public Transform BulletPool;
+    public List<Transform> BulletList;
     private Animator playerAnimator;
     public Transform LeftHand;
     public Transform RightHand;
@@ -17,6 +27,10 @@ public class Weapon : MonoBehaviour
     {
         if (playerAnimator == null)
             playerAnimator = GetComponentInParent<Animator>();
+        if(BulletList==null)
+        {
+            //BulletPool=
+        }
     }
     private void Update()
     {
@@ -32,6 +46,26 @@ public class Weapon : MonoBehaviour
             StartCoroutine(ChangePos(NonAimPos, 1f));
             StartCoroutine(ChangeRot(NonAimRot, 1f));
         }
+    }
+    public float Shoot()
+    {
+        if(LoadedBullets!=0)
+        {
+            if(!Shooting)
+            {
+                Shooting = true;
+                StartCoroutine(ShootBullets());
+                return Recoil;
+            }
+        }
+        return 0;
+    }
+    IEnumerator ShootBullets()
+    {
+        Debug.Log("Shoot");
+        LoadedBullets--;
+        yield return new WaitForSeconds(TimeToShoot);
+        Shooting = false;
     }
     public void WeaponIK(bool Aiming)
     {
@@ -71,13 +105,5 @@ public class Weapon : MonoBehaviour
             t += Time.deltaTime;
         }
     }
-    /*IEnumerator ChangeHandWeight(float targetfloat Duration)
-    {
-        float t = 0;
-        while(t<Duration)
-        {
-
-            yield return null;
-        }
-    }*/
+    
 }

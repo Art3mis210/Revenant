@@ -22,6 +22,7 @@ public class PlayerWeapon : MonoBehaviour
     Transform Head;
     public GameObject AimCamera;
     float Turn;
+    float Recoil;
 
     PlayerController playerController;
     private void Start()
@@ -48,19 +49,19 @@ public class PlayerWeapon : MonoBehaviour
             if (Aiming == true)
             {
                 Turn = transform.rotation.eulerAngles.y;
-               // AimCamera.GetComponent<CinemachineVirtualCamera>().LookAt = CurrentWeapon.transform;
-               // AimCamera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentWeapon.transform;
             }
         }
         if (Aiming)
         {
             if (!playerController.InCover || playerController.DisableCoverMovement)
             {
-                //if (!CameraLocker.instance.CameraLock)
-                {
-                    Turn += CrossPlatformInputManager.GetAxis("AimSide") * AimSensitivity * Time.deltaTime;
-                    transform.localRotation = Quaternion.Euler(0, Turn, 0);
-                }
+                Turn += CrossPlatformInputManager.GetAxis("AimSide") * AimSensitivity * Time.deltaTime;
+                transform.localRotation = Quaternion.Euler(0, Turn, 0);
+            }
+            if(CrossPlatformInputManager.GetButton("Shoot"))
+            {
+                Recoil=CurrentWeapon.Shoot();
+                WeaponIK.transform.position = new Vector3(WeaponIK.transform.position.x, WeaponIK.transform.position.y + Recoil, WeaponIK.transform.position.z);
             }
         }
     }
