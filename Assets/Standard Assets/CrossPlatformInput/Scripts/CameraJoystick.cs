@@ -41,18 +41,19 @@ namespace UnityStandardAssets.CrossPlatformInput
 		void UpdateVirtualAxes(Vector3 value)
 		{
 			var delta = m_StartPos - value;
-			delta.y = delta.y;
+			//delta.y = delta.y;
 			delta /= MovementRange;
 			if (m_UseX)
 			{
 				m_HorizontalVirtualAxis.Update(-delta.x);
-				ThirdPersonCamera.m_XAxis.Value += -delta.x*180*Time.deltaTime*speed;
+				//ThirdPersonCamera.m_XAxis.m_InputAxisValue=
+				//ThirdPersonCamera.m_XAxis.Value += -delta.x*360*Time.deltaTime*speed;
 			}
 
 			if (m_UseY)
 			{
 				m_VerticalVirtualAxis.Update(delta.y);
-				ThirdPersonCamera.m_YAxis.Value += delta.y * Time.deltaTime * speed;
+				//ThirdPersonCamera.m_YAxis.Value += delta.y * Time.deltaTime * speed;
 			}
 			
 		}

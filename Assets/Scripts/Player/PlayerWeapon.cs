@@ -21,7 +21,6 @@ public class PlayerWeapon : MonoBehaviour
     Transform Chest;
     Transform Head;
     public GameObject AimCamera;
-    public Image TouchJoystick;
     float Turn;
 
     PlayerController playerController;
@@ -49,7 +48,6 @@ public class PlayerWeapon : MonoBehaviour
             if (Aiming == true)
             {
                 Turn = transform.rotation.eulerAngles.y;
-                TouchJoystick.enabled = Aiming ;
                // AimCamera.GetComponent<CinemachineVirtualCamera>().LookAt = CurrentWeapon.transform;
                // AimCamera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentWeapon.transform;
             }
@@ -85,7 +83,6 @@ public class PlayerWeapon : MonoBehaviour
         if (CurrentWeapon.gameObject.activeInHierarchy)
         {
             Aiming = !Aiming;
-            TouchJoystick.enabled = Aiming;
             AimCamera.SetActive(Aiming);
             if (Aiming == true)
             {
@@ -98,6 +95,5 @@ public class PlayerWeapon : MonoBehaviour
         Aiming = false;
         AimCamera.SetActive(false);
         CurrentWeapon.gameObject.SetActive(false);
-        TouchJoystick.enabled = Aiming;
     }
 }
