@@ -5,6 +5,11 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Player
+    {
+        get;
+        private set;
+    }
     #region MovementVariables
     private Animator PlayerAnimator;
     private bool MovementSpeedChanging;
@@ -16,10 +21,10 @@ public class PlayerController : MonoBehaviour
 
     private PlayerWeapon playerWeapon;
     public GameObject PlayerCamera;
+    bool LockRotation;
 
     #region CoverVariables
     public LayerMask CoverLayer;
-    bool LockRotation;
     bool ChangingCoverDir;
     float CoverDir;
     Vector3 CoverPos;
@@ -42,6 +47,7 @@ public class PlayerController : MonoBehaviour
         playerWeapon = GetComponent<PlayerWeapon>();
         playerCollider = GetComponent<CapsuleCollider>();
         EnableMovement = true;
+        Player = this;
     }
 
     // Update is called once per frame
