@@ -65,8 +65,7 @@ public class Enemy : MonoBehaviour
             }
             if(Vector3.Distance(transform.position,PlayerController.Player.transform.position)<=VisualDetectionRadius)
             {
-                
-                if (Mathf.Abs(Vector3.Angle(transform.position+transform.forward, PlayerController.Player.transform.position-transform.position))<=VisualDetectionAngle)
+                if (Mathf.Abs(Vector3.Angle(transform.forward, PlayerController.Player.transform.position-transform.position))<=VisualDetectionAngle)
                 {
                     Debug.DrawRay(transform.position + transform.up + 0.2f*transform.forward,(PlayerController.Player.transform.position- transform.position), Color.red, 2f);
                     if(Physics.Raycast(transform.position + transform.up + 0.2f * transform.forward, (PlayerController.Player.transform.position - transform.position), out hit,VisualDetectionRadius))
@@ -92,6 +91,8 @@ public class Enemy : MonoBehaviour
         }
         if (CurrentEnemyState == EnemyState.AttackPlayer)
         {
+            if (EnemyAgent.enabled == false)
+                EnemyAgent.enabled = true;
             if (Vector3.Distance(transform.position, PlayerController.Player.transform.position) > VisualDetectionRadius / 2)
             {
                 EnemyAgent.SetDestination(PlayerController.Player.transform.position);

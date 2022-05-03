@@ -6,8 +6,8 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class RotateCamera : MonoBehaviour
 {
-    public CinemachineFreeLook PlayerCamera;
-    bool Mobile;
+    CinemachineFreeLook PlayerCamera;
+    public bool Mobile;
     void Start()
     {
         PlayerCamera = GetComponent<CinemachineFreeLook>();

@@ -17,6 +17,7 @@ public class PlayerWeapon : MonoBehaviour
     public Vector3 Offset;
     public Vector3 HeadOffset;
     public bool Aiming;
+    bool StealthPos;
 
     Transform Chest;
     Transform Head;
@@ -40,8 +41,21 @@ public class PlayerWeapon : MonoBehaviour
             CurrentWeapon.WeaponIK(Aiming);
         }
     }
-    private void Update()
+    void Update()
     {
+        if (CurrentWeapon.transform.gameObject.activeInHierarchy)
+        {
+            if (playerController.Stealth && !StealthPos)
+            {
+                StealthPos = true;
+                CurrentWeapon.EnableStealthPos(StealthPos);
+            }
+            else if (!playerController.Stealth && StealthPos)
+            {
+                StealthPos = false;
+                CurrentWeapon.EnableStealthPos(StealthPos);
+            }
+        }
         if((CrossPlatformInputManager.GetButtonDown("Aim")) && !playerController.InCover && CurrentWeapon.transform.gameObject.activeInHierarchy)
         {
             Aiming = !Aiming;
@@ -49,7 +63,10 @@ public class PlayerWeapon : MonoBehaviour
             if (Aiming == true)
             {
                 Turn = transform.rotation.eulerAngles.y;
+                playerAnimator.SetFloat("Aiming", 1f);
             }
+            else
+                playerAnimator.SetFloat("Aiming", 0);
         }
         if (Aiming)
         {

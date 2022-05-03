@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public GameObject BulletPrefab;
+    public float BulletSpeed;
     public int LoadedBullets;
     public int MagLength;
     public int TotalBullets;
     public float Recoil;
     public float TimeToShoot;
     bool Shooting;
+    bool ShootEnabled;
 
     public Transform Muzzle;
     public Transform BulletPool;
@@ -19,10 +22,16 @@ public class Weapon : MonoBehaviour
     public Transform RightHand;
     public Vector3 AimPos;
     public Vector3 AimRot;
+
+    public Vector3 NonAimStandPos;
+    public Vector3 NonAimStandRot;
     public Vector3 NonAimPos;
     public Vector3 NonAimRot;
+    public Vector3 NonAimStealthPos;
+    public Vector3 NonAimStealthRot;
     bool AimPosEnabled;
     bool Aiming;
+    bool StealthPos;
     private void OnEnable()
     {
         if (playerAnimator == null)
@@ -49,7 +58,7 @@ public class Weapon : MonoBehaviour
     }
     public float Shoot()
     {
-        if(LoadedBullets!=0)
+        if(LoadedBullets!=0 && ShootEnabled)
         {
             if(!Shooting)
             {
@@ -63,6 +72,9 @@ public class Weapon : MonoBehaviour
     IEnumerator ShootBullets()
     {
         Debug.Log("Shoot");
+        GameObject Bullet = Instantiate(BulletPrefab, Muzzle.transform.position, Camera.main.transform.rotation);
+        Bullet.GetComponent<Rigidbody>().AddForce(BulletSpeed * Camera.main.transform.forward);
+
         LoadedBullets--;
         yield return new WaitForSeconds(TimeToShoot);
         Shooting = false;
@@ -104,6 +116,32 @@ public class Weapon : MonoBehaviour
             yield return null;
             t += Time.deltaTime;
         }
+        ShootEnabled = Aiming;
+
+    }
+    public void EnableStealthPos(bool Status)
+    {
+        if (Status)
+        {
+            NonAimPos = NonAimStealthPos;
+            NonAimRot = NonAimStealthRot;
+            if(!Aiming)
+            {
+                StartCoroutine(ChangePos(NonAimPos, 1f));
+                StartCoroutine(ChangeRot(NonAimRot, 1f));
+            }
+        }
+        else
+        {
+            NonAimPos = NonAimStandPos;
+            NonAimRot = NonAimStandRot;
+            if (!Aiming)
+            {
+                StartCoroutine(ChangePos(NonAimPos, 1f));
+                StartCoroutine(ChangeRot(NonAimRot, 1f));
+            }
+        }
+
     }
     
 }

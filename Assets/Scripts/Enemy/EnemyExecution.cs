@@ -20,4 +20,19 @@ public class EnemyExecution : MonoBehaviour
         EnemyAnimator.SetFloat("Executions", Execution);
         EnemyAnimator.SetTrigger("StartExecution");
     }
+    public void StartInterrogation(float Execution, Collider PlayerCollider)
+    {
+        EnemyController.CurrentEnemyState = Enemy.EnemyState.Execution;
+        Physics.IgnoreCollision(EnemyCollider, PlayerCollider, true);
+        EnemyAnimator.SetInteger("InterrogatePos", 0);
+        EnemyAnimator.SetTrigger("Interrogate");
+    }
+    public void InterrogationKill()
+    {
+        EnemyAnimator.SetInteger("InterrogatePos", 1);
+    }
+    public void InterrogationRelease()
+    {
+        EnemyAnimator.SetInteger("InterrogatePos", -1);
+    }
 }

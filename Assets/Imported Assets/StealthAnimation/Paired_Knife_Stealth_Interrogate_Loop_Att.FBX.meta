@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 8993902097722301239
-    second: Interrogate
+    second: InterrogateLoopAttack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -48,7 +48,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Interrogate
+      name: InterrogateLoopAttack
       takeName: Unreal Take
       internalID: 0
       firstFrame: 0
@@ -59,7 +59,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1

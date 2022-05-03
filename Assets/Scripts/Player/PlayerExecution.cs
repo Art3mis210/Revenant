@@ -12,10 +12,18 @@ public class PlayerExecution : MonoBehaviour
     EnemyExecution enemy;
     PlayerWeapon Weapon;
     public List<int> KnifeExecution;
-    public GameObject MobileButton;
-    public GameObject KeyboardButton;
+    public GameObject MobileExecutionButton;
+    public GameObject KeyboardExecutionButton;
+
+    public GameObject MobileInterrogateButton;
+    public GameObject KeyboardInterrogateButton;
+
+    public GameObject InterrogationMenu;
+
     GameObject ExecutionButton;
+    GameObject InterrogateButton;
     PlayerController playerController;
+    bool InterrogationMode;
 
     private void Start()
     {
@@ -23,27 +31,74 @@ public class PlayerExecution : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         Weapon = GetComponent<PlayerWeapon>();
         #if MOBILE_INPUT
-            ExecutionButton = MobileButton;
+            ExecutionButton = MobileExecutionButton;
+            InterrogateButton = MobileInterrogateButton;
         #else
-            ExecutionButton = KeyboardButton;
+            ExecutionButton = KeyboardExecutionButton;
+            InterrogateButton = KeyboardInterrogateButton;
         #endif
 
     }
+    private void Update()
+    {
+        if(InterrogationMode)
+        {
+            if (!InterrogationMenu.activeInHierarchy)
+                InterrogationMenu.SetActive(true);
+            if(Input.GetKey(KeyCode.I) || CrossPlatformInputManager.GetButtonDown("InterrogateEnemy"))
+            {
+                //Mark Enemies
+            }
+            else if(Input.GetKey(KeyCode.O) || CrossPlatformInputManager.GetButtonDown("Kill"))
+            {
+                //kill
+                playerAnimator.SetInteger("InterrogatePos", 1);
+                enemy.InterrogationKill();
+                InterrogationMode = false;
+                InterrogationMenu.SetActive(false);
+            }
+            else if(Input.GetKey(KeyCode.P) || CrossPlatformInputManager.GetButtonDown("Release"))
+            {
+                //release
+                playerAnimator.SetInteger("InterrogatePos", -1);
+                enemy.InterrogationRelease();
+                InterrogationMode = false;
+                InterrogationMenu.SetActive(false);
+            }
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag=="ExecutionTrigger")
+        if (!InterrogationMode)
         {
-
-            ExecutionButton.SetActive(true);
-            Debug.Log("Press e");
-            if(Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Execute"))
+            if (other.gameObject.tag == "ExecutionTrigger")
             {
-                playerController.ChangeMovement(0);
-                ExecutionButton.SetActive(false);
-                TriggerTransform = other.gameObject.transform;
-                TriggerTransform.GetComponent<Collider>().enabled = false;
-                enemy=TriggerTransform.GetComponent<EnemyExecution>();
-                StartCoroutine(SetPlayerPositionRotation(1f));
+
+                ExecutionButton.SetActive(true);
+                InterrogateButton.SetActive(true);
+                Debug.Log("Press e");
+                if (Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Execute"))
+                {
+                    playerController.ChangeMovement(0);
+                    ExecutionButton.SetActive(false);
+                    InterrogateButton.SetActive(false);
+                    TriggerTransform = other.gameObject.transform;
+                    TriggerTransform.GetComponent<Collider>().enabled = false;
+                    enemy = TriggerTransform.GetComponent<EnemyExecution>();
+                    StartCoroutine(SetPlayerPositionRotation(1f));
+                    InterrogationMode = false;
+                }
+                else if (Input.GetKey(KeyCode.T) || CrossPlatformInputManager.GetButtonDown("Interrogate"))
+                {
+                    playerController.ChangeMovement(0);
+                    ExecutionButton.SetActive(false);
+                    InterrogateButton.SetActive(false);
+                    TriggerTransform = other.gameObject.transform;
+                    TriggerTransform.GetComponent<Collider>().enabled = false;
+                    enemy = TriggerTransform.GetComponent<EnemyExecution>();
+                    StartCoroutine(SetPlayerPositionRotation(1f));
+                    InterrogationMode = true;
+                }
             }
         }
     }
@@ -52,6 +107,7 @@ public class PlayerExecution : MonoBehaviour
         if (other.gameObject.tag == "ExecutionTrigger")
         {
             ExecutionButton.SetActive(false);
+            InterrogateButton.SetActive(false);
         }
     }
     IEnumerator SetPlayerPositionRotation(float Duration)
@@ -64,14 +120,24 @@ public class PlayerExecution : MonoBehaviour
             yield return null;
             t += Time.deltaTime;
         }
-        Execution = Random.Range(0, 9);
         Weapon.DisableCurrentWeapon();
-        if(KnifeExecution.Contains(Execution))
+        if (!InterrogationMode)
+        {
+            Execution = Random.Range(0, 9);
+            if (KnifeExecution.Contains(Execution))
+                Knife.SetActive(true);
+            playerAnimator.SetFloat("Executions", Execution);
+            playerAnimator.SetTrigger("StartExecution");
+            enemy.StartExecution(Execution, GetComponent<Collider>());
+            NoiseManager.Noise.CreateNoise(transform.position);
+        }
+        else
+        {
             Knife.SetActive(true);
-        playerAnimator.SetFloat("Executions", Execution);
-        playerAnimator.SetTrigger("StartExecution");
-        enemy.StartExecution(Execution,GetComponent<Collider>());
-        NoiseManager.Noise.CreateNoise(transform.position);
+            playerAnimator.SetTrigger("Interrogate");
+            playerAnimator.SetInteger("InterrogatePos", 0);
+            enemy.StartInterrogation(Execution, GetComponent<Collider>());
+        }
 
     }
 }

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float Vertical;
     private float MouseX;
     private float MouseY;
+    [HideInInspector] public bool Stealth;
     #endregion
 
     private PlayerWeapon playerWeapon;
@@ -63,25 +64,18 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
-        if (CrossPlatformInputManager.GetAxis("Vertical")!=0 || CrossPlatformInputManager.GetAxis("Horizontal")!=0)
+        if (CrossPlatformInputManager.GetAxis("Vertical")!=0f || CrossPlatformInputManager.GetAxis("Horizontal")!=0f)
         {
-            if(!LockRotation && (Vertical!= CrossPlatformInputManager.GetAxis("Vertical") || Horizontal!= CrossPlatformInputManager.GetAxis("Horizontal") || MouseX!= CrossPlatformInputManager.GetAxis("Mouse X") || MouseY != CrossPlatformInputManager.GetAxis("Mouse Y")))
+            if(!LockRotation)
             {
                 LockRotation = true;
                 Vertical = CrossPlatformInputManager.GetAxis("Vertical");
                 Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-                MouseX = CrossPlatformInputManager.GetAxis("Mouse X");
-                MouseY = CrossPlatformInputManager.GetAxis("Mouse Y");
                 if(!playerWeapon.Aiming)
                     StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0 , CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
-                else
-                {
-                    PlayerAnimator.SetFloat("Vertical", Vertical);
-                    PlayerAnimator.SetFloat("Horizontal", Horizontal);
-                    PlayerAnimator.SetFloat("MoveDir", Vertical + Horizontal);
-                }
                 if (PlayerAnimator.GetFloat("Speed") < 1f && !MovementSpeedChanging)
                 {
+                    PlayerAnimator.SetFloat("Speed", 0f);
                     MovementSpeedChanging = true;
                     StartCoroutine(ChangeMovementSpeed(1, 0.75f));
                 }
@@ -92,7 +86,7 @@ public class PlayerController : MonoBehaviour
             if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 0)
             {
                 MovementSpeedChanging = true;
-                StartCoroutine(ChangeMovementSpeed(0, 0.75f));
+                StartCoroutine(ChangeMovementSpeed(0f, 0.75f));
             }
             LockRotation = false;
         }
@@ -101,7 +95,8 @@ public class PlayerController : MonoBehaviour
             if (PlayerSpeed > 0)
             {
                 PlayerAnimator.SetBool("Sprint", true);
-                NoiseManager.Noise.CreateNoise(transform.position);
+                if(!Stealth)
+                    NoiseManager.Noise.CreateNoise(transform.position);
                 if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
                 {
                     MovementSpeedChanging = true;
@@ -117,6 +112,23 @@ public class PlayerController : MonoBehaviour
                 MovementSpeedChanging = true;
                 StartCoroutine(ChangeMovementSpeed(1, 1f));
             }
+        }
+        if(playerWeapon.Aiming)
+        {
+            PlayerAnimator.SetFloat("Vertical", CrossPlatformInputManager.GetAxis("Vertical"));
+            PlayerAnimator.SetFloat("Horizontal", CrossPlatformInputManager.GetAxis("Horizontal"));
+            PlayerAnimator.SetFloat("MoveDir", -Mathf.Abs(CrossPlatformInputManager.GetAxis("Vertical")) + Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")));
+        }
+
+        if(!InCover)
+        {
+            if (CrossPlatformInputManager.GetButtonDown("Stance"))
+            {
+                Stealth = !PlayerAnimator.GetBool("Stealth");
+                PlayerAnimator.SetBool("Stealth", Stealth);
+                
+            }
+
         }
 
     }
@@ -286,7 +298,8 @@ public class PlayerController : MonoBehaviour
         while(t<Duration)
         {
             //CurrentSpeed = ;
-            PlayerAnimator.SetFloat("Speed",CurrentSpeed=Mathf.Lerp(CurrentSpeed, RequiredSpeed, t / Duration));
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, RequiredSpeed, t / Duration);
+            PlayerAnimator.SetFloat("Speed",CurrentSpeed);
             yield return null;
             t += Time.deltaTime;
         }
