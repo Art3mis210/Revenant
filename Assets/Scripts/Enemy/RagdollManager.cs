@@ -31,12 +31,28 @@ public class RagdollManager : MonoBehaviour
         foreach (Collider col in Colliders)
         {
             if (col != MainCollider)
-                col.enabled = Status;
+            {
+                if(col.gameObject.layer==7)
+                {
+                    col.enabled = !Status;
+                }
+                else
+                    col.enabled = Status;
+            }
+                
         }
         MainRigidbody.isKinematic = Status;
         MainCollider.enabled = !Status;
         animator.enabled = !Status;
         ExecutionCollider.enabled = !Status;
+        if(Status)
+        {
+            Invoke("TurnOff", 10f);
+        }
 
+    }
+    void TurnOff()
+    {
+        gameObject.SetActive(false);
     }
 }

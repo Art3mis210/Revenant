@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 10656188}
   - component: {fileID: 10656187}
   - component: {fileID: 10656189}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 18558408}
   - component: {fileID: 18558409}
   - component: {fileID: 18558410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2139,7 +2139,7 @@ GameObject:
   - component: {fileID: 54216810}
   - component: {fileID: 54216809}
   - component: {fileID: 54216811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2535,7 +2535,7 @@ GameObject:
   - component: {fileID: 58755871}
   - component: {fileID: 58755870}
   - component: {fileID: 58755872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2931,7 +2931,7 @@ GameObject:
   - component: {fileID: 66349209}
   - component: {fileID: 66349210}
   - component: {fileID: 66349211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3007,7 +3007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 67284368}
   - component: {fileID: 67284369}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4007,7 +4007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c3c865782347f41b6358d9fba14b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementRange: 40
+  MovementRange: 50
   axesToUse: 0
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
@@ -4193,6 +4193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c37f0af5e2ccf24abc612cea8e08f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentInput: 1
   Stealth: 0
   PlayerCamera: {fileID: 618930472}
   CoverLayer:
@@ -4258,12 +4259,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100466315}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 39, y: 5.35, z: 115.17}
+  m_LocalPosition: {x: 41.47, y: -4.31, z: 115.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 312019519}
   - {fileID: 1401583658}
   - {fileID: 1203617629}
+  - {fileID: 1629293313}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -5079,7 +5081,7 @@ GameObject:
   - component: {fileID: 124570486}
   - component: {fileID: 124570487}
   - component: {fileID: 124570488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5857,7 +5859,7 @@ GameObject:
   - component: {fileID: 139967271}
   - component: {fileID: 139967272}
   - component: {fileID: 139967273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6405,7 +6407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &157382528
 Transform:
   m_ObjectHideFlags: 0
@@ -6432,10 +6434,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 30
-  m_SpotAngle: 104.1
-  m_InnerSpotAngle: 16.9
+  m_Intensity: 7
+  m_Range: 10
+  m_SpotAngle: 107.2
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -6466,7 +6468,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -7246,7 +7248,7 @@ GameObject:
   - component: {fileID: 169314035}
   - component: {fileID: 169314034}
   - component: {fileID: 169314036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7429,7 +7431,7 @@ GameObject:
   - component: {fileID: 172895009}
   - component: {fileID: 172895010}
   - component: {fileID: 172895011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8279,7 +8281,7 @@ GameObject:
   - component: {fileID: 207930287}
   - component: {fileID: 207930288}
   - component: {fileID: 207930289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8439,7 +8441,7 @@ RectTransform:
   m_Children:
   - {fileID: 1088181773}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8786,7 +8788,7 @@ GameObject:
   - component: {fileID: 228494335}
   - component: {fileID: 228494334}
   - component: {fileID: 228494336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9203,7 +9205,7 @@ GameObject:
   - component: {fileID: 232788274}
   - component: {fileID: 232788275}
   - component: {fileID: 232788276}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9478,7 +9480,7 @@ GameObject:
   - component: {fileID: 245645131}
   - component: {fileID: 245645132}
   - component: {fileID: 245645133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9544,6 +9546,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7, y: 9.4, z: 1.43}
   m_Center: {x: 0, y: 3.38, z: -0.17}
+--- !u!1 &246887805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246887806}
+  - component: {fileID: 246887809}
+  - component: {fileID: 246887808}
+  - component: {fileID: 246887807}
+  m_Layer: 10
+  m_Name: er
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &246887806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246887805}
+  m_LocalRotation: {x: -0.000000075585525, y: 0.000000042453728, z: -0.000000067055204, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.4427406, y: 1.4427404, z: 1.4427409}
+  m_Children: []
+  m_Father: {fileID: 1094560041}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &246887807
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246887805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &246887808
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246887805}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4b70c53b958425a48ae994cc135bc01a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &246887809
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246887805}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &247482243
 GameObject:
   m_ObjectHideFlags: 0
@@ -9586,7 +9683,7 @@ GameObject:
   - component: {fileID: 248043971}
   - component: {fileID: 248043970}
   - component: {fileID: 248043972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9903,7 +10000,7 @@ GameObject:
   - component: {fileID: 258252097}
   - component: {fileID: 258252098}
   - component: {fileID: 258252099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10699,6 +10796,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1834896552}
     m_Modifications:
     - target: {fileID: 100000, guid: 33edf693e23919a46a065d48d2096224, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 33edf693e23919a46a065d48d2096224, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -10825,7 +10926,7 @@ GameObject:
   - component: {fileID: 282952903}
   - component: {fileID: 282952902}
   - component: {fileID: 282952904}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11263,7 +11364,7 @@ GameObject:
   - component: {fileID: 286350342}
   - component: {fileID: 286350343}
   - component: {fileID: 286350344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11370,7 +11471,7 @@ GameObject:
   - component: {fileID: 292479520}
   - component: {fileID: 292479521}
   - component: {fileID: 292479522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13072,7 +13173,7 @@ GameObject:
   - component: {fileID: 342278387}
   - component: {fileID: 342278388}
   - component: {fileID: 342278389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13230,7 +13331,7 @@ GameObject:
   - component: {fileID: 350740850}
   - component: {fileID: 350740851}
   - component: {fileID: 350740852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13680,7 +13781,7 @@ GameObject:
   - component: {fileID: 369399026}
   - component: {fileID: 369399025}
   - component: {fileID: 369399027}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13772,7 +13873,7 @@ GameObject:
   - component: {fileID: 371565399}
   - component: {fileID: 371565400}
   - component: {fileID: 371565401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15172,7 +15273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397416648}
   - component: {fileID: 397416649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15495,7 +15596,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -15542,7 +15643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406972931}
   m_LocalRotation: {x: 0.23195517, y: 0.7026899, z: -0.26334637, w: 0.61892843}
-  m_LocalPosition: {x: 39, y: 7.9922085, z: 112.16303}
+  m_LocalPosition: {x: 38.9607, y: -1.6677911, z: 116.82687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1253390233}
@@ -15643,7 +15744,7 @@ GameObject:
   - component: {fileID: 417865533}
   - component: {fileID: 417865534}
   - component: {fileID: 417865535}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15882,7 +15983,7 @@ GameObject:
   - component: {fileID: 424246211}
   - component: {fileID: 424246212}
   - component: {fileID: 424246213}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16328,7 +16429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &436131421
 Transform:
   m_ObjectHideFlags: 0
@@ -16336,11 +16437,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436131420}
-  m_LocalRotation: {x: 0.4771136, y: -0.52188367, z: -0.4771127, w: -0.5218847}
+  m_LocalRotation: {x: 0.49283805, y: -0.5070607, z: -0.49283728, w: -0.5070616}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4427409, y: 1.4427406, z: 1.4427403}
   m_Children: []
-  m_Father: {fileID: 583835106}
+  m_Father: {fileID: 1094560041}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 5.13, y: 0, z: 0}
 --- !u!108 &436131422
@@ -16355,13 +16456,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 16.41
-  m_Range: 40
-  m_SpotAngle: 35.9
-  m_InnerSpotAngle: 16.9
+  m_Intensity: 7
+  m_Range: 10
+  m_SpotAngle: 107.2
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -16389,10 +16490,10 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 473
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -16749,7 +16850,7 @@ GameObject:
   - component: {fileID: 447346902}
   - component: {fileID: 447346903}
   - component: {fileID: 447346904}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16964,7 +17065,7 @@ GameObject:
   - component: {fileID: 450480895}
   - component: {fileID: 450480894}
   - component: {fileID: 450480896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17250,7 +17351,7 @@ GameObject:
   - component: {fileID: 460888358}
   - component: {fileID: 460888357}
   - component: {fileID: 460888359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17342,7 +17443,7 @@ GameObject:
   - component: {fileID: 461311559}
   - component: {fileID: 461311560}
   - component: {fileID: 461311561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19123,7 +19224,7 @@ RectTransform:
   m_Children:
   - {fileID: 286058470}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -19340,7 +19441,7 @@ RectTransform:
   m_Children:
   - {fileID: 1893533114}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -19901,7 +20002,7 @@ GameObject:
   - component: {fileID: 521919348}
   - component: {fileID: 521919347}
   - component: {fileID: 521919349}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19993,7 +20094,7 @@ GameObject:
   - component: {fileID: 522674745}
   - component: {fileID: 522674746}
   - component: {fileID: 522674747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20813,11 +20914,11 @@ RectTransform:
   m_Children:
   - {fileID: 1113619934}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 794.9999, y: 375.2618}
+  m_AnchoredPosition: {x: 794.9997, y: 375.2618}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &544364166
@@ -22015,7 +22116,7 @@ GameObject:
   - component: {fileID: 574446555}
   - component: {fileID: 574446554}
   - component: {fileID: 574446556}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22184,7 +22285,7 @@ RectTransform:
   m_Children:
   - {fileID: 699688413}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22544,7 +22645,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 870173971}
-  - {fileID: 436131421}
   m_Father: {fileID: 760926463}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23223,7 +23323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 602354437}
   m_Layer: 5
-  m_Name: MovementControls
+  m_Name: GamepadControls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23242,24 +23342,24 @@ RectTransform:
   m_Children:
   - {fileID: 1652763719}
   - {fileID: 2049016103}
-  - {fileID: 814152120}
   - {fileID: 508779683}
-  - {fileID: 544364165}
   - {fileID: 213500384}
-  - {fileID: 1837724921}
   - {fileID: 1509321992}
   - {fileID: 1429718342}
   - {fileID: 1550570267}
   - {fileID: 576257194}
   - {fileID: 506435102}
+  - {fileID: 544364165}
+  - {fileID: 814152120}
+  - {fileID: 1837724921}
   m_Father: {fileID: 1216661107}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 909.9999, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &603111460
 GameObject:
   m_ObjectHideFlags: 0
@@ -23781,7 +23881,7 @@ GameObject:
   - component: {fileID: 614671131}
   - component: {fileID: 614671132}
   - component: {fileID: 614671133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23891,6 +23991,7 @@ GameObject:
   - component: {fileID: 618930475}
   - component: {fileID: 618930474}
   - component: {fileID: 618930473}
+  - component: {fileID: 618930478}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -24032,13 +24133,13 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -24050,13 +24151,25 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618930472}
-  m_LocalRotation: {x: 0.18061683, y: 0.00000002970306, z: 0.0000000015763835, w: 0.9835535}
-  m_LocalPosition: {x: 39, y: 7.9922085, z: 112.16303}
+  m_LocalRotation: {x: 0.0855777, y: 0.8661452, z: -0.15905651, w: 0.46601507}
+  m_LocalPosition: {x: 38.9607, y: -1.6677911, z: 116.82687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &618930478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618930472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b945298961dcd4e8d5b50fedd4b1fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &620171973
 GameObject:
   m_ObjectHideFlags: 0
@@ -24427,7 +24540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 631316677}
   - component: {fileID: 631316678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25140,7 +25253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 651043845}
   - component: {fileID: 651043846}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25461,7 +25574,7 @@ GameObject:
   - component: {fileID: 663559547}
   - component: {fileID: 663559546}
   - component: {fileID: 663559548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25842,7 +25955,7 @@ GameObject:
   - component: {fileID: 673693068}
   - component: {fileID: 673693067}
   - component: {fileID: 673693069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25995,7 +26108,7 @@ GameObject:
   - component: {fileID: 676780247}
   - component: {fileID: 676780248}
   - component: {fileID: 676780249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26697,6 +26810,99 @@ Transform:
   m_Father: {fileID: 1315152503}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &693923134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693923135}
+  - component: {fileID: 693923136}
+  m_Layer: 10
+  m_Name: Point Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &693923135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693923134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1094560041}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &693923136
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693923134}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 0.48
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &695116039
 GameObject:
   m_ObjectHideFlags: 0
@@ -30824,11 +31030,11 @@ RectTransform:
   m_Children:
   - {fileID: 667853116}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 2
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -794.99994, y: 15.261871}
+  m_AnchoredPosition: {x: -794.99976, y: 15.261871}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &814152121
@@ -31081,7 +31287,7 @@ GameObject:
   - component: {fileID: 821827179}
   - component: {fileID: 821827180}
   - component: {fileID: 821827181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31773,7 +31979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &836311854
 Transform:
   m_ObjectHideFlags: 0
@@ -32071,7 +32277,7 @@ GameObject:
   - component: {fileID: 848912873}
   - component: {fileID: 848912872}
   - component: {fileID: 848912874}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32554,7 +32760,7 @@ GameObject:
   - component: {fileID: 863437099}
   - component: {fileID: 863437098}
   - component: {fileID: 863437100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32695,6 +32901,7 @@ Transform:
   - {fileID: 389366942}
   - {fileID: 1123553554}
   - {fileID: 829339321}
+  - {fileID: 1094560041}
   m_Father: {fileID: 583835106}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33016,7 +33223,7 @@ GameObject:
   - component: {fileID: 878253803}
   - component: {fileID: 878253804}
   - component: {fileID: 878253805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35241,7 +35448,7 @@ GameObject:
   - component: {fileID: 924900656}
   - component: {fileID: 924900657}
   - component: {fileID: 924900658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35801,6 +36008,48 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934959352}
   m_Mesh: {fileID: 4300000, guid: 7e75bd0bc10d7c145b2a149bda20778d, type: 3}
+--- !u!1 &935219885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935219887}
+  - component: {fileID: 935219886}
+  m_Layer: 0
+  m_Name: Occlusion Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!192 &935219886
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935219885}
+  serializedVersion: 2
+  m_Size: {x: 600, y: 102.25, z: 614}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_IsViewVolume: 1
+--- !u!4 &935219887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935219885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 157, y: 0, z: -64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &938598470
 GameObject:
   m_ObjectHideFlags: 0
@@ -36608,7 +36857,7 @@ GameObject:
   - component: {fileID: 951234000}
   - component: {fileID: 951233999}
   - component: {fileID: 951234001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37370,7 +37619,7 @@ GameObject:
   - component: {fileID: 962412465}
   - component: {fileID: 962412466}
   - component: {fileID: 962412467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37478,7 +37727,7 @@ GameObject:
   - component: {fileID: 964882393}
   - component: {fileID: 964882392}
   - component: {fileID: 964882394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37651,7 +37900,7 @@ GameObject:
   - component: {fileID: 973480548}
   - component: {fileID: 973480549}
   - component: {fileID: 973480550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39857,7 +40106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1039854990}
   - component: {fileID: 1039854991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39990,7 +40239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1045304539
 Transform:
   m_ObjectHideFlags: 0
@@ -40017,10 +40266,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 30
-  m_SpotAngle: 104.1
-  m_InnerSpotAngle: 16.9
+  m_Intensity: 7
+  m_Range: 10
+  m_SpotAngle: 107.2
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -40051,7 +40300,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -40383,7 +40632,7 @@ GameObject:
   - component: {fileID: 1057259907}
   - component: {fileID: 1057259906}
   - component: {fileID: 1057259908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41074,7 +41323,7 @@ GameObject:
   - component: {fileID: 1069515271}
   - component: {fileID: 1069515270}
   - component: {fileID: 1069515272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41167,7 +41416,7 @@ GameObject:
   - component: {fileID: 1070188842}
   - component: {fileID: 1070188841}
   - component: {fileID: 1070188843}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41495,7 +41744,7 @@ GameObject:
   - component: {fileID: 1079438962}
   - component: {fileID: 1079438963}
   - component: {fileID: 1079438964}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41966,7 +42215,7 @@ GameObject:
   - component: {fileID: 1085933632}
   - component: {fileID: 1085933633}
   - component: {fileID: 1085933634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42365,6 +42614,90 @@ Transform:
   m_Father: {fileID: 28391208}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1094560040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1094560041}
+  - component: {fileID: 1094560043}
+  - component: {fileID: 1094560042}
+  m_Layer: 10
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1094560041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094560040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.111, y: -0.017, z: 0.008}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_Children:
+  - {fileID: 693923135}
+  - {fileID: 436131421}
+  - {fileID: 246887806}
+  m_Father: {fileID: 870173971}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1094560042
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094560040}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 75a28889282d0be43884e63699b75769, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1094560043
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094560040}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1094947746
 GameObject:
   m_ObjectHideFlags: 0
@@ -43225,7 +43558,7 @@ GameObject:
   - component: {fileID: 1128309553}
   - component: {fileID: 1128309552}
   - component: {fileID: 1128309554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44494,7 +44827,7 @@ GameObject:
   - component: {fileID: 1171330324}
   - component: {fileID: 1171330323}
   - component: {fileID: 1171330325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44646,7 +44979,7 @@ GameObject:
   - component: {fileID: 1172963331}
   - component: {fileID: 1172963332}
   - component: {fileID: 1172963333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45611,7 +45944,7 @@ GameObject:
   - component: {fileID: 1190059514}
   - component: {fileID: 1190059513}
   - component: {fileID: 1190059515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46662,7 +46995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1217690726}
   - component: {fileID: 1217690727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47095,7 +47428,7 @@ GameObject:
   - component: {fileID: 1222724855}
   - component: {fileID: 1222724856}
   - component: {fileID: 1222724857}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47202,7 +47535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1227040370}
   - component: {fileID: 1227040371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47615,7 +47948,7 @@ GameObject:
   - component: {fileID: 1240943685}
   - component: {fileID: 1240943686}
   - component: {fileID: 1240943687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47921,7 +48254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1247824093
 Light:
   m_ObjectHideFlags: 0
@@ -47934,7 +48267,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -48175,7 +48508,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253390231}
-  m_LocalRotation: {x: -0.10520956, y: -0.6368755, z: 0.39688033, w: 0.65253854}
+  m_LocalRotation: {x: -0.15503809, y: 0.19224021, z: -0.119798, w: 0.96159}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -49029,7 +49362,7 @@ GameObject:
   - component: {fileID: 1280753142}
   - component: {fileID: 1280753141}
   - component: {fileID: 1280753143}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49381,7 +49714,7 @@ GameObject:
   - component: {fileID: 1289335765}
   - component: {fileID: 1289335764}
   - component: {fileID: 1289335766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49472,7 +49805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1290028726}
   - component: {fileID: 1290028727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49794,7 +50127,7 @@ GameObject:
   - component: {fileID: 1297492264}
   - component: {fileID: 1297492263}
   - component: {fileID: 1297492265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51546,7 +51879,7 @@ GameObject:
   - component: {fileID: 1333783392}
   - component: {fileID: 1333783393}
   - component: {fileID: 1333783394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52013,7 +52346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1337850586
 Transform:
   m_ObjectHideFlags: 0
@@ -52040,10 +52373,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 30
-  m_SpotAngle: 104.1
-  m_InnerSpotAngle: 16.9
+  m_Intensity: 7
+  m_Range: 10
+  m_SpotAngle: 107.2
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -52074,7 +52407,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -52838,7 +53171,7 @@ GameObject:
   - component: {fileID: 1365001085}
   - component: {fileID: 1365001086}
   - component: {fileID: 1365001087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53108,7 +53441,7 @@ GameObject:
   - component: {fileID: 1370183413}
   - component: {fileID: 1370183412}
   - component: {fileID: 1370183414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53802,7 +54135,7 @@ GameObject:
   - component: {fileID: 1389761905}
   - component: {fileID: 1389761904}
   - component: {fileID: 1389761906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53893,7 +54226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390844113}
   - component: {fileID: 1390844114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54020,7 +54353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395849685}
   - component: {fileID: 1395849686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54815,7 +55148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1415057800}
   - component: {fileID: 1415057801}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54863,7 +55196,7 @@ GameObject:
   - component: {fileID: 1416533965}
   - component: {fileID: 1416533964}
   - component: {fileID: 1416533966}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55275,7 +55608,7 @@ RectTransform:
   m_Children:
   - {fileID: 1983979623}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -55801,7 +56134,7 @@ GameObject:
   - component: {fileID: 1446168800}
   - component: {fileID: 1446168801}
   - component: {fileID: 1446168802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55960,7 +56293,7 @@ GameObject:
   - component: {fileID: 1447966239}
   - component: {fileID: 1447966238}
   - component: {fileID: 1447966240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56305,7 +56638,7 @@ GameObject:
   - component: {fileID: 1461614034}
   - component: {fileID: 1461614035}
   - component: {fileID: 1461614036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58216,7 +58549,7 @@ GameObject:
   - component: {fileID: 1492943750}
   - component: {fileID: 1492943749}
   - component: {fileID: 1492943751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58515,7 +58848,7 @@ GameObject:
   - component: {fileID: 1505042861}
   - component: {fileID: 1505042860}
   - component: {fileID: 1505042862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58716,7 +59049,7 @@ RectTransform:
   m_Children:
   - {fileID: 2094042706}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -59322,7 +59655,7 @@ GameObject:
   - component: {fileID: 1531881432}
   - component: {fileID: 1531881431}
   - component: {fileID: 1531881433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59690,7 +60023,7 @@ RectTransform:
   m_Children:
   - {fileID: 2080000605}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -59803,7 +60136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1551452584}
   - component: {fileID: 1551452585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60367,7 +60700,7 @@ GameObject:
   - component: {fileID: 1572476797}
   - component: {fileID: 1572476796}
   - component: {fileID: 1572476798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60620,7 +60953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577604128}
   - component: {fileID: 1577604129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61312,7 +61645,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588254377}
-  m_LocalRotation: {x: -0.12884358, y: -0.6508719, z: 0.37348396, w: 0.64828616}
+  m_LocalRotation: {x: -0.18986547, y: 0.19646505, z: -0.11273579, w: 0.9553237}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -61506,7 +61839,7 @@ GameObject:
   - component: {fileID: 1592786064}
   - component: {fileID: 1592786063}
   - component: {fileID: 1592786065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61597,7 +61930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1592812276}
   - component: {fileID: 1592812277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62232,7 +62565,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609185839}
-  m_LocalRotation: {x: -0.1170615, y: -0.6439892, z: 0.38523024, w: 0.6505169}
+  m_LocalRotation: {x: -0.1725033, y: 0.19438754, z: -0.116281405, w: 0.9586109}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -62283,7 +62616,7 @@ GameObject:
   - component: {fileID: 1611689347}
   - component: {fileID: 1611689346}
   - component: {fileID: 1611689348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63137,7 +63470,7 @@ GameObject:
   - component: {fileID: 1625053601}
   - component: {fileID: 1625053602}
   - component: {fileID: 1625053603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63339,11 +63672,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629293312}
-  m_LocalRotation: {x: 0.4771136, y: -0.52188367, z: -0.4771127, w: -0.5218847}
-  m_LocalPosition: {x: -0.15758277, y: 0.07297641, z: 0.025001336}
+  m_LocalRotation: {x: 0.04475276, y: -0.000000029802322, z: 0.000000029802322, w: 0.99899817}
+  m_LocalPosition: {x: -0.025001526, y: 1.3299999, z: 0.07299805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1905949531}
+  m_Father: {fileID: 100466324}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 5.13, y: 0, z: 0}
 --- !u!108 &1629293314
@@ -65391,7 +65724,7 @@ GameObject:
   - component: {fileID: 1691977618}
   - component: {fileID: 1691977617}
   - component: {fileID: 1691977619}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66930,7 +67263,7 @@ GameObject:
   - component: {fileID: 1742220718}
   - component: {fileID: 1742220717}
   - component: {fileID: 1742220719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68744,7 +69077,7 @@ GameObject:
   - component: {fileID: 1795686600}
   - component: {fileID: 1795686599}
   - component: {fileID: 1795686601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68923,7 +69256,7 @@ GameObject:
   - component: {fileID: 1801147237}
   - component: {fileID: 1801147236}
   - component: {fileID: 1801147238}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69932,7 +70265,7 @@ GameObject:
   - component: {fileID: 1829807149}
   - component: {fileID: 1829807150}
   - component: {fileID: 1829807151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_e '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70094,7 +70427,7 @@ GameObject:
   - component: {fileID: 1834331986}
   - component: {fileID: 1834331985}
   - component: {fileID: 1834331987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70404,13 +70737,13 @@ RectTransform:
   m_Children:
   - {fileID: 2014600581}
   m_Father: {fileID: 602354437}
-  m_RootOrder: 6
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 610, y: 190.26184}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -794.99976, y: 375.2618}
   m_SizeDelta: {x: 120, y: 120}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1837724922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70740,7 +71073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1844683377}
   - component: {fileID: 1844683378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70788,7 +71121,7 @@ GameObject:
   - component: {fileID: 1844775500}
   - component: {fileID: 1844775499}
   - component: {fileID: 1844775501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71390,7 +71723,7 @@ GameObject:
   - component: {fileID: 1856895674}
   - component: {fileID: 1856895673}
   - component: {fileID: 1856895675}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71917,7 +72250,7 @@ GameObject:
   - component: {fileID: 1873605433}
   - component: {fileID: 1873605434}
   - component: {fileID: 1873605435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71994,7 +72327,7 @@ GameObject:
   - component: {fileID: 1877612388}
   - component: {fileID: 1877612389}
   - component: {fileID: 1877612390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72786,7 +73119,7 @@ GameObject:
   - component: {fileID: 1889411483}
   - component: {fileID: 1889411482}
   - component: {fileID: 1889411484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73326,7 +73659,6 @@ Transform:
   - {fileID: 586178692}
   - {fileID: 1236074098}
   - {fileID: 2076997763}
-  - {fileID: 1629293313}
   m_Father: {fileID: 257288950}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73801,7 +74133,7 @@ GameObject:
   - component: {fileID: 1916059669}
   - component: {fileID: 1916059668}
   - component: {fileID: 1916059670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_i '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74020,7 +74352,7 @@ GameObject:
   - component: {fileID: 1921738105}
   - component: {fileID: 1921738106}
   - component: {fileID: 1921738107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75454,7 +75786,7 @@ GameObject:
   - component: {fileID: 1960635339}
   - component: {fileID: 1960635340}
   - component: {fileID: 1960635341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MEP_Tree_02_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76853,48 +77185,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.3182942, y: 0.033179857, z: -0.022263542}
     m_Extent: {x: 0.31464055, y: 0.20377022, z: 0.31091267}
   m_DirtyAABB: 0
---- !u!1 &1988383923
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1988383925}
-  - component: {fileID: 1988383924}
-  m_Layer: 0
-  m_Name: Occlusion Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!192 &1988383924
-OcclusionArea:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988383923}
-  serializedVersion: 2
-  m_Size: {x: 579.07544, y: 34.84455, z: 562.46436}
-  m_Center: {x: 118.40578, y: 4.3879642, z: -50.01249}
-  m_IsViewVolume: 1
---- !u!4 &1988383925
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988383923}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1989710847
 GameObject:
   m_ObjectHideFlags: 0
@@ -77216,7 +77506,7 @@ GameObject:
   - component: {fileID: 1995840153}
   - component: {fileID: 1995840154}
   - component: {fileID: 1995840155}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78020,6 +78310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e87125a70b8be24babc50ea7eabd5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  count: 0
   FPSText: {fileID: 2006641975}
 --- !u!114 &2006641975
 MonoBehaviour:
@@ -78079,7 +78370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2006667865
 Transform:
   m_ObjectHideFlags: 0
@@ -78106,10 +78397,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 30
-  m_SpotAngle: 104.1
-  m_InnerSpotAngle: 16.9
+  m_Intensity: 7
+  m_Range: 10
+  m_SpotAngle: 107.2
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -78140,7 +78431,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -78167,7 +78458,7 @@ GameObject:
   - component: {fileID: 2008184868}
   - component: {fileID: 2008184869}
   - component: {fileID: 2008184870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_c '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79012,7 +79303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2021294784
 Transform:
   m_ObjectHideFlags: 0
@@ -79039,10 +79330,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 30
-  m_SpotAngle: 104.1
-  m_InnerSpotAngle: 16.9
+  m_Intensity: 7
+  m_Range: 10
+  m_SpotAngle: 107.2
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -79073,7 +79364,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -80065,7 +80356,7 @@ GameObject:
   - component: {fileID: 2056821912}
   - component: {fileID: 2056821913}
   - component: {fileID: 2056821914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_f '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83622,7 +83913,7 @@ GameObject:
   - component: {fileID: 2123148681}
   - component: {fileID: 2123148680}
   - component: {fileID: 2123148682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'MEP_Tree_02_j '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

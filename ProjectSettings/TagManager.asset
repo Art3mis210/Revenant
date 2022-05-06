@@ -12,6 +12,7 @@ TagManager:
   - ExecutionTrigger
   - AnimTag
   - Ground
+  - ZombieGrabTrigger
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Cover
-  - ExecutionLayer
+  - Triggers
   - Player
   - PostProcess
   - BodyParts

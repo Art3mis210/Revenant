@@ -73,32 +73,39 @@ public class PlayerExecution : MonoBehaviour
         {
             if (other.gameObject.tag == "ExecutionTrigger")
             {
-
-                ExecutionButton.SetActive(true);
-                InterrogateButton.SetActive(true);
-                Debug.Log("Press e");
-                if (Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Execute"))
+                if (TriggerTransform != other.gameObject.transform)
                 {
+                    TriggerTransform = other.gameObject.transform;
+                    enemy = TriggerTransform.GetComponent<EnemyExecution>();
+                    ExecutionButton.SetActive(true);
+                    if (enemy.CurrentEnemyType==EnemyExecution.EnemyType.Human) 
+                        InterrogateButton.SetActive(true);
+                }
+                if (CrossPlatformInputManager.GetButtonDown("Execute"))
+                {
+                    Weapon.DisableCurrentWeapon();
                     playerController.ChangeMovement(0);
                     ExecutionButton.SetActive(false);
                     InterrogateButton.SetActive(false);
                     TriggerTransform = other.gameObject.transform;
                     TriggerTransform.GetComponent<Collider>().enabled = false;
                     enemy = TriggerTransform.GetComponent<EnemyExecution>();
+                    enemy.ReduceEnemyCollider(true);
                     StartCoroutine(SetPlayerPositionRotation(1f));
                     InterrogationMode = false;
                 }
-                else if (Input.GetKey(KeyCode.T) || CrossPlatformInputManager.GetButtonDown("Interrogate"))
+                else if (CrossPlatformInputManager.GetButtonDown("Interrogate") && enemy.CurrentEnemyType == EnemyExecution.EnemyType.Human)
                 {
+                    Weapon.DisableCurrentWeapon();
                     playerController.ChangeMovement(0);
                     ExecutionButton.SetActive(false);
                     InterrogateButton.SetActive(false);
-                    TriggerTransform = other.gameObject.transform;
                     TriggerTransform.GetComponent<Collider>().enabled = false;
-                    enemy = TriggerTransform.GetComponent<EnemyExecution>();
+                    enemy.ReduceEnemyCollider(true);
                     StartCoroutine(SetPlayerPositionRotation(1f));
                     InterrogationMode = true;
                 }
+
             }
         }
     }
@@ -120,7 +127,6 @@ public class PlayerExecution : MonoBehaviour
             yield return null;
             t += Time.deltaTime;
         }
-        Weapon.DisableCurrentWeapon();
         if (!InterrogationMode)
         {
             Execution = Random.Range(0, 9);
@@ -128,7 +134,7 @@ public class PlayerExecution : MonoBehaviour
                 Knife.SetActive(true);
             playerAnimator.SetFloat("Executions", Execution);
             playerAnimator.SetTrigger("StartExecution");
-            enemy.StartExecution(Execution, GetComponent<Collider>());
+            enemy.StartExecution(Execution);
             NoiseManager.Noise.CreateNoise(transform.position);
         }
         else
@@ -136,7 +142,7 @@ public class PlayerExecution : MonoBehaviour
             Knife.SetActive(true);
             playerAnimator.SetTrigger("Interrogate");
             playerAnimator.SetInteger("InterrogatePos", 0);
-            enemy.StartInterrogation(Execution, GetComponent<Collider>());
+            enemy.StartInterrogation(Execution);
         }
 
     }
