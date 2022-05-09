@@ -7,9 +7,11 @@ public class RagdollManager : MonoBehaviour
     private Rigidbody MainRigidbody;
     private Collider MainCollider;
     public Collider ExecutionCollider;
-    private Rigidbody[] Rigidbodies;
+    [SerializeField] private Rigidbody[] Rigidbodies;
     private Collider[] Colliders;
     private Animator animator;
+    [SerializeField] private RuntimeAnimatorController GetUpController;
+    public GameObject Root;
 
     void Start()
     {
@@ -47,12 +49,21 @@ public class RagdollManager : MonoBehaviour
         ExecutionCollider.enabled = !Status;
         if(Status)
         {
-            Invoke("TurnOff", 10f);
+            Root.transform.parent = null;
+            Invoke("TurnOff", 5f);
+            
         }
 
     }
     void TurnOff()
     {
-        gameObject.SetActive(false);
+        transform.position = new Vector3(Root.transform.GetChild(0).position.x, transform.position.y, Root.transform.GetChild(0).transform.position.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Root.transform.GetChild(0).rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+        Root.transform.parent = transform;
+        animator.runtimeAnimatorController = GetUpController;
+        animator.Rebind();
+        EnableRagdoll(false);
+
+        //gameObject.SetActive(false);
     }
 }

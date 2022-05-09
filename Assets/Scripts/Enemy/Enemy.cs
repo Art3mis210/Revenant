@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     Animator EnemyAnimator;
     RaycastHit hit;
     Rigidbody EnemyRigidbody;
+    bool Aiming;
     
     
     void Start()
@@ -73,6 +74,11 @@ public class Enemy : MonoBehaviour
                         if(hit.transform.gameObject.tag=="Player")
                         {
                             CurrentEnemyState = EnemyState.AttackPlayer;
+                            if (Aiming == false)
+                            {
+                                Aiming = true;
+                                StartCoroutine(AimMode(1f, 0.5f));
+                            }
                         }
                     }
                 }
@@ -189,5 +195,17 @@ public class Enemy : MonoBehaviour
         {
             EnemyAgent.isStopped = false;
         }
+    }
+    IEnumerator AimMode(float Aim,float Duration)
+    {
+        float t = 0;
+        float CurrentAim = EnemyAnimator.GetFloat("Aim");
+        while (t < Duration)
+        {
+            EnemyAnimator.SetFloat("Aim", CurrentAim = Mathf.Lerp(CurrentAim, Aim, t / Duration));
+            yield return null;
+            t += Time.deltaTime;
+        }
+
     }
 }

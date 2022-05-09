@@ -1917,7 +1917,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185214158}
-  m_LocalRotation: {x: -0.19285798, y: 0.084753476, z: -0.038621303, w: -0.9767963}
+  m_LocalRotation: {x: -0.19285794, y: 0.084753506, z: -0.038621318, w: -0.9767963}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5148,7 +5148,7 @@ GameObject:
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5369,6 +5369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExecutionCollider: {fileID: 608305070}
+  Rigidbodies: []
+  GetUpController: {fileID: 0}
+  Root: {fileID: 0}
 --- !u!54 &568858217
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9486,7 +9489,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.34802067, y: -0.120413825, z: 0.04512745, w: 0.9286257}
+  m_LocalRotation: {x: 0.34802067, y: -0.120413825, z: 0.04512744, w: 0.9286257}
   m_LocalPosition: {x: 0.65667224, y: 3.7089553, z: -2.4895375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -10036,7 +10039,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017040069}
-  m_LocalRotation: {x: -0.17505868, y: 0.08544198, z: -0.037073307, w: -0.9801428}
+  m_LocalRotation: {x: -0.17505868, y: 0.08544195, z: -0.037073288, w: -0.9801428}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -13138,7 +13141,7 @@ GameObject:
   m_Layer: 0
   m_Name: Rebel Ragdoll
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -13155,6 +13158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExecutionCollider: {fileID: 1010453680}
+  Rigidbodies: []
+  GetUpController: {fileID: 9100000, guid: d16353d7c05a1834eabceb87d761a6b7, type: 2}
+  Root: {fileID: 567813097}
 --- !u!195 &1454599893
 NavMeshAgent:
   m_ObjectHideFlags: 0
