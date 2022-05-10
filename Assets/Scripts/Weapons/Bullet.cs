@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     RaycastHit BodyHit;
     Rigidbody BulletRigidbody;
     public GameObject BulletEffect;
+    public GameObject BulletWallEffect;
     private void Start()
     {
         BulletRigidbody = GetComponent<Rigidbody>();
@@ -25,6 +26,7 @@ public class Bullet : MonoBehaviour
                 if(Physics.Raycast(hit.point,transform.forward,out BodyHit,4f,BodyMask))
                 {
                     Debug.Log(BodyHit.transform.gameObject.name);
+                    BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
                     BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(50, BodyHit.point, 50f, 70f, ForceMode.Impulse);
                     GameObject bEffect = Instantiate(BulletEffect,BodyHit.point,Quaternion.LookRotation(-BodyHit.normal));
                     bEffect.transform.parent = BodyHit.transform;
@@ -34,10 +36,16 @@ public class Bullet : MonoBehaviour
             else if (Physics.Raycast(hit.point, transform.forward, out BodyHit, 4f, BodyMask))
             {
                 Debug.Log(BodyHit.transform.gameObject.name);
+                BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
                 BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(50, BodyHit.point, 50f, 70f, ForceMode.Impulse);
                 GameObject bEffect = Instantiate(BulletEffect, BodyHit.point, Quaternion.LookRotation(-BodyHit.normal));
                 bEffect.transform.parent = BodyHit.transform;
 
+            }
+            else if(hit.transform.gameObject.layer==6 || hit.transform.gameObject.layer == 3)
+            {
+                GameObject bEffect = Instantiate(BulletWallEffect, hit.point, Quaternion.LookRotation(-hit.normal));
+                bEffect.transform.parent = BodyHit.transform;
             }
             gameObject.SetActive(false);
         }

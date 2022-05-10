@@ -13,6 +13,8 @@ TagManager:
   - AnimTag
   - Ground
   - ZombieGrabTrigger
+  - Zombie
+  - Enemy
   layers:
   - Default
   - TransparentFX

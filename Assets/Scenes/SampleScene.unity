@@ -1120,6 +1120,7 @@ GameObject:
   - component: {fileID: 120104563}
   - component: {fileID: 120104562}
   - component: {fileID: 120104561}
+  - component: {fileID: 120104564}
   m_Layer: 10
   m_Name: LeftForeArm
   m_TagString: Untagged
@@ -1222,6 +1223,19 @@ CapsuleCollider:
   m_Height: 0.40690607
   m_Direction: 0
   m_Center: {x: -0.20345303, y: 0, z: 0}
+--- !u!114 &120104564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120104559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -15
 --- !u!114 &120521644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1917,7 +1931,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185214158}
-  m_LocalRotation: {x: -0.19285798, y: 0.08475346, z: -0.038621303, w: -0.9767963}
+  m_LocalRotation: {x: -0.19285794, y: 0.084753506, z: -0.038621318, w: -0.9767963}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2161,6 +2175,7 @@ GameObject:
   - component: {fileID: 202317417}
   - component: {fileID: 202317416}
   - component: {fileID: 202317415}
+  - component: {fileID: 202317418}
   m_Layer: 10
   m_Name: Head 1
   m_TagString: Untagged
@@ -2257,6 +2272,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.13
   m_Center: {x: -0.09972732, y: 0, z: 0}
+--- !u!114 &202317418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202317413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -100
 --- !u!1 &202546413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2463,7 @@ GameObject:
   - component: {fileID: 244398194}
   - component: {fileID: 244398192}
   - component: {fileID: 244398193}
+  - component: {fileID: 244398195}
   m_Layer: 10
   m_Name: RightUpLeg
   m_TagString: Untagged
@@ -2533,6 +2562,19 @@ CapsuleCollider:
   m_Height: 0.45506883
   m_Direction: 0
   m_Center: {x: -0.22753441, y: 0, z: 0}
+--- !u!114 &244398195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244398190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -10
 --- !u!1 &244605785
 GameObject:
   m_ObjectHideFlags: 0
@@ -4901,6 +4943,8 @@ MonoBehaviour:
   HeadOffset: {x: 9.15, y: -72.6, z: -94.32}
   Aiming: 0
   AimCamera: {fileID: 1288020957}
+  Reticle: {fileID: 0}
+  CanvasTransform: {fileID: 0}
 --- !u!114 &556902889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5258,7 +5302,7 @@ GameObject:
   - component: {fileID: 568858216}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5370,12 +5414,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExecutionCollider: {fileID: 608305070}
   Rigidbodies: []
-  GetUpController: {fileID: 0}
-  Root: {fileID: 0}
+  GetUpController: {fileID: 9100000, guid: d16353d7c05a1834eabceb87d761a6b7, type: 2}
+  Root: {fileID: 601830163}
   bones: 0
   GroundLayer:
     serializedVersion: 2
     m_Bits: 0
+  Health: 0
   TimetoLerp: 0
   timeLerped: 0
 --- !u!54 &568858217
@@ -7773,6 +7818,7 @@ GameObject:
   - component: {fileID: 797525293}
   - component: {fileID: 797525292}
   - component: {fileID: 797525291}
+  - component: {fileID: 797525294}
   m_Layer: 10
   m_Name: RightLeg
   m_TagString: Untagged
@@ -7871,6 +7917,19 @@ CapsuleCollider:
   m_Height: 0.44717252
   m_Direction: 0
   m_Center: {x: -0.22358626, y: 0, z: 0}
+--- !u!114 &797525294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797525289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -5
 --- !u!1 &798505968
 GameObject:
   m_ObjectHideFlags: 0
@@ -7883,6 +7942,7 @@ GameObject:
   - component: {fileID: 798505972}
   - component: {fileID: 798505970}
   - component: {fileID: 798505971}
+  - component: {fileID: 798505973}
   m_Layer: 10
   m_Name: Spine
   m_TagString: Untagged
@@ -7980,6 +8040,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.28542823, y: 0.24366583, z: 0.39768043}
   m_Center: {x: -0.14271423, y: 0.012027331, z: -0.00021851063}
+--- !u!114 &798505973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798505968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -80
 --- !u!1 &799358510
 GameObject:
   m_ObjectHideFlags: 0
@@ -9495,7 +9568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.34802067, y: -0.120413795, z: 0.04512745, w: 0.9286257}
+  m_LocalRotation: {x: 0.34802067, y: -0.12041383, z: 0.04512745, w: 0.9286257}
   m_LocalPosition: {x: 0.65667224, y: 3.7089553, z: -2.4895375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -10641,6 +10714,7 @@ GameObject:
   - component: {fileID: 1104177095}
   - component: {fileID: 1104177093}
   - component: {fileID: 1104177094}
+  - component: {fileID: 1104177096}
   m_Layer: 10
   m_Name: LeftArm
   m_TagString: Untagged
@@ -10739,6 +10813,19 @@ CapsuleCollider:
   m_Height: 0.3045418
   m_Direction: 0
   m_Center: {x: -0.1522709, y: 0, z: 0}
+--- !u!114 &1104177096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104177091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -25
 --- !u!1 &1113980029
 GameObject:
   m_ObjectHideFlags: 0
@@ -13146,7 +13233,7 @@ GameObject:
   - component: {fileID: 1454599892}
   m_Layer: 0
   m_Name: Rebel Ragdoll
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13171,6 +13258,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  Health: 100
   TimetoLerp: 0.5
   timeLerped: 0.5
 --- !u!195 &1454599893
@@ -13508,6 +13596,7 @@ GameObject:
   - component: {fileID: 1522547547}
   - component: {fileID: 1522547545}
   - component: {fileID: 1522547546}
+  - component: {fileID: 1522547548}
   m_Layer: 10
   m_Name: RightArm
   m_TagString: Untagged
@@ -13606,6 +13695,19 @@ CapsuleCollider:
   m_Height: 0.30430713
   m_Direction: 0
   m_Center: {x: -0.15215357, y: 0, z: 0}
+--- !u!114 &1522547548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522547543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -25
 --- !u!1 &1526531132
 GameObject:
   m_ObjectHideFlags: 0
@@ -13723,6 +13825,7 @@ GameObject:
   - component: {fileID: 1527800843}
   - component: {fileID: 1527800841}
   - component: {fileID: 1527800842}
+  - component: {fileID: 1527800844}
   m_Layer: 10
   m_Name: LeftUpLeg
   m_TagString: Untagged
@@ -13821,6 +13924,19 @@ CapsuleCollider:
   m_Height: 0.4550262
   m_Direction: 0
   m_Center: {x: -0.2275131, y: 0, z: 0}
+--- !u!114 &1527800844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527800839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -10
 --- !u!1 &1542450543
 GameObject:
   m_ObjectHideFlags: 0
@@ -15614,6 +15730,7 @@ GameObject:
   - component: {fileID: 1827817342}
   - component: {fileID: 1827817341}
   - component: {fileID: 1827817340}
+  - component: {fileID: 1827817343}
   m_Layer: 0
   m_Name: RightForeArm
   m_TagString: Untagged
@@ -15716,6 +15833,19 @@ CapsuleCollider:
   m_Height: 0.40533108
   m_Direction: 0
   m_Center: {x: -0.20266554, y: 0, z: 0}
+--- !u!114 &1827817343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827817338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -15
 --- !u!1 &1833885159
 GameObject:
   m_ObjectHideFlags: 0
@@ -16579,6 +16709,7 @@ GameObject:
   - component: {fileID: 1954583465}
   - component: {fileID: 1954583464}
   - component: {fileID: 1954583463}
+  - component: {fileID: 1954583466}
   m_Layer: 10
   m_Name: LeftLeg
   m_TagString: Untagged
@@ -16677,6 +16808,19 @@ CapsuleCollider:
   m_Height: 0.46320802
   m_Direction: 0
   m_Center: {x: -0.23160401, y: 0, z: 0}
+--- !u!114 &1954583466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954583461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15c433e88644a74699f05af8448cda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthChange: -5
 --- !u!1 &1960714005
 GameObject:
   m_ObjectHideFlags: 0
@@ -20951,6 +21095,8 @@ MonoBehaviour:
   HeadOffset: {x: 9.15, y: -72.6, z: -94.32}
   Aiming: 0
   AimCamera: {fileID: 580131469}
+  Reticle: {fileID: 227101917}
+  CanvasTransform: {fileID: 1526531136}
 --- !u!114 &919132149140045562
 MonoBehaviour:
   m_ObjectHideFlags: 0

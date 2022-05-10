@@ -32,6 +32,7 @@ public class Weapon : MonoBehaviour
     bool AimPosEnabled;
     bool Aiming;
     bool StealthPos;
+    RaycastHit hit;
     private void OnEnable()
     {
         if (playerAnimator == null)
@@ -43,6 +44,12 @@ public class Weapon : MonoBehaviour
     }
     private void Update()
     {
+        if(Aiming)
+            Debug.DrawRay(Muzzle.position, Muzzle.forward, Color.blue, 0.1f);
+        if(Physics.Raycast(Muzzle.position, Muzzle.forward,out hit))
+        {
+            PlayerWeapon.playerWeapon.MoveReticle(hit.point);
+        }
         if (Aiming && !AimPosEnabled)
         {
             AimPosEnabled = true;
@@ -72,8 +79,8 @@ public class Weapon : MonoBehaviour
     IEnumerator ShootBullets()
     {
         Debug.Log("Shoot");
-        GameObject Bullet = Instantiate(BulletPrefab, Muzzle.transform.position, Camera.main.transform.rotation);
-        Bullet.GetComponent<Rigidbody>().AddForce(BulletSpeed * Camera.main.transform.forward);
+        GameObject Bullet = Instantiate(BulletPrefab, Muzzle.transform.position, Muzzle.transform.rotation);
+        Bullet.GetComponent<Rigidbody>().AddForce(BulletSpeed * Muzzle.transform.forward);
 
         LoadedBullets--;
         yield return new WaitForSeconds(TimeToShoot);

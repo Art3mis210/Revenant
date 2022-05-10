@@ -30,7 +30,11 @@ public class PlayerWeapon : MonoBehaviour
     delegate void Weapons();
     Weapons WeaponsUpdate;
     #endregion
-
+    public static PlayerWeapon playerWeapon
+    {
+        get;
+        set;
+    }
     PlayerController playerController;
     private void Start()
     {
@@ -38,6 +42,7 @@ public class PlayerWeapon : MonoBehaviour
         Chest = playerAnimator.GetBoneTransform(HumanBodyBones.Spine);
         Head = playerAnimator.GetBoneTransform(HumanBodyBones.Head);
         playerController = GetComponent<PlayerController>();
+        playerWeapon = this;
         if (playerController.CurrentInput == PlayerController.InputType.Mobile)
         {
             WeaponsUpdate = WeaponsUpdateGamepad;
@@ -184,5 +189,16 @@ public class PlayerWeapon : MonoBehaviour
         Aiming = false;
         AimCamera.SetActive(false);
         playerAnimator.SetFloat("Aiming", 0);
+    }
+    public RectTransform Reticle;
+    public RectTransform CanvasTransform;
+    public void MoveReticle(Vector3 MovePos)
+    {
+        Vector2 ViewportPosition = Camera.main.WorldToViewportPoint(MovePos);
+        Vector2 WorldObject_ScreenPosition = new Vector2(
+        ((ViewportPosition.x * CanvasTransform.sizeDelta.x) - (CanvasTransform.sizeDelta.x * 0.5f)),
+        ((ViewportPosition.y * CanvasTransform.sizeDelta.y) - (CanvasTransform.sizeDelta.y * 0.5f)));
+
+        Reticle.anchoredPosition = WorldObject_ScreenPosition;
     }
 }

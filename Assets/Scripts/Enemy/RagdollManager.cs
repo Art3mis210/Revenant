@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RagdollManager : MonoBehaviour
 {
+    #region References
     private Rigidbody MainRigidbody;
     private Collider MainCollider;
     public Collider ExecutionCollider;
@@ -16,6 +17,8 @@ public class RagdollManager : MonoBehaviour
     Quaternion[] RagdollBonesRot;
     public HumanBodyBones bones;
     public LayerMask GroundLayer;
+    public float Health;
+    #endregion
 
     void Start()
     {
@@ -64,34 +67,45 @@ public class RagdollManager : MonoBehaviour
     }
     void TurnOff()
     {
-        for (int i = 1; i < 12; i++)
+        if (Health > 0)
         {
-            RagdollBonesPos[i] = Rigidbodies[i].transform.position;
-        }
-        for (int i = 1; i < 12; i++)
-        {
-            RagdollBonesRot[i] = Rigidbodies[i].transform.rotation;
-        }
-        transform.position = new Vector3(Root.transform.GetChild(0).position.x, transform.position.y, Root.transform.GetChild(0).transform.position.z);
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Root.transform.GetChild(0).rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        Root.transform.parent = transform;
-        animator.runtimeAnimatorController = GetUpController;
-        animator.Rebind();
-        Debug.DrawRay(Root.transform.position, Root.transform.right, Color.red,5f);
-        if(Physics.Raycast(Root.transform.position,Root.transform.right,2f,GroundLayer))
-        {
-            animator.SetFloat("GetUpPose", 1);
-        }
+            for (int i = 1; i < 12; i++)
+            {
+                RagdollBonesPos[i] = Rigidbodies[i].transform.position;
+            }
+            for (int i = 1; i < 12; i++)
+            {
+                RagdollBonesRot[i] = Rigidbodies[i].transform.rotation;
+            }
+            transform.position = new Vector3(Root.transform.GetChild(0).position.x, transform.position.y, Root.transform.GetChild(0).transform.position.z);
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Root.transform.GetChild(0).rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            Root.transform.parent = transform;
+            animator.runtimeAnimatorController = GetUpController;
+            animator.Rebind();
+            Debug.DrawRay(Rigidbodies[9].transform.position, Rigidbodies[9].transform.up, Color.red, 10f);
+            //Debug.DrawRay(Root.transform.position,Root.transform.right, Color.red,5f);
+            if (Physics.Raycast(Rigidbodies[9].transform.position, Rigidbodies[9].transform.up, GroundLayer))
+            {
+                Debug.Log("upsidedown");
+                animator.SetFloat("GetUpPose", 1);
+            }
+            else
+            {
+                animator.SetFloat("GetUpPose", 0);
+            }
+            EnableRagdoll(false);
+            timeLerped = 0f;
+        } //stand up
         else
         {
-            animator.SetFloat("GetUpPose", 0);
+            Root.transform.parent = transform;
+            gameObject.SetActive(false);
         }
 
-        
-        EnableRagdoll(false);
-        timeLerped = 0f;
-
-        //gameObject.SetActive(false);
+    }
+    public void ChangeHealth(int DeltaHealth)
+    {
+        Health += DeltaHealth;
     }
     public float TimetoLerp;
     public float timeLerped;
@@ -111,26 +125,10 @@ public class RagdollManager : MonoBehaviour
             Rigidbodies[10].transform.position = Vector3.Lerp(RagdollBonesPos[10], animator.GetBoneTransform(HumanBodyBones.RightUpperArm).position, timeLerped / TimetoLerp);
             Rigidbodies[11].transform.position = Vector3.Lerp(RagdollBonesPos[11], animator.GetBoneTransform(HumanBodyBones.RightLowerArm).position, timeLerped / TimetoLerp);
 
-            /*Rigidbodies[1].transform.rotation = Quaternion.Slerp(RagdollBonesRot[1], animator.GetBoneTransform(HumanBodyBones.Hips).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[2].transform.rotation = Quaternion.Slerp(RagdollBonesRot[2], animator.GetBoneTransform(HumanBodyBones.LeftUpperLeg).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[3].transform.rotation = Quaternion.Slerp(RagdollBonesRot[3], animator.GetBoneTransform(HumanBodyBones.LeftLowerLeg).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[4].transform.rotation = Quaternion.Slerp(RagdollBonesRot[4], animator.GetBoneTransform(HumanBodyBones.RightUpperLeg).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[5].transform.rotation = Quaternion.Slerp(RagdollBonesRot[5], animator.GetBoneTransform(HumanBodyBones.RightLowerLeg).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[6].transform.rotation = Quaternion.Slerp(RagdollBonesRot[6], animator.GetBoneTransform(HumanBodyBones.Spine).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[7].transform.rotation = Quaternion.Slerp(RagdollBonesRot[7], animator.GetBoneTransform(HumanBodyBones.LeftUpperArm).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[8].transform.rotation = Quaternion.Slerp(RagdollBonesRot[8], animator.GetBoneTransform(HumanBodyBones.LeftLowerArm).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[9].transform.rotation = Quaternion.Slerp(RagdollBonesRot[9], animator.GetBoneTransform(HumanBodyBones.Head).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[10].transform.rotation = Quaternion.Slerp(RagdollBonesRot[10], animator.GetBoneTransform(HumanBodyBones.RightUpperArm).rotation, timeLerped / TimetoLerp);
-            Rigidbodies[11].transform.rotation = Quaternion.Slerp(RagdollBonesRot[11], animator.GetBoneTransform(HumanBodyBones.RightLowerArm).rotation, timeLerped / TimetoLerp);
-            */
             for (int i = 1; i < 12; i++)
             {
                 RagdollBonesPos[i] = Rigidbodies[i].transform.position;
             }
-            /*for (int i = 1; i < 12; i++)
-            {
-                RagdollBonesRot[i] = Rigidbodies[i].transform.rotation;
-            }*/
             timeLerped += Time.deltaTime;
         }
         
