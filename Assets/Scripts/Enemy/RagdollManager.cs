@@ -15,6 +15,7 @@ public class RagdollManager : MonoBehaviour
     Vector3[] RagdollBonesPos;
     Quaternion[] RagdollBonesRot;
     public HumanBodyBones bones;
+    public LayerMask GroundLayer;
 
     void Start()
     {
@@ -76,6 +77,17 @@ public class RagdollManager : MonoBehaviour
         Root.transform.parent = transform;
         animator.runtimeAnimatorController = GetUpController;
         animator.Rebind();
+        Debug.DrawRay(Root.transform.position, Root.transform.right, Color.red,5f);
+        if(Physics.Raycast(Root.transform.position,Root.transform.right,2f,GroundLayer))
+        {
+            animator.SetFloat("GetUpPose", 1);
+        }
+        else
+        {
+            animator.SetFloat("GetUpPose", 0);
+        }
+
+        
         EnableRagdoll(false);
         timeLerped = 0f;
 

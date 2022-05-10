@@ -1101,7 +1101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119933018}
   m_LocalRotation: {x: -0.15724866, y: 0.08610043, z: -0.035517126, w: -0.9831572}
-  m_LocalPosition: {x: 0.0000000049781907, y: 0.00000022443983, z: -0.000000080283236}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 45998070}
@@ -1917,8 +1917,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185214158}
-  m_LocalRotation: {x: -0.19285801, y: 0.08475347, z: -0.0386213, w: -0.9767964}
-  m_LocalPosition: {x: 0.0000000049781907, y: 0.00000022443983, z: -0.000000080283236}
+  m_LocalRotation: {x: -0.19285798, y: 0.08475346, z: -0.038621303, w: -0.9767963}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 563900869}
@@ -5373,6 +5373,9 @@ MonoBehaviour:
   GetUpController: {fileID: 0}
   Root: {fileID: 0}
   bones: 0
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   TimetoLerp: 0
   timeLerped: 0
 --- !u!54 &568858217
@@ -9492,7 +9495,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.34802067, y: -0.120413795, z: 0.04512744, w: 0.9286257}
+  m_LocalRotation: {x: 0.34802067, y: -0.120413795, z: 0.04512745, w: 0.9286257}
   m_LocalPosition: {x: 0.65667224, y: 3.7089553, z: -2.4895375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -10042,8 +10045,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017040069}
-  m_LocalRotation: {x: -0.17505868, y: 0.08544195, z: -0.037073288, w: -0.9801428}
-  m_LocalPosition: {x: 0.0000000049781907, y: 0.00000022443983, z: -0.000000080283236}
+  m_LocalRotation: {x: -0.17505866, y: 0.08544195, z: -0.03707328, w: -0.9801427}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1907460075}
@@ -13165,6 +13168,9 @@ MonoBehaviour:
   GetUpController: {fileID: 9100000, guid: d16353d7c05a1834eabceb87d761a6b7, type: 2}
   Root: {fileID: 567813097}
   bones: 0
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   TimetoLerp: 0.5
   timeLerped: 0.5
 --- !u!195 &1454599893
