@@ -20,6 +20,7 @@ public class RagdollManager : MonoBehaviour
     public LayerMask GroundLayer;
     public float Health;
     public bool DisableRagdollMode;
+    Enemy enemyController;
     #endregion
 
     void Start()
@@ -59,7 +60,8 @@ public class RagdollManager : MonoBehaviour
             MainRigidbody.isKinematic = Status;
             MainCollider.enabled = !Status;
             animator.enabled = !Status;
-            ExecutionCollider.enabled = !Status;
+            if(ExecutionCollider!=null)
+                ExecutionCollider.enabled = !Status;
             if (Status)
             {
                 Root.transform.parent = null;

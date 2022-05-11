@@ -11,6 +11,7 @@ public class EnableMovement : StateMachineBehaviour
     {
         animator.GetComponent<PlayerController>().ChangeMovement(1);
         animator.GetComponent<PlayerExecution>().Knife.SetActive(false);
+        animator.GetComponent<BulletHit>().EnableBulletHit = true;
     }
 
 }

@@ -107,6 +107,8 @@ public class PlayerController : MonoBehaviour
                 Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
                 if(!playerWeapon.Aiming)
                     StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0 , CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
+                if (!Stealth)
+                    NoiseManager.Noise.CreateNoise(transform.position, 0.25f);
                 if (PlayerAnimator.GetFloat("Speed") < 1f && !MovementSpeedChanging)
                 {
                     PlayerAnimator.SetFloat("Speed", 0f);
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour
             {
                 PlayerAnimator.SetBool("Sprint", true);
                 if(!Stealth)
-                    NoiseManager.Noise.CreateNoise(transform.position);
+                    NoiseManager.Noise.CreateNoise(transform.position,1f);
                 if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
                 {
                     MovementSpeedChanging = true;
@@ -328,7 +330,7 @@ public class PlayerController : MonoBehaviour
             {
                 PlayerAnimator.SetBool("Sprint", true);
                 if (!Stealth)
-                    NoiseManager.Noise.CreateNoise(transform.position);
+                    NoiseManager.Noise.CreateNoise(transform.position,2f);
                 if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
                 {
                     MovementSpeedChanging = true;

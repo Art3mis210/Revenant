@@ -85,9 +85,20 @@ public class Enemy : MonoBehaviour
                                 Aiming = true;
                                 enemyWeapon.EnableAimPos(true);
                                 StartCoroutine(AimMode(1f, 0.5f));
+                                EnemyAlert.Reference.AlertNearbyEnemies(transform.position, 25f);
                             }
                         }
                     }
+                }
+            }
+            if(EnemyAlert.Reference.GetActiveAlert(NoiseDetectionRadius,transform.position))
+            {
+                CurrentEnemyState = EnemyState.AttackPlayer;
+                if (Aiming == false)
+                {
+                    Aiming = true;
+                    enemyWeapon.EnableAimPos(true);
+                    StartCoroutine(AimMode(1f, 0.5f));
                 }
             }
         }
@@ -137,11 +148,13 @@ public class Enemy : MonoBehaviour
                     {
                         EnemyAnimator.SetBool("Shoot", true);
                         AimIK = true;
+                        EnemyAgent.ResetPath();
+                        EnemyAgent.speed = 0;
                     }
                     else
                     {
                         EnemyAnimator.SetBool("Shoot", false);
-                        AimIK = true;
+                        AimIK = false;
                     }
                 }
                 else

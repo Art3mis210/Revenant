@@ -14,12 +14,14 @@ public class NoiseManager : MonoBehaviour
         Noise = this;
     }
     public Vector3 NoiseLocation;
+    public float NoiseRadius;
     bool NoiseActive;
     bool AddNewNoise;
-    public void CreateNoise(Vector3 Location)
+    public void CreateNoise(Vector3 Location,float Radius)
     {
         AddNewNoise = true;
         NoiseLocation = Location;
+        NoiseRadius = Radius;
         StartCoroutine(DestroyNoise());
     }
     IEnumerator DestroyNoise()
@@ -36,7 +38,7 @@ public class NoiseManager : MonoBehaviour
     {
         if (NoiseActive == true)
         {
-            if (Vector3.Distance(NoiseLocation, Location) <= Radius)
+            if (Vector3.Distance(NoiseLocation, Location) <= Radius+NoiseRadius)
                 return true;
         }
         return false;

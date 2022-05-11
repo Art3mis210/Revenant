@@ -32,7 +32,6 @@ public class Bullet : MonoBehaviour
     {
         if (Physics.Raycast(transform.position,transform.forward,out hit,5f))
         {
-            Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject.GetComponent<RagdollManager>() != null)
             {
                 Debug.DrawRay(hit.point,transform.forward, Color.red, 5f);
@@ -63,15 +62,15 @@ public class Bullet : MonoBehaviour
                 GameObject bEffect = Instantiate(BulletWallEffect, hit.point, Quaternion.LookRotation(-hit.normal));
                 bEffect.transform.parent = BodyHit.transform;
             }
+            else if(hit.transform.tag=="Player")
+            {
+                hit.transform.GetComponent<BulletHit>().BulletHitReaction(hit.point,transform.forward);
+            }
             BulletRigidbody.velocity = Vector3.zero;
             BulletRigidbody.angularVelocity = Vector3.zero;
             gameObject.SetActive(false);
             
         }
        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
     }
 }

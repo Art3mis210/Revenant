@@ -25,6 +25,7 @@ public class PlayerExecution : MonoBehaviour
     GameObject InterrogateButton;
     PlayerController playerController;
     bool InterrogationMode;
+    [SerializeField] AudioClip ExecutionSound;
 
     private void Start()
     {
@@ -136,7 +137,7 @@ public class PlayerExecution : MonoBehaviour
             playerAnimator.SetFloat("Executions", Execution);
             playerAnimator.SetTrigger("StartExecution");
             enemy.StartExecution(Execution);
-            NoiseManager.Noise.CreateNoise(transform.position);
+            NoiseManager.Noise.CreateNoise(transform.position,0.1f);
         }
         else
         {
@@ -149,6 +150,7 @@ public class PlayerExecution : MonoBehaviour
     }
     public void BloodEffect()
     {
+        Knife.GetComponent<AudioSource>().PlayOneShot(ExecutionSound);
         KnifeBloodEffect.Play();
     }
 }
