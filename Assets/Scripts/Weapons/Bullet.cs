@@ -10,9 +10,23 @@ public class Bullet : MonoBehaviour
     Rigidbody BulletRigidbody;
     public GameObject BulletEffect;
     public GameObject BulletWallEffect;
+    public float TimeToTurnOff=3f;
+    float ActiveTime;
     private void Start()
     {
         BulletRigidbody = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    {
+        if (ActiveTime <= TimeToTurnOff)
+            ActiveTime += Time.deltaTime;
+        else
+        {
+            ActiveTime = 0f;
+            BulletRigidbody.velocity = Vector3.zero;
+            BulletRigidbody.angularVelocity = Vector3.zero;
+            gameObject.SetActive(false);
+        }
     }
     void FixedUpdate()
     {
@@ -26,8 +40,9 @@ public class Bullet : MonoBehaviour
                 if(Physics.Raycast(hit.point,transform.forward,out BodyHit,4f,BodyMask))
                 {
                     Debug.Log(BodyHit.transform.gameObject.name);
-                    BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
-                    BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(50, BodyHit.point, 50f, 70f, ForceMode.Impulse);
+                    if(BodyHit.transform.GetComponent<BulletDamage>()!=null)
+                        BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
+                    BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(20, BodyHit.point, 50f, 70f, ForceMode.Impulse);
                     GameObject bEffect = Instantiate(BulletEffect,BodyHit.point,Quaternion.LookRotation(-BodyHit.normal));
                     bEffect.transform.parent = BodyHit.transform;
 
@@ -36,8 +51,9 @@ public class Bullet : MonoBehaviour
             else if (Physics.Raycast(hit.point, transform.forward, out BodyHit, 4f, BodyMask))
             {
                 Debug.Log(BodyHit.transform.gameObject.name);
-                BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
-                BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(50, BodyHit.point, 50f, 70f, ForceMode.Impulse);
+                if (BodyHit.transform.GetComponent<BulletDamage>() != null)
+                    BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
+                BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(20, BodyHit.point, 50f, 70f, ForceMode.Impulse);
                 GameObject bEffect = Instantiate(BulletEffect, BodyHit.point, Quaternion.LookRotation(-BodyHit.normal));
                 bEffect.transform.parent = BodyHit.transform;
 
@@ -47,7 +63,10 @@ public class Bullet : MonoBehaviour
                 GameObject bEffect = Instantiate(BulletWallEffect, hit.point, Quaternion.LookRotation(-hit.normal));
                 bEffect.transform.parent = BodyHit.transform;
             }
+            BulletRigidbody.velocity = Vector3.zero;
+            BulletRigidbody.angularVelocity = Vector3.zero;
             gameObject.SetActive(false);
+            
         }
        
     }

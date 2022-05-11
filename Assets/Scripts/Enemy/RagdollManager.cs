@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RagdollManager : MonoBehaviour
 {
+    public EnemyExecution.EnemyType CurrentEnemyType;
     #region References
     private Rigidbody MainRigidbody;
     private Collider MainCollider;
@@ -13,11 +14,12 @@ public class RagdollManager : MonoBehaviour
     private Animator animator;
     [SerializeField] private RuntimeAnimatorController GetUpController;
     public GameObject Root;
+    public Transform RootParent;
     Vector3[] RagdollBonesPos;
-    Quaternion[] RagdollBonesRot;
     public HumanBodyBones bones;
     public LayerMask GroundLayer;
     public float Health;
+    public bool DisableRagdollMode;
     #endregion
 
     void Start()
@@ -29,61 +31,58 @@ public class RagdollManager : MonoBehaviour
         animator = GetComponent<Animator>();
         EnableRagdoll(false);
         RagdollBonesPos = new Vector3[12];
-        RagdollBonesRot = new Quaternion[12];
+        RootParent = Root.transform.parent;
     }
 
     public void EnableRagdoll(bool Status)
     {
-        foreach(Rigidbody rb in Rigidbodies)
+        if (!DisableRagdollMode)
         {
-            if (rb != MainRigidbody)
-                rb.isKinematic = !Status;
-        }
-        foreach (Collider col in Colliders)
-        {
-            if (col != MainCollider)
+            foreach (Rigidbody rb in Rigidbodies)
             {
-                if(col.gameObject.layer==7)
-                {
-                    col.enabled = !Status;
-                }
-                else
-                    col.enabled = Status;
+                if (rb != MainRigidbody)
+                    rb.isKinematic = !Status;
             }
-                
-        }
-        MainRigidbody.isKinematic = Status;
-        MainCollider.enabled = !Status;
-        animator.enabled = !Status;
-        ExecutionCollider.enabled = !Status;
-        if(Status)
-        {
-            Root.transform.parent = null;
-            
-            Invoke("TurnOff", 5f);
-            
+            foreach (Collider col in Colliders)
+            {
+                if (col != MainCollider)
+                {
+                    if (col.gameObject.layer == 7)
+                    {
+                        col.enabled = !Status;
+                    }
+                    else
+                        col.enabled = Status;
+                }
+
+            }
+            MainRigidbody.isKinematic = Status;
+            MainCollider.enabled = !Status;
+            animator.enabled = !Status;
+            ExecutionCollider.enabled = !Status;
+            if (Status)
+            {
+                Root.transform.parent = null;
+
+                Invoke("TurnOff", 5f);
+
+            }
         }
 
     }
     void TurnOff()
     {
+        Root.transform.parent = RootParent;
         if (Health > 0)
         {
             for (int i = 1; i < 12; i++)
             {
                 RagdollBonesPos[i] = Rigidbodies[i].transform.position;
             }
-            for (int i = 1; i < 12; i++)
-            {
-                RagdollBonesRot[i] = Rigidbodies[i].transform.rotation;
-            }
             transform.position = new Vector3(Root.transform.GetChild(0).position.x, transform.position.y, Root.transform.GetChild(0).transform.position.z);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Root.transform.GetChild(0).rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-            Root.transform.parent = transform;
             animator.runtimeAnimatorController = GetUpController;
             animator.Rebind();
-            Debug.DrawRay(Rigidbodies[9].transform.position, Rigidbodies[9].transform.up, Color.red, 10f);
-            //Debug.DrawRay(Root.transform.position,Root.transform.right, Color.red,5f);
             if (Physics.Raycast(Rigidbodies[9].transform.position, Rigidbodies[9].transform.up, GroundLayer))
             {
                 Debug.Log("upsidedown");
@@ -98,7 +97,7 @@ public class RagdollManager : MonoBehaviour
         } //stand up
         else
         {
-            Root.transform.parent = transform;
+            Root.transform.parent = RootParent;
             gameObject.SetActive(false);
         }
 

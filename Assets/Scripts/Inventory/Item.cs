@@ -11,8 +11,10 @@ public class Item : MonoBehaviour
     public Text QuantityText;
     public Image ItemImage;
     public GameObject UseDropButton;
+    public InventoryItems ItemReference;
     public delegate void Itemfunction();
     public Itemfunction UseItem;
+    public GameObject ReferenceInScene;
     public void CreateItem(InventoryItems itemData)
     {
         this.ID = itemData.ID;
@@ -22,6 +24,12 @@ public class Item : MonoBehaviour
         ItemImage.sprite = itemData.icon;
         QuantityText.text = "X" + Quantity.ToString();
         Name.text = itemData.ItemName;
+        ItemReference = itemData;
+        if (itemData.itemType == PlayerInventory.ItemType.Weapons)
+        {
+            ReferenceInScene = Instantiate(itemData.Prefab, PlayerWeapon.playerWeapon.WeaponParent);
+            ReferenceInScene.SetActive(false);
+        }
     }
     public void IncreaseQuantity()
     {
@@ -47,6 +55,14 @@ public class Item : MonoBehaviour
     {
         if (Quantity == 1)
         {
+            if(ItemReference.itemType == PlayerInventory.ItemType.Weapons)
+            {
+                if(PlayerWeapon.playerWeapon.CurrentWeapon == ReferenceInScene.GetComponent<Weapon>())
+                {
+                    PlayerWeapon.playerWeapon.DisableCurrentWeapon();
+                }
+                Destroy(ReferenceInScene);
+            }
             Destroy(transform.gameObject);
         }
         else
@@ -54,6 +70,22 @@ public class Item : MonoBehaviour
     }
     public void OnUseItem()
     {
-        UseItem();
+        if (ItemReference.itemType == PlayerInventory.ItemType.Weapons)
+        {
+            if (!ReferenceInScene.activeInHierarchy)
+            {
+                PlayerWeapon.playerWeapon.DisableCurrentWeapon();
+                PlayerWeapon.playerWeapon.CurrentWeapon = ReferenceInScene.GetComponent<Weapon>();
+                ReferenceInScene.SetActive(true);
+            }
+            else
+            {
+                PlayerWeapon.playerWeapon.DisableCurrentWeapon();
+            }
+        }
+        else
+        {
+            UseItem();
+        }
     }
 }

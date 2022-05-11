@@ -8,6 +8,7 @@ public class PickableInventoryItem : MonoBehaviour
     public bool InInventory;
     public GameObject MeshObject;
     public InventoryItems itemData;
+    public bool RotateAxisY;
     
     private void Start()
     {
@@ -19,8 +20,16 @@ public class PickableInventoryItem : MonoBehaviour
     {
         if(!InInventory)
         {
-            if(MeshObject.activeInHierarchy)
-                MeshObject.transform.Rotate(0, 0, 60 * Time.deltaTime);
+            if (!RotateAxisY)
+            {
+                if (MeshObject.activeInHierarchy)
+                    MeshObject.transform.Rotate(0, 0, 60 * Time.deltaTime);
+            }
+            else
+            {
+                if (MeshObject.activeInHierarchy)
+                    MeshObject.transform.Rotate(0, 60 * Time.deltaTime, 0);
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -35,7 +44,7 @@ public class PickableInventoryItem : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if(Input.GetKey(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Pick"))
+            if(CrossPlatformInputManager.GetButtonDown("Pick"))
             {
                 PlayerInventory.InventoryReference.PickUpItem(this);
                 InInventory = true;

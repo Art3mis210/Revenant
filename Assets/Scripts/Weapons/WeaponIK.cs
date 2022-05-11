@@ -12,9 +12,14 @@ public class WeaponIK : MonoBehaviour
     private void Start()
     {
         if (PlayerController.Player.CurrentInput == PlayerController.InputType.Mobile)
+        {
             MoveIKPoint = MoveIKPointGamepad;
+        }
         else
+        {
             MoveIKPoint = MoveIKPointKeyboard;
+            Speed = 100;
+        }
     }
     void Update()
     {

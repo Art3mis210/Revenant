@@ -8,11 +8,11 @@ using Cinemachine;
 public class PlayerWeapon : MonoBehaviour
 {
     #region VariablesAndReferences
+    public Transform WeaponParent;
     public Weapon CurrentWeapon;
     public float AimSensitivity;
 
     private Animator playerAnimator;
-    public AvatarMask PlayerAvatarMask;
     public GameObject WeaponIK;
 
     public Vector3 Offset;
@@ -25,6 +25,12 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject AimCamera;
     float Turn;
     float Recoil;
+
+    public List<RectTransform> ReticlesList;
+    public RectTransform Reticle;
+    public RectTransform CanvasTransform;
+
+
     #endregion
     #region Delegates
     delegate void Weapons();
@@ -50,6 +56,7 @@ public class PlayerWeapon : MonoBehaviour
         else
         {
             WeaponsUpdate = WeaponsUpdateKeyboard;
+            AimSensitivity = 100;
         }
 
     }
@@ -84,6 +91,10 @@ public class PlayerWeapon : MonoBehaviour
         {
             Aiming = !Aiming;
             AimCamera.SetActive(Aiming);
+            if (Reticle.gameObject.activeInHierarchy)
+                Reticle.gameObject.SetActive(false);
+            Reticle = ReticlesList[CurrentWeapon.ReticleType];
+            Reticle.gameObject.SetActive(Aiming);
             if (Aiming == true)
             {
                 Turn = transform.rotation.eulerAngles.y;
@@ -126,6 +137,10 @@ public class PlayerWeapon : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && !playerController.InCover && CurrentWeapon.transform.gameObject.activeInHierarchy)
         {
             Aiming = !Aiming;
+            if (Reticle.gameObject.activeInHierarchy)
+                Reticle.gameObject.SetActive(false);
+            Reticle = ReticlesList[CurrentWeapon.ReticleType];
+            Reticle.gameObject.SetActive(Aiming);
             AimCamera.SetActive(Aiming);
             if (Aiming == true)
             {
@@ -170,6 +185,10 @@ public class PlayerWeapon : MonoBehaviour
         {
             Aiming = !Aiming;
             AimCamera.SetActive(Aiming);
+            if(Reticle.gameObject.activeInHierarchy)
+                Reticle.gameObject.SetActive(false);
+            Reticle = ReticlesList[CurrentWeapon.ReticleType];
+            Reticle.gameObject.SetActive(Aiming);
             if (Aiming == true)
             {
                 Turn = transform.rotation.eulerAngles.y;
@@ -180,6 +199,10 @@ public class PlayerWeapon : MonoBehaviour
     {
         Aiming = false;
         AimCamera.SetActive(false);
+        if (Reticle.gameObject.activeInHierarchy)
+            Reticle.gameObject.SetActive(false);
+        Reticle = ReticlesList[CurrentWeapon.ReticleType];
+        Reticle.gameObject.SetActive(Aiming);
         if (CurrentWeapon != null)
             CurrentWeapon.gameObject.SetActive(false);
         playerAnimator.SetFloat("Aiming", 0);
@@ -188,10 +211,12 @@ public class PlayerWeapon : MonoBehaviour
     {
         Aiming = false;
         AimCamera.SetActive(false);
+        if (Reticle.gameObject.activeInHierarchy)
+            Reticle.gameObject.SetActive(false);
+        Reticle = ReticlesList[CurrentWeapon.ReticleType];
+        Reticle.gameObject.SetActive(Aiming);
         playerAnimator.SetFloat("Aiming", 0);
     }
-    public RectTransform Reticle;
-    public RectTransform CanvasTransform;
     public void MoveReticle(Vector3 MovePos)
     {
         Vector2 ViewportPosition = Camera.main.WorldToViewportPoint(MovePos);

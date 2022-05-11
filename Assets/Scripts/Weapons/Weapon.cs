@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject BulletPrefab;
+#region References
     public float BulletSpeed;
     public int LoadedBullets;
     public int MagLength;
@@ -13,42 +13,50 @@ public class Weapon : MonoBehaviour
     public float TimeToShoot;
     bool Shooting;
     bool ShootEnabled;
-
     public Transform Muzzle;
-    public Transform BulletPool;
-    public List<Transform> BulletList;
     private Animator playerAnimator;
     public Transform LeftHand;
     public Transform RightHand;
     public Vector3 AimPos;
     public Vector3 AimRot;
-
     public Vector3 NonAimStandPos;
     public Vector3 NonAimStandRot;
     public Vector3 NonAimPos;
     public Vector3 NonAimRot;
     public Vector3 NonAimStealthPos;
     public Vector3 NonAimStealthRot;
+    public int ReticleType;
     bool AimPosEnabled;
     bool Aiming;
     bool StealthPos;
     RaycastHit hit;
+    #endregion
     private void OnEnable()
     {
         if (playerAnimator == null)
             playerAnimator = GetComponentInParent<Animator>();
-        if(BulletList==null)
+        if(Aiming)
         {
-            //BulletPool=
+            transform.localPosition = AimPos;
+            transform.localRotation = Quaternion.Euler(AimRot);
+        }
+        else if(PlayerController.Player.Stealth)
+        {
+            EnableStealthPos(true);
+        }
+        else
+        {
+            transform.localPosition = NonAimStandPos;
+            transform.localRotation = Quaternion.Euler(NonAimStandRot);
         }
     }
     private void Update()
     {
-        if(Aiming)
-            Debug.DrawRay(Muzzle.position, Muzzle.forward, Color.blue, 0.1f);
-        if(Physics.Raycast(Muzzle.position, Muzzle.forward,out hit))
-        {
-            PlayerWeapon.playerWeapon.MoveReticle(hit.point);
+        if (Aiming)
+        {    if (Physics.Raycast(Muzzle.position, Muzzle.forward, out hit))
+             {
+                PlayerWeapon.playerWeapon.MoveReticle(hit.point);
+             }
         }
         if (Aiming && !AimPosEnabled)
         {
@@ -78,11 +86,16 @@ public class Weapon : MonoBehaviour
     }
     IEnumerator ShootBullets()
     {
-        Debug.Log("Shoot");
-        GameObject Bullet = Instantiate(BulletPrefab, Muzzle.transform.position, Muzzle.transform.rotation);
-        Bullet.GetComponent<Rigidbody>().AddForce(BulletSpeed * Muzzle.transform.forward);
+        Bullet BulletToFire=BulletPool.Reference.GetBulletFromPool();
+        if (BulletToFire != null)
+        {
+            BulletToFire.transform.position = Muzzle.transform.position;
+            BulletToFire.transform.rotation = Muzzle.transform.rotation;
+            BulletToFire.gameObject.SetActive(true);
 
-        LoadedBullets--;
+            BulletToFire.GetComponent<Rigidbody>().AddForce(BulletSpeed * Muzzle.transform.forward);
+            LoadedBullets--;
+        }
         yield return new WaitForSeconds(TimeToShoot);
         Shooting = false;
     }

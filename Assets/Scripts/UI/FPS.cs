@@ -17,7 +17,7 @@ public class FPS : MonoBehaviour
 			{
 				yield return new WaitForSeconds(0.1f);
 				count = (1 / Time.deltaTime);
-				label = "FPS :" + count;
+				label = "FPS :" + Mathf.Round(count);
 				FPSText.text = label;
 			}
 			else

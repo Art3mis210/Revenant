@@ -7,6 +7,7 @@ public class PlayerExecution : MonoBehaviour
 {
     public int Execution;
     public GameObject Knife;
+    public ParticleSystem KnifeBloodEffect;
     Animator playerAnimator;
     Transform TriggerTransform;
     EnemyExecution enemy;
@@ -145,5 +146,9 @@ public class PlayerExecution : MonoBehaviour
             enemy.StartInterrogation(Execution);
         }
 
+    }
+    public void BloodEffect()
+    {
+        KnifeBloodEffect.Play();
     }
 }

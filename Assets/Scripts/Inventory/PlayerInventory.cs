@@ -37,11 +37,10 @@ public class PlayerInventory : MonoBehaviour
         WeaponItems = new List<Item>();
         EssentialItems = new List<Item>();
         InventoryReference = this;
-        #if MOBILE_INPUT
+        if(PlayerController.Player.CurrentInput==PlayerController.InputType.Mobile)
                 PickIndicator=MobilePickIndicator;
-        #else
+        else
                 PickIndicator = KeyboardPickIndicator;
-        #endif
     }
     void Update()
     {
@@ -132,6 +131,8 @@ public class PlayerInventory : MonoBehaviour
             item.UseItem = Medkit;
         else if (item.ID == 1)
             item.UseItem = Bandage;
+        else if (item.ID == 2)
+            item.UseItem = EquipWeapon;
     }
     void Medkit()
     {
@@ -147,6 +148,12 @@ public class PlayerInventory : MonoBehaviour
         }
         else
             Health = MaxHealth;
+    }
+    void EquipWeapon()
+    {
+        PlayerWeapon.playerWeapon.DisableCurrentWeapon();
+        Debug.Log("ChangeWeapon");
+       // PlayerWeapon.playerWeapon.CurrentWeapon
     }
 
 }

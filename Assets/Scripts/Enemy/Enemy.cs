@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    #region references
     public enum EnemyState
     {
         Idle,Patrol,Execution,Investigate,AttackPlayer
@@ -30,15 +31,20 @@ public class Enemy : MonoBehaviour
     RaycastHit hit;
     Rigidbody EnemyRigidbody;
     bool Aiming;
-    
-    
+    EnemyWeapon enemyWeapon;
+    public Vector3 AimOffset;
+    public bool AimIK;
+    #endregion
+
     void Start()
     {
+        enemyWeapon = transform.GetComponentInChildren<EnemyWeapon>();
         EnemyAgent = GetComponent<NavMeshAgent>();
         NoiseLookAtLocation = Vector3.zero;
         //CurrentEnemyState = EnemyState.Idle;
         EnemyAnimator = GetComponent<Animator>();
         EnemyRigidbody = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -77,6 +83,7 @@ public class Enemy : MonoBehaviour
                             if (Aiming == false)
                             {
                                 Aiming = true;
+                                enemyWeapon.EnableAimPos(true);
                                 StartCoroutine(AimMode(1f, 0.5f));
                             }
                         }
@@ -101,6 +108,8 @@ public class Enemy : MonoBehaviour
                 EnemyAgent.enabled = true;
             if (Vector3.Distance(transform.position, PlayerController.Player.transform.position) > VisualDetectionRadius / 2)
             {
+                EnemyAnimator.SetBool("Shoot", false);
+                AimIK = false;
                 EnemyAgent.SetDestination(PlayerController.Player.transform.position);
                 if (SpeedChanging == false && Speed != 2f)
                 {
@@ -126,8 +135,19 @@ public class Enemy : MonoBehaviour
                 {
                     if (hit.transform.gameObject.tag == "Player")
                     {
-                        //Shoot At Player
+                        EnemyAnimator.SetBool("Shoot", true);
+                        AimIK = true;
                     }
+                    else
+                    {
+                        EnemyAnimator.SetBool("Shoot", false);
+                        AimIK = true;
+                    }
+                }
+                else
+                {
+                    EnemyAnimator.SetBool("Shoot", false);
+                    AimIK = false;
                 }
             }
 
@@ -161,6 +181,15 @@ public class Enemy : MonoBehaviour
             EnemyAgent.enabled = false;
         }
 
+    }
+    private void LateUpdate()
+    {
+        if(AimIK)
+        {
+            Transform Chest = EnemyAnimator.GetBoneTransform(HumanBodyBones.Chest);
+            Chest.LookAt(PlayerController.Player.transform.position);
+            Chest.rotation = Chest.rotation * Quaternion.Euler(AimOffset);
+        }
     }
     IEnumerator RotateTowardsTarget(Vector3 Target,float Duration)
     {
@@ -206,6 +235,9 @@ public class Enemy : MonoBehaviour
             yield return null;
             t += Time.deltaTime;
         }
-
+    }
+    public void Shoot()
+    {
+        enemyWeapon.Shoot();
     }
 }
