@@ -40,9 +40,10 @@ public class Weapon : MonoBehaviour
             transform.localPosition = AimPos;
             transform.localRotation = Quaternion.Euler(AimRot);
         }
-        else if(PlayerController.Player.Stealth)
+        else if(PlayerController.Player!=null)
         {
-            EnableStealthPos(true);
+            if(PlayerController.Player.Stealth)
+                EnableStealthPos(true);
         }
         else
         {

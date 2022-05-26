@@ -29,8 +29,8 @@ public class EnemyExecution : MonoBehaviour
         ragdollManager.DisableRagdollMode = true;
         if (CurrentEnemyType == EnemyType.Human)
             EnemyController.CurrentEnemyState = Enemy.EnemyState.Execution;
-        //else
-            //Zombie State Change
+        else
+            ZombieController.CurrentState = Zombie.ZombieState.Execution;
         EnemyAnimator.SetFloat("Executions", Execution);
         EnemyAnimator.SetTrigger("StartExecution");
         ragdollManager.Health = 0;

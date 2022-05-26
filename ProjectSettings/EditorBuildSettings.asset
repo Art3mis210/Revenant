@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Desert.unity
     guid: eab08351f289500428aa4b44654760a9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Prologue.unity
     guid: 861ec640ae9378048beed96c8723aad5
   - enabled: 0

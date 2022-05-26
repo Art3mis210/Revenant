@@ -47,16 +47,6 @@ public class PlayerController : MonoBehaviour
     public bool EnableMovement;
     #endregion
 
-    #region Delegates
-    delegate void MovementReference();
-    MovementReference Movement;
-
-    delegate void CoverReference();
-    MovementReference Cover;
-
-    delegate void CoverMoveReference();
-    MovementReference CoverMove;
-    #endregion
 
     private void Awake()
     {
@@ -64,24 +54,11 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        if(CurrentInput==InputType.Mobile)
-        {
-            Movement = MovementGamepad;
-            Cover = CoverGamepad;
-            CoverMove = CoverMoveGamepad;
-        }
-        else
-        {
-            Movement = MovementKeyboard;
-            Cover = CoverKeyboard;
-            CoverMove = CoverMoveKeyboard;
-        }
         PlayerAnimator = GetComponent<Animator>();
         LockRotation = false;
         playerWeapon = GetComponent<PlayerWeapon>();
         playerCollider = GetComponent<CapsuleCollider>();
         EnableMovement = true;
-        ;
     }
 
     // Update is called once per frame
@@ -95,8 +72,7 @@ public class PlayerController : MonoBehaviour
             Cover();
         }
     }
-    #region Gamepad
-    void MovementGamepad()
+    void Movement()
     {
         if (CrossPlatformInputManager.GetAxis("Vertical")!=0f || CrossPlatformInputManager.GetAxis("Horizontal")!=0f)
         {
@@ -126,7 +102,7 @@ public class PlayerController : MonoBehaviour
             }
             LockRotation = false;
         }
-        if(Input.GetKey(KeyCode.LeftShift) || CrossPlatformInputManager.GetButton("Sprint"))
+        if(CrossPlatformInputManager.GetButton("Sprint"))
         {
             if (PlayerSpeed > 0)
             {
@@ -168,11 +144,11 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    void CoverGamepad()
+    void Cover()
     {
         if (!playerWeapon.Aiming)
         {
-            if (Input.GetKeyDown(KeyCode.Q) || CrossPlatformInputManager.GetButtonDown("Cover"))
+            if (CrossPlatformInputManager.GetButtonDown("Cover"))
             {
                 if (!PlayerAnimator.GetBool("Cover"))
                 {
@@ -214,7 +190,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    void CoverMoveGamepad()
+    void CoverMove()
     {
         if (CoverMovement)
         {
@@ -294,205 +270,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    #endregion
-    #region Keyboard
-    void MovementKeyboard()
-    {
-        if (CrossPlatformInputManager.GetAxis("Vertical") != 0f || CrossPlatformInputManager.GetAxis("Horizontal") != 0f)
-        {
-            if (!LockRotation)
-            {
-                LockRotation = true;
-                Vertical = CrossPlatformInputManager.GetAxis("Vertical");
-                Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-                if (!playerWeapon.Aiming)
-                    StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(PlayerCamera.transform.TransformDirection(CrossPlatformInputManager.GetAxis("Horizontal"), 0, CrossPlatformInputManager.GetAxis("Vertical"))), 0.2f));
-                if (PlayerAnimator.GetFloat("Speed") < 1f && !MovementSpeedChanging)
-                {
-                    PlayerAnimator.SetFloat("Speed", 0f);
-                    MovementSpeedChanging = true;
-                    StartCoroutine(ChangeMovementSpeed(1, 0.75f));
-                }
-            }
-        }
-        else
-        {
-            if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 0)
-            {
-                MovementSpeedChanging = true;
-                StartCoroutine(ChangeMovementSpeed(0f, 0.75f));
-            }
-            LockRotation = false;
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if (PlayerSpeed > 0)
-            {
-                PlayerAnimator.SetBool("Sprint", true);
-                if (!Stealth)
-                    NoiseManager.Noise.CreateNoise(transform.position,2f);
-                if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
-                {
-                    MovementSpeedChanging = true;
-                    StartCoroutine(ChangeMovementSpeed(2, 1f));
-                }
-            }
-        }
-        else
-        {
-            PlayerAnimator.SetBool("Sprint", false);
-            if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") == 2)
-            {
-                MovementSpeedChanging = true;
-                StartCoroutine(ChangeMovementSpeed(1, 1f));
-            }
-        }
-        if (playerWeapon.Aiming)
-        {
-            PlayerAnimator.SetFloat("Vertical", CrossPlatformInputManager.GetAxis("Vertical"));
-            PlayerAnimator.SetFloat("Horizontal", CrossPlatformInputManager.GetAxis("Horizontal"));
-            PlayerAnimator.SetFloat("MoveDir", -Mathf.Abs(CrossPlatformInputManager.GetAxis("Vertical")) + Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")));
-        }
-
-        if (!InCover)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                Stealth = !PlayerAnimator.GetBool("Stealth");
-                PlayerAnimator.SetBool("Stealth", Stealth);
-
-            }
-
-        }
-
-    }
-    void CoverKeyboard()
-    {
-        if (!playerWeapon.Aiming)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if (!PlayerAnimator.GetBool("Cover"))
-                {
-                    Debug.DrawRay(transform.position, transform.forward, Color.red);
-                    if (Physics.Raycast(transform.position, transform.forward, out hit, 2f, CoverLayer))
-                    {
-                        InCover = true;
-                    }
-                    else if (Physics.Raycast(transform.position, transform.right, out hit, 2f, CoverLayer))
-                    {
-                        InCover = true;
-                    }
-                    else if (Physics.Raycast(transform.position, -transform.right, out hit, 2f, CoverLayer))
-                    {
-                        InCover = true;
-                    }
-                    else if (Physics.Raycast(transform.position, -transform.forward, out hit, 2f, CoverLayer))
-                    {
-                        InCover = true;
-                    }
-                    if (InCover == true)
-                    {
-                        Vector3 CoverLocation = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-                        PlayerAnimator.SetBool("Cover", true);
-                        //PlayerAnimator.applyRootMotion = false;
-                        StartCoroutine(MovePlayerToTarget(CoverLocation - (playerCollider.radius * (CoverLocation - transform.position).normalized), 1f));
-                        StartCoroutine(RotatePlayerTowardsTarget(transform.localRotation, Quaternion.LookRotation(-hit.normal), 0.2f));
-                        CoverMovement = true;
-                    }
-                }
-                else
-                {
-                    //PlayerAnimator.applyRootMotion = true;
-                    PlayerAnimator.SetBool("Cover", false);
-                    PlayerAnimator.SetBool("CoverAim", false);
-                    InCover = false;
-
-                }
-            }
-        }
-    }
-    void CoverMoveKeyboard()
-    {
-        if (CoverMovement)
-        {
-            Horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            if (Horizontal > 0)
-            {
-                if (CoverDir <= 0 && !ChangingCoverDir)
-                {
-                    ChangingCoverDir = true;
-                    StartCoroutine(ChangeCoverDir(1, 1f));
-                }
-                Debug.DrawRay(transform.position + 0.25f * transform.right, transform.forward, Color.red, 1f);
-                if (Physics.Raycast(transform.position + 0.25f * transform.right, transform.forward, out hit, 2f, CoverLayer))
-                {
-                    if (DisableCoverMovement)
-                        DisableCoverMovement = false;
-                    PlayerAnimator.SetFloat("CoverPos", Horizontal);
-                }
-                else
-                {
-                    if (!DisableCoverMovement)
-                    {
-                        DisableCoverMovement = true;
-                        StartCoroutine(StopCoverMovement(1f));
-                    }
-                }
-            }
-            else if (Horizontal < 0)
-            {
-                if (CoverDir >= 0 && !ChangingCoverDir)
-                {
-                    ChangingCoverDir = true;
-                    StartCoroutine(ChangeCoverDir(-1, 1f));
-                }
-                Debug.DrawRay(transform.position - 0.25f * transform.right, transform.forward, Color.red, 1f);
-                if (Physics.Raycast(transform.position - 0.25f * transform.right, transform.forward, out hit, 2f, CoverLayer))
-                {
-                    if (DisableCoverMovement)
-                        DisableCoverMovement = false;
-                    PlayerAnimator.SetFloat("CoverPos", Horizontal);
-                }
-                else
-                {
-                    if (!DisableCoverMovement)
-                    {
-                        DisableCoverMovement = true;
-                        StartCoroutine(StopCoverMovement(1f));
-                    }
-                }
-            }
-            else
-            {
-                PlayerAnimator.SetFloat("CoverPos", Horizontal);
-            }
-            PlayerAnimator.SetFloat("CoverDir", CoverDir);
-        }
-        if (DisableCoverMovement)
-        {
-            if (Input.GetMouseButtonDown(1) && !CoverAimLock)
-            {
-                if (playerWeapon.CurrentWeapon.gameObject.activeInHierarchy)
-                {
-                    CoverAimLock = true;
-                    PlayerAnimator.SetBool("CoverAim", !PlayerAnimator.GetBool("CoverAim"));
-                    if (PlayerAnimator.GetBool("CoverAim"))
-                    {
-                        CoverPos = transform.position;
-                        CoverRot = transform.rotation;
-                        CoverMovement = false;
-                    }
-                    else
-                    {
-                        Invoke("ReturnToCover", 0.4f);
-                    }
-                }
-            }
-        }
-
-    }
-    #endregion
 
     #region ControlIndependentFunctions
     void ReturnToCover()

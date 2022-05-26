@@ -226,4 +226,21 @@ public class PlayerWeapon : MonoBehaviour
 
         Reticle.anchoredPosition = WorldObject_ScreenPosition;
     }
+    public void ThrowWeapon()
+    {
+        if(CurrentWeapon!=null)
+        {
+            if(CurrentWeapon.gameObject.activeInHierarchy)
+            {
+                Aiming = false;
+                AimCamera.SetActive(false);
+                if (Reticle.gameObject.activeInHierarchy)
+                    Reticle.gameObject.SetActive(false);
+                CurrentWeapon.gameObject.transform.parent = null;
+                CurrentWeapon.gameObject.AddComponent<BoxCollider>().size=CurrentWeapon.transform.lossyScale;
+                CurrentWeapon.gameObject.AddComponent<Rigidbody>();
+                CurrentWeapon.enabled = false;
+            }
+        }
+    }
 }

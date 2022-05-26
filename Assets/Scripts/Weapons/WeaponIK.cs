@@ -27,7 +27,6 @@ public class WeaponIK : MonoBehaviour
     }
     void MoveIKPointGamepad()
     {
-        
         YPos = transform.localPosition.y + (CrossPlatformInputManager.GetAxis("AimUp") / 8) * Speed * Time.deltaTime;
         YPos = Mathf.Clamp(YPos, -0.23f, 5f);
         transform.localPosition = new Vector3(transform.localPosition.x, YPos, transform.localPosition.z);

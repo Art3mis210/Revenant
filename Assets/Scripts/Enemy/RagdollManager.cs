@@ -21,6 +21,7 @@ public class RagdollManager : MonoBehaviour
     public float Health;
     public bool DisableRagdollMode;
     Enemy enemyController;
+    Zombie ZombieController;
     #endregion
 
     void Start()
@@ -33,6 +34,10 @@ public class RagdollManager : MonoBehaviour
         EnableRagdoll(false);
         RagdollBonesPos = new Vector3[12];
         RootParent = Root.transform.parent;
+        if (CurrentEnemyType == EnemyExecution.EnemyType.Human)
+            enemyController = GetComponent<Enemy>();
+        else
+            ZombieController = GetComponent<Zombie>();
     }
 
     public void EnableRagdoll(bool Status)
@@ -64,6 +69,8 @@ public class RagdollManager : MonoBehaviour
                 ExecutionCollider.enabled = !Status;
             if (Status)
             {
+                if(enemyController!=null)
+                    enemyController.AimIK = false;
                 Root.transform.parent = null;
 
                 Invoke("TurnOff", 5f);
@@ -87,7 +94,6 @@ public class RagdollManager : MonoBehaviour
             animator.Rebind();
             if (Physics.Raycast(Rigidbodies[9].transform.position, Rigidbodies[9].transform.up, GroundLayer))
             {
-                Debug.Log("upsidedown");
                 animator.SetFloat("GetUpPose", 1);
             }
             else
@@ -96,7 +102,16 @@ public class RagdollManager : MonoBehaviour
             }
             EnableRagdoll(false);
             timeLerped = 0f;
-        } //stand up
+            if (enemyController != null)
+            {
+                enemyController.CurrentEnemyState = Enemy.EnemyState.AttackPlayer;
+                EnemyAlert.Reference.AlertNearbyEnemies(transform.position, 4f);
+            }
+            else
+            {
+                ZombieController.CurrentState = Zombie.ZombieState.Attack;
+            }
+        } 
         else
         {
             Root.transform.parent = RootParent;

@@ -79,13 +79,16 @@ public class Enemy : MonoBehaviour
                     {
                         if(hit.transform.gameObject.tag=="Player")
                         {
-                            CurrentEnemyState = EnemyState.AttackPlayer;
-                            if (Aiming == false)
+                            if (VisualDetection.DetectPlayer.PlayerDetection(transform.position))
                             {
-                                Aiming = true;
-                                enemyWeapon.EnableAimPos(true);
-                                StartCoroutine(AimMode(1f, 0.5f));
-                                EnemyAlert.Reference.AlertNearbyEnemies(transform.position, 25f);
+                                CurrentEnemyState = EnemyState.AttackPlayer;
+                                if (Aiming == false)
+                                {
+                                    Aiming = true;
+                                    enemyWeapon.EnableAimPos(true);
+                                    StartCoroutine(AimMode(1f, 0.5f));
+                                    EnemyAlert.Reference.AlertNearbyEnemies(transform.position, 25f);
+                                }
                             }
                         }
                     }

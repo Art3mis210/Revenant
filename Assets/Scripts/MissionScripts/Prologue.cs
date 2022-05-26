@@ -9,9 +9,11 @@ public class Prologue : MonoBehaviour
     public GameObject VideoCamera;
     public GameObject Phone;
     private AudioSource audioSource;
+    public Canvas Controls;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        Controls.enabled = false;
     }
     void Update()
     {
@@ -20,7 +22,8 @@ public class Prologue : MonoBehaviour
             if (videoPlayer.frame>0 && !videoPlayer.isPlaying)
             {
                 VideoCamera.SetActive(false);
-                Invoke("TurnOffPhone", 10f);
+                Controls.enabled = true;
+                Invoke("TurnOffPhone", 3f);
                 audioSource.enabled = true;
             }
         }
@@ -28,6 +31,7 @@ public class Prologue : MonoBehaviour
     void TurnOffPhone()
     {
         Phone.SetActive(false);
+        
         
     }
 }

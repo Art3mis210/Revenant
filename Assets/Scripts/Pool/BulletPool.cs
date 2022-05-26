@@ -27,7 +27,10 @@ public class BulletPool : MonoBehaviour
         foreach(Bullet b in BulletList)
         {
             if (!b.transform.gameObject.activeInHierarchy)
+            {
                 return b;
+            }
+                
         }
         return null;
     }
