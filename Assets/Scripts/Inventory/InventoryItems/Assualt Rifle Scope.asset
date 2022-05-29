@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Assualt Rifle Scope
   itemType: 1
-  ID: 4
+  ID: 5
   icon: {fileID: 0}
   Prefab: {fileID: 5164911859192637509, guid: 9e21a0b656412254981f1f165e4991b0, type: 3}

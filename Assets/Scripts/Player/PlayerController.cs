@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float Vertical;
     private float MouseX;
     private float MouseY;
+    private float Stamina = 100f;
     [HideInInspector] public bool Stealth;
     #endregion
 
@@ -107,12 +108,33 @@ public class PlayerController : MonoBehaviour
             if (PlayerSpeed > 0)
             {
                 PlayerAnimator.SetBool("Sprint", true);
-                if(!Stealth)
-                    NoiseManager.Noise.CreateNoise(transform.position,1f);
+                if (!Stealth)
+                {
+                    NoiseManager.Noise.CreateNoise(transform.position, 1f);
+                }
                 if (!MovementSpeedChanging && (int)PlayerAnimator.GetFloat("Speed") != 2)
                 {
                     MovementSpeedChanging = true;
                     StartCoroutine(ChangeMovementSpeed(2, 1f));
+                }
+            }
+            if(PlayerSpeed>1)
+            {
+                if(!Stealth)
+                {
+                    Stamina -= Time.deltaTime;
+                    if (StaminaManager.Reference != null)
+                    {
+                        StaminaManager.Reference.UpdateStamina(Stamina);
+                        if(Stamina<=0f)
+                        {
+                            if (!MovementSpeedChanging)
+                            {
+                                MovementSpeedChanging = true;
+                                StartCoroutine(ChangeMovementSpeed(1, 1f));
+                            }
+                        }
+                    }
                 }
             }
         }    

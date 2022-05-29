@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     Rigidbody BulletRigidbody;
     TrailRenderer bulletTrail;
     public float TimeToTurnOff=3f;
+    public float Damage = 0.5f;
     private void Start()
     {
         BulletRigidbody = GetComponent<Rigidbody>();
@@ -39,7 +40,7 @@ public class Bullet : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (Physics.Raycast(transform.position,transform.forward,out hit,5f))
+        if (Physics.Raycast(transform.position,transform.forward,out hit,4f))
         {
             if (hit.transform.gameObject.layer != 7)
             {
@@ -83,7 +84,7 @@ public class Bullet : MonoBehaviour
                 }
                 else if (hit.transform.tag == "Player")
                 {
-                    hit.transform.GetComponent<BulletHit>().BulletHitReaction(hit.point, transform.forward);
+                    hit.transform.GetComponent<BulletHit>().HitDetection(hit.point, transform.forward,Damage);
                     /* if (hit.transform.GetComponent<BulletHit>().EnableBulletHit)
                      {
                          GameObject bEffect = BulletFleshImpactPool.Reference.GetBulletFleshImpactFromPool(); //Instantiate(BulletFleshImpactPool.Reference.GetBulletFleshImpactFromPool(), hit.point, Quaternion.LookRotation(-hit.normal));

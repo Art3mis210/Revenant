@@ -13,6 +13,7 @@ public class RagdollManager : MonoBehaviour
     private Collider[] Colliders;
     private Animator animator;
     [SerializeField] private RuntimeAnimatorController GetUpController;
+    [SerializeField] private RuntimeAnimatorController CrawlController;
     public GameObject Root;
     public Transform RootParent;
     Vector3[] RagdollBonesPos;
@@ -22,6 +23,7 @@ public class RagdollManager : MonoBehaviour
     public bool DisableRagdollMode;
     Enemy enemyController;
     Zombie ZombieController;
+
     #endregion
 
     void Start()
@@ -90,7 +92,10 @@ public class RagdollManager : MonoBehaviour
             }
             transform.position = new Vector3(Root.transform.GetChild(0).position.x, transform.position.y, Root.transform.GetChild(0).transform.position.z);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Root.transform.GetChild(0).rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-            animator.runtimeAnimatorController = GetUpController;
+            if (ZombieController != null && Health < 10 && CrawlController!=null)
+                animator.runtimeAnimatorController = CrawlController;
+            else
+                animator.runtimeAnimatorController = GetUpController;
             animator.Rebind();
             if (Physics.Raycast(Rigidbodies[9].transform.position, Rigidbodies[9].transform.up, GroundLayer))
             {

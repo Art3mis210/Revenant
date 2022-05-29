@@ -222,6 +222,5 @@ MonoBehaviour:
   BodyMask:
     serializedVersion: 2
     m_Bits: 1024
-  BulletEffect: {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285, type: 3}
-  BulletWallEffect: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
   TimeToTurnOff: 5
+  Damage: 1

@@ -8,8 +8,6 @@ public class BulletHit : MonoBehaviour
     public int FrontBulletHit;
     public bool EnableBulletHit;
     public float Health;
-    Rigidbody PlayerRigidbody;
-    Collider PlayerCollider;
     public CharacterController PlayerCharacterController;
     Rigidbody[] rigidbodies;
     Collider[] colliders;
@@ -18,26 +16,26 @@ public class BulletHit : MonoBehaviour
     HitMeter[] hitMeter;
     private void Start()
     {
-        PlayerRigidbody = GetComponent<Rigidbody>();
-        PlayerCollider = GetComponent<Collider>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         colliders = GetComponentsInChildren<Collider>();
         PlayerAnimator = GetComponent<Animator>();
         EnableBulletHit = true;
         EnableRagdoll(false);
         hitMeter = BulletHitDetection.GetComponentsInChildren<HitMeter>();
+        if(HealthManager.Reference!=null)
+        {
+            HealthManager.Reference.UpdateHealth((int)Health);
+        }
 
     }
     public void EnableRagdoll(bool Status)
     {
         foreach (Rigidbody rb in rigidbodies)
         {
-            if (rb != PlayerRigidbody)
             rb.isKinematic = !Status;
         }
         foreach (Collider col in colliders)
         {
-            if (col != PlayerCollider && col!=PlayerCharacterController)
             {
                 if (col.gameObject.layer == 7)
                 {
@@ -47,8 +45,8 @@ public class BulletHit : MonoBehaviour
                     col.enabled = Status;
             }
         }
-        PlayerRigidbody.isKinematic = Status;
-        PlayerCollider.enabled = !Status;
+      //  PlayerRigidbody.isKinematic = Status;
+      //  PlayerCollider.enabled = !Status;
         PlayerCharacterController.enabled = !Status;
         PlayerAnimator.enabled = !Status;;
         if (Status)
@@ -56,10 +54,11 @@ public class BulletHit : MonoBehaviour
             PlayerWeapon.playerWeapon.ThrowWeapon();
         }
     }
-    public void BulletHitReaction(Vector3 hitPoint,Vector3 hitForward)
+    public void HitDetection(Vector3 hitPoint,Vector3 hitForward,float Damage)
     {
-        Health--;
-        
+        Health-=Damage;
+        if(HealthManager.Reference!=null)
+            HealthManager.Reference.UpdateHealth((int)Health);
         if (EnableBulletHit)
         {
             if (Health > 0)

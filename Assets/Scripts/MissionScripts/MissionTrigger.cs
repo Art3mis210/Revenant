@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MissionTrigger : MonoBehaviour
 {
     public GameObject BlackScreenFade;
+    Image BlackScreenAlpha;
     public static MissionTrigger Reference
     {
         get;
@@ -13,6 +16,7 @@ public class MissionTrigger : MonoBehaviour
     private void Start()
     {
         Reference = this;
+        BlackScreenAlpha = BlackScreenFade.GetComponent<Image>();
     }
     public bool InTrigger;
     public void OnTriggerEnter(Collider other)
@@ -45,5 +49,15 @@ public class MissionTrigger : MonoBehaviour
         {
             BlackScreenFade.GetComponent<Animator>().SetBool("Fade", false);
         }
+    }
+    public void LoadNewScene(string SceneName,float Duration)
+    {
+        StartCoroutine(LoadSceneAfter(SceneName,Duration));
+    }
+    IEnumerator LoadSceneAfter(string SceneName,float Duration)
+    {
+        yield return new WaitForSeconds(Duration);
+        SceneManager.LoadScene(SceneName);
+        
     }
 }

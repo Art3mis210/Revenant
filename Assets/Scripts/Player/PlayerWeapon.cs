@@ -223,7 +223,6 @@ public class PlayerWeapon : MonoBehaviour
         Vector2 WorldObject_ScreenPosition = new Vector2(
         ((ViewportPosition.x * CanvasTransform.sizeDelta.x) - (CanvasTransform.sizeDelta.x * 0.5f)),
         ((ViewportPosition.y * CanvasTransform.sizeDelta.y) - (CanvasTransform.sizeDelta.y * 0.5f)));
-
         Reticle.anchoredPosition = WorldObject_ScreenPosition;
     }
     public void ThrowWeapon()

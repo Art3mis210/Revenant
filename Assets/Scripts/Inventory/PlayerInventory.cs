@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -15,15 +16,18 @@ public class PlayerInventory : MonoBehaviour
     public List<Item> WeaponItems;
     public List<Item> EssentialItems;
 
-
     private GameObject PickIndicator;
     private Animator PlayerAnimator;
     public GameObject KeyboardPickIndicator;
     public GameObject MobilePickIndicator;
-
+    public int AddedItems;
+    public int MaxItems = 20;
+    public InventoryItems[] AllInventoryItems;
+    public int[] Count;
+    bool Loading;
     int Health=10;
     int MaxHealth=100;
-
+    public bool Load;
     public enum ItemType
     {
         BuildingMaterials = 0,
@@ -32,6 +36,30 @@ public class PlayerInventory : MonoBehaviour
     }
     private void Start()
     {
+        if(SceneManager.GetActiveScene().name=="Prologue" || Load==false )
+        {
+            AddedItems = 0;
+            Count = new int[AllInventoryItems.Length];
+        }
+        else
+        {
+            AddedItems = 0;
+            int[] LoadInventory;
+            Count = new int[AllInventoryItems.Length];
+            LoadInventory = PlayerDataSaver.LoadGame().quantity;
+            Loading = true;
+            for(int i=0;i< LoadInventory.Length; i++)
+            {
+                if(LoadInventory[i]>0)
+                {
+                    for(int j=0;j<LoadInventory[i];j++)
+                    {
+                        PickUpItem(null, AllInventoryItems[i]);
+                    }
+                }
+            }
+            Loading = false;
+        }
         PlayerAnimator = GetComponent<Animator>();
         BuildingItems = new List<Item>();
         WeaponItems = new List<Item>();
@@ -65,23 +93,39 @@ public class PlayerInventory : MonoBehaviour
             PickIndicator.SetActive(false);
         }
     }
-    public void PickUpItem(PickableInventoryItem ItemtoPick)
+    public void PickUpItem(PickableInventoryItem ItemtoPick,InventoryItems itemData)
     {
-        PickIndicator.SetActive(false);
-        PlayerAnimator.SetTrigger("Pick");
-        if (ItemtoPick.itemData.itemType == ItemType.BuildingMaterials)
-            AddBuildingMaterials(ItemtoPick);
-        else if (ItemtoPick.itemData.itemType == ItemType.Weapons)
-            AddWeapons(ItemtoPick);
-        else if (ItemtoPick.itemData.itemType == ItemType.Essentials)
-            AddEssentials(ItemtoPick);
+        if (AddedItems < MaxItems)
+        {
+            AddedItems++;
+            for(int i=0;i<AllInventoryItems.Length;i++)
+            {
+                if(AllInventoryItems[i].ID==itemData.ID)
+                {
+                    Count[i]++;
+                }
+            }
+            if (Loading == false)
+            {
+                PickIndicator.SetActive(false);
+                PlayerAnimator.SetTrigger("Pick");
+            }
+            if (itemData.itemType == ItemType.BuildingMaterials)
+                AddBuildingMaterials(ItemtoPick,itemData);
+            else if (itemData.itemType == ItemType.Weapons)
+                AddWeapons(ItemtoPick,itemData);
+            else if (itemData.itemType == ItemType.Essentials)
+                AddEssentials(ItemtoPick,itemData);
+        }
+        PlayerDataSaver.SaveGame(this);
     }
-    void AddBuildingMaterials(PickableInventoryItem ItemtoPick)
+    void AddBuildingMaterials(PickableInventoryItem ItemtoPick, InventoryItems itemData)
     {
-        ItemtoPick.transform.gameObject.SetActive(false);
+        if (ItemtoPick != null)
+            ItemtoPick.transform.gameObject.SetActive(false);
         foreach (Item item in BuildingItems)
         {
-            if(item.ID==ItemtoPick.itemData.ID)
+            if(item.ID==itemData.ID)
             {
                 item.IncreaseQuantity();
                 return;
@@ -93,12 +137,13 @@ public class PlayerInventory : MonoBehaviour
         BuildingItems.Add(newItem.GetComponent<Item>());
         
     }
-    void AddWeapons(PickableInventoryItem ItemtoPick)
+    void AddWeapons(PickableInventoryItem ItemtoPick, InventoryItems itemData)
     {
-        ItemtoPick.transform.gameObject.SetActive(false);
+        if (ItemtoPick != null)
+            ItemtoPick.transform.gameObject.SetActive(false);
         foreach (Item item in WeaponItems)
         {
-            if (item.ID == ItemtoPick.itemData.ID)
+            if (item.ID ==itemData.ID)
             {
                 item.IncreaseQuantity();
                 return;
@@ -106,22 +151,23 @@ public class PlayerInventory : MonoBehaviour
         }
 
         GameObject newItem = Instantiate(ItemPrefab, Weapons.transform);
-        newItem.GetComponent<Item>().CreateItem(ItemtoPick.itemData);
+        newItem.GetComponent<Item>().CreateItem(itemData);
         BuildingItems.Add(newItem.GetComponent<Item>());
     }
-    void AddEssentials(PickableInventoryItem ItemtoPick)
+    void AddEssentials(PickableInventoryItem ItemtoPick, InventoryItems itemData)
     {
-        ItemtoPick.transform.gameObject.SetActive(false);
+        if (ItemtoPick != null)
+            ItemtoPick.transform.gameObject.SetActive(false);
         foreach (Item item in EssentialItems)
         {
-            if (item.ID == ItemtoPick.itemData.ID)
+            if (item.ID == itemData.ID)
             {
                 item.IncreaseQuantity();
                 return;
             }
         }
         GameObject newItem = Instantiate(ItemPrefab, Essentials.transform);
-        newItem.GetComponent<Item>().CreateItem(ItemtoPick.itemData);
+        newItem.GetComponent<Item>().CreateItem(itemData);
         EssentialItems.Add(newItem.GetComponent<Item>());
         AssignItemFunction(newItem.GetComponent<Item>());
     }
@@ -132,6 +178,8 @@ public class PlayerInventory : MonoBehaviour
         else if (item.ID == 1)
             item.UseItem = Bandage;
         else if (item.ID == 2)
+            item.UseItem = EquipWeapon;
+        else
             item.UseItem = EquipWeapon;
     }
     void Medkit()

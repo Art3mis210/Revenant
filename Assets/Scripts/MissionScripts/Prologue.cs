@@ -11,6 +11,8 @@ public class Prologue : MonoBehaviour
     private AudioSource audioSource;
     public Canvas Controls;
     [SerializeField] AudioClip[] Dialogue;
+    public PrologueCutscene cutscene;
+    bool MissionComplete;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -32,21 +34,27 @@ public class Prologue : MonoBehaviour
         }
         else
         {
-            if(MissionTrigger.Reference.InTrigger)
+            if(MissionTrigger.Reference.InTrigger && !MissionComplete)
             {
+                MissionComplete = true;
                 PlayerController.Player.EnableMovement = false;
                 Debug.Log("Mission Complete");
                 MissionTrigger.Reference.Fade();
                 audioSource.PlayOneShot(Dialogue[1]);
                 PlayerPrefs.SetInt("Mission", 1);
-                this.enabled = false;
+                Invoke("EnableCutscene", 5f);
             }
         }
+    }
+    public void EnableCutscene()
+    {
+        audioSource.enabled = false;
+        cutscene.enabled = true;
+        MissionTrigger.Reference.UnFade();
     }
     void TurnOffPhone()
     {
         Phone.SetActive(false);
-        
-        
     }
+    
 }

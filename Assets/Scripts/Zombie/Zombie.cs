@@ -9,8 +9,8 @@ public class Zombie : MonoBehaviour
     public float NoiseDetectionRadius;
     Vector3 NoiseLocation;
     Vector3 NoiseLookAtLocation;
-   
 
+    [SerializeField] LayerMask PlayerLayer;
     Animator EnemyAnimator;
     NavMeshAgent EnemyAgent;
     bool Rotating;
@@ -121,6 +121,33 @@ public class Zombie : MonoBehaviour
                 }
             }
         }
+        else if(CurrentState == ZombieState.Attack)
+        {
+            EnemyAnimator.SetBool("Eat", false);
+            EnemyAgent.SetDestination(PlayerController.Player.transform.position);
+            if(Vector3.Distance(PlayerController.Player.transform.position,transform.position)<1f)
+            {
+                if (Speed > 0f)
+                {
+                    if (SpeedChanging == false)
+                    {
+                        SpeedChanging = true;
+                        StartCoroutine(ChangeSpeed(0f, 1f));
+                    }
+                }
+            }
+            else
+            {
+                if(Speed<2f)
+                {
+                    if (SpeedChanging == false)
+                    {
+                        SpeedChanging = true;
+                        StartCoroutine(ChangeSpeed(2f, 1f));
+                    }
+                }
+            }
+        }
     }
     public Vector3 RandomNavSphere(Vector3 origin, float dist)
     {
@@ -128,7 +155,6 @@ public class Zombie : MonoBehaviour
         randDirection += origin;
         NavMeshHit navHit;
         NavMesh.SamplePosition(randDirection, out navHit, dist, 3);
-        Debug.Log(navHit.position);
         return navHit.position;
     }
     IEnumerator RotateTowardsTarget(Vector3 Target, float Duration)
@@ -166,5 +192,18 @@ public class Zombie : MonoBehaviour
             EnemyAgent.isStopped = false;
             EnemyAgent.speed = 0.1f;
         }
+    }
+    RaycastHit hit;
+    public void HitPlayer(float Damage)
+    {
+        Debug.DrawRay(transform.position + transform.up, transform.forward,Color.black,1f);
+        if(Physics.Raycast(transform.position+transform.up,transform.forward,out hit,2f,PlayerLayer))
+        {
+            hit.transform.gameObject.GetComponent<BulletHit>().HitDetection(hit.point, transform.forward,Damage);
+        }
+    }
+    public void BitePlayer()
+    {
+        PlayerController.Player.GetComponent<BulletHit>().HitDetection(transform.position, transform.forward, 50f);
     }
 }

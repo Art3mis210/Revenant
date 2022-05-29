@@ -8,6 +8,8 @@ public class ZombieBite : MonoBehaviour
     [SerializeField] float TimeInTrigger;
     private Animator ZombieAnimator;
     private CapsuleCollider EnemyCollider;
+    private RagdollManager ragdollManager;
+    Zombie zombie;
 
     Transform Player;
     bool Biting;
@@ -15,28 +17,42 @@ public class ZombieBite : MonoBehaviour
     {
         ZombieAnimator = GetComponentInParent<Animator>();
         EnemyCollider = GetComponentInParent<CapsuleCollider>();
+        zombie = GetComponentInParent<Zombie>();
+        ragdollManager = GetComponentInParent<RagdollManager>();
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (!Biting)
+        if (zombie.CurrentState==Zombie.ZombieState.Attack)
         {
-            TimeInTrigger += Time.deltaTime;
-            if (TimeInTrigger >= TimeToBite)
+            if (!Biting && ragdollManager.Health>=10)
             {
-                EnemyCollider.radius = 0.15f;
-                Biting = true;
-                if (Player == null)
-                    Player = other.transform;
-                PlayerController.Player.EnableMovement = false;
-                PlayerController.Player.transform.GetComponent<PlayerWeapon>().DisableAim();
-                StartCoroutine(MovePlayerTowardsTrigger(1.25f));
+                TimeInTrigger += Time.deltaTime;
+                if (TimeInTrigger >= TimeToBite)
+                {
+                    EnemyCollider.radius = 0.15f;
+                    Biting = true;
+                    if (Player == null)
+                        Player = other.transform;
+                    PlayerController.Player.EnableMovement = false;
+                    PlayerController.Player.transform.GetComponent<PlayerWeapon>().DisableAim();
+                    StartCoroutine(MovePlayerTowardsTrigger(1.25f));
+                }
+                else
+                {
+                    ZombieAnimator.SetBool("Attack", true);
+                }
+            }
+            else
+            {
+                ZombieAnimator.SetBool("Attack",true);
             }
         }
     }
     void OnTriggerExit(Collider other)
     {
         TimeInTrigger = 0;
+        ZombieAnimator.SetBool("Attack", false);
     }
     IEnumerator MovePlayerTowardsTrigger(float Duration)
     {
@@ -51,7 +67,11 @@ public class ZombieBite : MonoBehaviour
             t += Time.deltaTime;
         }
         Player.GetComponent<Animator>().SetTrigger("ZombieBite");
-        
+        Invoke("EnableBiting", 2f);
+    }
+    void EnableBiting()
+    {
+        Biting = false;
     }
 
 }

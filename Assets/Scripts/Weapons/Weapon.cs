@@ -54,10 +54,12 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         if (Aiming)
-        {    if (Physics.Raycast(Muzzle.position, Muzzle.forward, out hit))
-             {
+        {
+            Debug.DrawRay(Muzzle.position, Muzzle.forward, Color.red, 0.1f);    
+            if (Physics.Raycast(Muzzle.position, Muzzle.forward, out hit))
+            {
                 PlayerWeapon.playerWeapon.MoveReticle(hit.point);
-             }
+            }
         }
         if (Aiming && !AimPosEnabled)
         {

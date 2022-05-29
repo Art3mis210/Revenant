@@ -46,7 +46,7 @@ public class PickableInventoryItem : MonoBehaviour
         {
             if(CrossPlatformInputManager.GetButtonDown("Pick"))
             {
-                PlayerInventory.InventoryReference.PickUpItem(this);
+                PlayerInventory.InventoryReference.PickUpItem(this,itemData);
                 InInventory = true;
             }
         }
