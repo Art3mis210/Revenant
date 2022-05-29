@@ -7,16 +7,18 @@ using UnityEngine.SceneManagement;
 public class MissionTrigger : MonoBehaviour
 {
     public GameObject BlackScreenFade;
+    BoxCollider boxC;
     Image BlackScreenAlpha;
     public static MissionTrigger Reference
     {
         get;
         set;
     }
-    private void Start()
+    private void Awake()
     {
         Reference = this;
         BlackScreenAlpha = BlackScreenFade.GetComponent<Image>();
+        boxC = GetComponent<BoxCollider>();
     }
     public bool InTrigger;
     public void OnTriggerEnter(Collider other)
@@ -24,19 +26,16 @@ public class MissionTrigger : MonoBehaviour
         if(other.gameObject==PlayerController.Player.gameObject)
         {
             InTrigger = true;
-        }
-    }
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject == PlayerController.Player.gameObject)
-        {
-            InTrigger = false;
+            boxC.enabled = false;
+
         }
     }
     public void ChangePos(Vector3 pos,string Objective)
     {
         transform.position = pos;
         ObjectiveMarker.Reference.ChangeTarget(gameObject, Objective);
+        InTrigger = false;
+        boxC.enabled = true;
     }
     public void Fade()
     {

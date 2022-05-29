@@ -15,7 +15,7 @@ public class ObjectiveMarker : MonoBehaviour
         get;
         set;
     }
-    void Start()
+    void Awake()
     {
         Objective = transform.GetChild(0).GetComponent<Text>();
         Distance = transform.GetChild(1).GetComponent<Text>();
