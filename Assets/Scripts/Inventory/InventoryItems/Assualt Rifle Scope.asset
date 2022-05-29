@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd6acad33601724c991189d74687fd2, type: 3}
+  m_Name: Assualt Rifle Scope
+  m_EditorClassIdentifier: 
+  ItemName: Assualt Rifle Scope
+  itemType: 1
+  ID: 4
+  icon: {fileID: 0}
+  Prefab: {fileID: 5164911859192637509, guid: 9e21a0b656412254981f1f165e4991b0, type: 3}

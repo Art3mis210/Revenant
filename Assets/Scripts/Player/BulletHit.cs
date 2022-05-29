@@ -10,6 +10,7 @@ public class BulletHit : MonoBehaviour
     public float Health;
     Rigidbody PlayerRigidbody;
     Collider PlayerCollider;
+    public CharacterController PlayerCharacterController;
     Rigidbody[] rigidbodies;
     Collider[] colliders;
     [SerializeField] ParticleSystem ShoulderHit;
@@ -36,7 +37,7 @@ public class BulletHit : MonoBehaviour
         }
         foreach (Collider col in colliders)
         {
-            if (col != PlayerCollider)
+            if (col != PlayerCollider && col!=PlayerCharacterController)
             {
                 if (col.gameObject.layer == 7)
                 {
@@ -48,6 +49,7 @@ public class BulletHit : MonoBehaviour
         }
         PlayerRigidbody.isKinematic = Status;
         PlayerCollider.enabled = !Status;
+        PlayerCharacterController.enabled = !Status;
         PlayerAnimator.enabled = !Status;;
         if (Status)
         {
