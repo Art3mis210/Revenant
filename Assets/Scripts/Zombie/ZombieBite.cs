@@ -67,6 +67,8 @@ public class ZombieBite : MonoBehaviour
             t += Time.deltaTime;
         }
         Player.GetComponent<Animator>().SetTrigger("ZombieBite");
+        PlayerController.Player.InCover = false;
+        PlayerController.Player.GetComponent<Animator>().SetBool("Cover", false);
         Invoke("EnableBiting", 2f);
     }
     void EnableBiting()

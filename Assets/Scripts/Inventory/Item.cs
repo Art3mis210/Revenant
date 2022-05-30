@@ -55,9 +55,9 @@ public class Item : MonoBehaviour
     {
         if (Quantity == 1)
         {
-            if(ItemReference.itemType == PlayerInventory.ItemType.Weapons)
+            if (ItemReference.itemType == PlayerInventory.ItemType.Weapons)
             {
-                if(PlayerWeapon.playerWeapon.CurrentWeapon == ReferenceInScene.GetComponent<Weapon>())
+                if (PlayerWeapon.playerWeapon.CurrentWeapon == ReferenceInScene.GetComponent<Weapon>())
                 {
                     PlayerWeapon.playerWeapon.DisableCurrentWeapon();
                 }
@@ -66,7 +66,10 @@ public class Item : MonoBehaviour
             Destroy(transform.gameObject);
         }
         else
+        {
             DecreaseQuantity();
+        }
+        PlayerInventory.InventoryReference.Count[ID]--;
     }
     public void OnUseItem()
     {
@@ -86,6 +89,7 @@ public class Item : MonoBehaviour
         else
         {
             UseItem();
+            OnDropItem();
         }
     }
 }

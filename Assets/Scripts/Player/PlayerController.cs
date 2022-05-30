@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour
     private Animator PlayerAnimator;
     private bool MovementSpeedChanging;
     private float Horizontal;
+    private CharacterController playerCollider;
     private float Vertical;
     private float MouseX;
     private float MouseY;
-    private float Stamina = 100f;
+    public float Stamina = 100f;
     [HideInInspector] public bool Stealth;
     #endregion
 
@@ -30,7 +31,6 @@ public class PlayerController : MonoBehaviour
     private PlayerWeapon playerWeapon;
     public GameObject PlayerCamera;
     bool LockRotation;
-    private CapsuleCollider playerCollider;
     RaycastHit hit;
     #endregion
 
@@ -52,14 +52,15 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Player = this;
+        EnableMovement = true;
     }
     void Start()
     {
         PlayerAnimator = GetComponent<Animator>();
         LockRotation = false;
         playerWeapon = GetComponent<PlayerWeapon>();
-        playerCollider = GetComponent<CapsuleCollider>();
-        EnableMovement = true;
+        playerCollider = GetComponent<CharacterController>();
+        StaminaManager.Reference.UpdateStamina(Stamina);
     }
 
     // Update is called once per frame
@@ -71,6 +72,21 @@ public class PlayerController : MonoBehaviour
             else
                 CoverMove();
             Cover();
+        }
+        else
+        {
+            if(PlayerSpeed>0)
+            {
+                if(!MovementSpeedChanging)
+                {
+                    MovementSpeedChanging = true;
+                    StartCoroutine(ChangeMovementSpeed(0f, 0.75f));
+                }
+            }
+        }
+        if(CrossPlatformInputManager.GetButton("Pause") && Time.timeScale!=0)
+        {
+            PauseMenu.Reference.PauseGame();
         }
     }
     void Movement()
@@ -122,7 +138,8 @@ public class PlayerController : MonoBehaviour
             {
                 if(!Stealth)
                 {
-                    Stamina -= Time.deltaTime;
+                    if(Stamina>0)
+                        Stamina -= Time.deltaTime;
                     if (StaminaManager.Reference != null)
                     {
                         StaminaManager.Reference.UpdateStamina(Stamina);
@@ -160,7 +177,6 @@ public class PlayerController : MonoBehaviour
             {
                 Stealth = !PlayerAnimator.GetBool("Stealth");
                 PlayerAnimator.SetBool("Stealth", Stealth);
-                
             }
 
         }

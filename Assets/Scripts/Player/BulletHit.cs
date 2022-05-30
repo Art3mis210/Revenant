@@ -56,11 +56,11 @@ public class BulletHit : MonoBehaviour
     }
     public void HitDetection(Vector3 hitPoint,Vector3 hitForward,float Damage)
     {
-        Health-=Damage;
-        if(HealthManager.Reference!=null)
-            HealthManager.Reference.UpdateHealth((int)Health);
         if (EnableBulletHit)
         {
+            Health -= Damage;
+            if (HealthManager.Reference != null)
+                HealthManager.Reference.UpdateHealth((int)Health);
             if (Health > 0)
             {
                 if (!PlayerController.Player.InCover && PlayerController.Player.EnableMovement == true)
@@ -126,5 +126,13 @@ public class BulletHit : MonoBehaviour
     private void Update()
     {
         BulletHitDetection.transform.rotation = Quaternion.Euler(BulletHitDetection.transform.rotation.eulerAngles.x, BulletHitDetection.transform.rotation.eulerAngles.y, PlayerController.Player.PlayerCamera.transform.rotation.eulerAngles.y - transform.rotation.eulerAngles.y);
+    }
+    public void ChangeHealth(int DeltaHealth)
+    {
+        Health += DeltaHealth;
+        if (Health > 100)
+            Health = 100;
+        if (HealthManager.Reference != null)
+            HealthManager.Reference.UpdateHealth((int)Health);
     }
 }

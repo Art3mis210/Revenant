@@ -9,6 +9,7 @@ public class MissionTrigger : MonoBehaviour
     public GameObject BlackScreenFade;
     BoxCollider boxC;
     Image BlackScreenAlpha;
+    public bool DisableTriggerChange;
     public static MissionTrigger Reference
     {
         get;
@@ -23,11 +24,13 @@ public class MissionTrigger : MonoBehaviour
     public bool InTrigger;
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject==PlayerController.Player.gameObject)
+        if (!DisableTriggerChange)
         {
-            InTrigger = true;
-            boxC.enabled = false;
-
+            if (other.gameObject == PlayerController.Player.gameObject)
+            {
+                InTrigger = true;
+                boxC.enabled = false;
+            }
         }
     }
     public void ChangePos(Vector3 pos,string Objective)
@@ -41,12 +44,14 @@ public class MissionTrigger : MonoBehaviour
     {
         BlackScreenFade.GetComponent<Animator>().Rebind();
         BlackScreenFade.SetActive(true);
+        PlayerController.Player.GetComponent<BulletHit>().EnableBulletHit = false;
     }
     public void UnFade()
     {
         if(BlackScreenFade.activeInHierarchy)
         {
             BlackScreenFade.GetComponent<Animator>().SetBool("Fade", false);
+            PlayerController.Player.GetComponent<BulletHit>().EnableBulletHit = true;
         }
     }
     public void LoadNewScene(string SceneName,float Duration)
@@ -57,6 +62,10 @@ public class MissionTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(Duration);
         SceneManager.LoadScene(SceneName);
-        
+    }
+    public void FadeThenUnfade()
+    {
+        Fade();
+        Invoke("UnFade", 5f);
     }
 }

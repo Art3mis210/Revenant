@@ -36,7 +36,7 @@ public class PlayerInventory : MonoBehaviour
     }
     private void Start()
     {
-        if(SceneManager.GetActiveScene().name=="Prologue" || Load==false )
+        if(Load==false)
         {
             AddedItems = 0;
             Count = new int[AllInventoryItems.Length];
@@ -117,7 +117,6 @@ public class PlayerInventory : MonoBehaviour
             else if (itemData.itemType == ItemType.Essentials)
                 AddEssentials(ItemtoPick,itemData);
         }
-        PlayerDataSaver.SaveGame(this);
     }
     void AddBuildingMaterials(PickableInventoryItem ItemtoPick, InventoryItems itemData)
     {
@@ -185,7 +184,7 @@ public class PlayerInventory : MonoBehaviour
     void Medkit()
     {
         Debug.Log("Health increased to Max");
-        Health = MaxHealth;
+        PlayerController.Player.GetComponent<BulletHit>().ChangeHealth(50);
     }
     void Bandage()
     {

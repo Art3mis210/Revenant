@@ -6,21 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Desert.unity
-    guid: eab08351f289500428aa4b44654760a9
-  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Prologue.unity
     guid: 861ec640ae9378048beed96c8723aad5
-  - enabled: 0
-    path: Assets/Scenes/Cliff.unity
-    guid: 138d03df0176a7945844a81ab4a7d5b3
-  - enabled: 0
-    path: Assets/Scenes/FinalScenes/PrologueIntro.unity
-    guid: 46c11e16e25b1ca4baef26266133410c
   - enabled: 1
     path: Assets/Scenes/Dark/Dark.unity
     guid: fd61a6092a9182642ae100fa6908bdbf
+  - enabled: 1
+    path: Assets/Scenes/Cliff.unity
+    guid: 138d03df0176a7945844a81ab4a7d5b3
+  - enabled: 1
+    path: Assets/Scenes/Industrial.unity
+    guid: 480d67bf4cbacde4e9169bf02a7c72d7
+  - enabled: 1
+    path: Assets/Scenes/Desert.unity
+    guid: eab08351f289500428aa4b44654760a9
+  - enabled: 0
+    path: Assets/Scenes/FinalScenes/PrologueIntro.unity
+    guid: 46c11e16e25b1ca4baef26266133410c
   m_configObjects: {}

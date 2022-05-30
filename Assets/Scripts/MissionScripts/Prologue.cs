@@ -12,6 +12,7 @@ public class Prologue : MonoBehaviour
     public Canvas Controls;
     [SerializeField] AudioClip[] Dialogue;
     public PrologueCutscene cutscene;
+    public GameObject Civilians;
     bool MissionComplete;
     private void Start()
     {
@@ -26,10 +27,12 @@ public class Prologue : MonoBehaviour
             {
                 VideoCamera.SetActive(false);
                 Controls.enabled = true;
+                Civilians.SetActive(true);
                 Invoke("TurnOffPhone", 3f);
                 audioSource.enabled = true;
                 MissionTrigger.Reference.ChangePos(new Vector3(-98.3899994f, 1.34461617f, -112.940002f),"Return To Home");
                 audioSource.PlayOneShot(Dialogue[0]);
+                
             }
         }
         else

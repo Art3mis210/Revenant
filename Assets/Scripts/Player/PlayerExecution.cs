@@ -26,6 +26,7 @@ public class PlayerExecution : MonoBehaviour
     PlayerController playerController;
     bool InterrogationMode;
     [SerializeField] AudioClip ExecutionSound;
+    [SerializeField] AudioClip Talk;
 
     private void Start()
     {
@@ -47,11 +48,16 @@ public class PlayerExecution : MonoBehaviour
         {
             if (!InterrogationMenu.activeInHierarchy)
                 InterrogationMenu.SetActive(true);
-            if(Input.GetKey(KeyCode.I) || CrossPlatformInputManager.GetButtonDown("InterrogateEnemy"))
+            if(CrossPlatformInputManager.GetButton("InterrogateEnemy"))
             {
+                if (!enemy.Interrogated)
+                {
+                    transform.GetComponent<AudioSource>().PlayOneShot(Talk);
+                    enemy.Interrogate();
+                }
                 //Mark Enemies
             }
-            else if(Input.GetKey(KeyCode.O) || CrossPlatformInputManager.GetButtonDown("Kill"))
+            else if(CrossPlatformInputManager.GetButton("Kill"))
             {
                 //kill
                 playerAnimator.SetInteger("InterrogatePos", 1);
@@ -59,7 +65,7 @@ public class PlayerExecution : MonoBehaviour
                 InterrogationMode = false;
                 InterrogationMenu.SetActive(false);
             }
-            else if(Input.GetKey(KeyCode.P) || CrossPlatformInputManager.GetButtonDown("Release"))
+            else if(CrossPlatformInputManager.GetButton("Release"))
             {
                 //release
                 playerAnimator.SetInteger("InterrogatePos", -1);
@@ -137,7 +143,6 @@ public class PlayerExecution : MonoBehaviour
             playerAnimator.SetFloat("Executions", Execution);
             playerAnimator.SetTrigger("StartExecution");
             enemy.StartExecution(Execution);
-            NoiseManager.Noise.CreateNoise(transform.position,0.1f);
         }
         else
         {

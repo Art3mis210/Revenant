@@ -853,6 +853,8 @@ MonoBehaviour:
   QuantityText: {fileID: 8450758389197215353}
   ItemImage: {fileID: 0}
   UseDropButton: {fileID: 225817381491905010}
+  ItemReference: {fileID: 0}
+  ReferenceInScene: {fileID: 0}
 --- !u!114 &7305109840215245526
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,14 +23,23 @@ public class Dark : MonoBehaviour
         {
             if (MissionCount < Locations.Length-1)
             {
-                audioS.PlayOneShot(audioC[MissionCount]);
+                MissionTrigger.Reference.FadeThenUnfade();
+                Invoke("PlayAudio", 5f);
                 MissionCount++;
                 MissionTrigger.Reference.ChangePos(Locations[MissionCount], Objectives[MissionCount]);
             }
             else
             {
+                
                 audioS.PlayOneShot(audioC[MissionCount]);
+                MissionTrigger.Reference.Fade();
+                MissionTrigger.Reference.LoadNewScene("Cliff", 5f);
+                MissionCount = -1;
             }
         }
+    }
+    void PlayAudio()
+    {
+        audioS.PlayOneShot(audioC[MissionCount-1]);
     }
 }

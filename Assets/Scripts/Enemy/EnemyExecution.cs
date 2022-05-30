@@ -14,13 +14,26 @@ public class EnemyExecution : MonoBehaviour
     RagdollManager ragdollManager;
     Animator EnemyAnimator;
     CapsuleCollider EnemyCollider;
+    [SerializeField] AudioClip[] Dialogue;
+    public DialogueType CurrentDialogue;
+    public GameObject[] InterrogationObjects;
+    AudioSource audioS;
+    public bool Interrogated;
+    public enum DialogueType
+    {
+        Team,Weapon,none
+    }
     private void Start()
     {
         EnemyAnimator = transform.GetComponentInParent<Animator>();
         EnemyCollider = transform.GetComponentInParent<CapsuleCollider>();
         ragdollManager= transform.GetComponentInParent<RagdollManager>();
         if (CurrentEnemyType == EnemyType.Human)
+        {
             EnemyController = transform.GetComponentInParent<Enemy>();
+            audioS=gameObject.AddComponent<AudioSource>();
+            audioS.spatialBlend = 1;
+        }
         else
             ZombieController = transform.GetComponentInParent<Zombie>();
     }
@@ -33,6 +46,7 @@ public class EnemyExecution : MonoBehaviour
             ZombieController.CurrentState = Zombie.ZombieState.Execution;
         EnemyAnimator.SetFloat("Executions", Execution);
         EnemyAnimator.SetTrigger("StartExecution");
+        EnemyTracker.Reference.Count++;
         ragdollManager.Health = 0;
     }
     public void StartInterrogation(float Execution)
@@ -41,10 +55,14 @@ public class EnemyExecution : MonoBehaviour
         EnemyController.CurrentEnemyState = Enemy.EnemyState.Execution;
         EnemyAnimator.SetInteger("InterrogatePos", 0);
         EnemyAnimator.SetTrigger("Interrogate");
+        
     }
     public void InterrogationKill()
     {
+        audioS.Pause();
+        Destroy(audioS);
         EnemyAnimator.SetInteger("InterrogatePos", 1);
+        EnemyTracker.Reference.Count++;
         ragdollManager.Health = 0;
     }
     public void InterrogationRelease()
@@ -52,6 +70,43 @@ public class EnemyExecution : MonoBehaviour
         EnemyAnimator.SetInteger("InterrogatePos", -1);
         ReduceEnemyCollider(false);
         ragdollManager.DisableRagdollMode = false;
+    }
+    public void Interrogate()
+    {
+        Interrogated = true;
+        Invoke("PlayDialogue", 0.5f);
+    }
+    void PlayDialogue()
+    {
+        if (audioS != null)
+        {
+            if (CurrentDialogue == EnemyExecution.DialogueType.Team)
+            {
+                audioS.PlayOneShot(Dialogue[0]);
+                foreach (GameObject go in InterrogationObjects)
+                {
+                    if (go.GetComponent<Outline>() == null)
+                        go.AddComponent<Outline>().OutlineColor = Color.red;
+                    go.GetComponent<Outline>().OutlineWidth = 10f;
+                }
+            }
+            else if (CurrentDialogue == EnemyExecution.DialogueType.Weapon)
+            {
+                audioS.PlayOneShot(Dialogue[1]);
+                foreach (GameObject go in InterrogationObjects)
+                {
+                    if (go.GetComponent<Outline>() == null)
+                    {
+                        go.AddComponent<Outline>().OutlineColor = Color.green;
+                    }
+                    go.GetComponent<Outline>().OutlineWidth = 10f;
+                }
+            }
+            else
+            {
+                audioS.PlayOneShot(Dialogue[2]);
+            }
+        }
     }
     public void ReduceEnemyCollider(bool Status)
     {

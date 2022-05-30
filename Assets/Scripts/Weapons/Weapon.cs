@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
     public Vector3 NonAimStealthPos;
     public Vector3 NonAimStealthRot;
     public int ReticleType;
+    public bool Suppressed;
     bool AimPosEnabled;
     bool Aiming;
     bool StealthPos;
@@ -95,7 +96,8 @@ public class Weapon : MonoBehaviour
             BulletToFire.transform.position = Muzzle.transform.position;
             BulletToFire.transform.rotation = Muzzle.transform.rotation;
             BulletToFire.gameObject.SetActive(true);
-
+            if (Suppressed == false)
+                NoiseManager.Noise.CreateNoise(transform.position, 50f);
             BulletToFire.GetComponent<Rigidbody>().AddForce(BulletSpeed * Muzzle.transform.forward);
             LoadedBullets--;
         }

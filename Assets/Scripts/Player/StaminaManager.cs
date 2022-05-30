@@ -13,7 +13,7 @@ public class StaminaManager : MonoBehaviour
         get;
         set;
     }
-    private void Start()
+    private void Awake()
     {
         Reference = this;
         Bar = GetComponent<Image>();
