@@ -18,6 +18,7 @@ public class Prologue : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         Controls.enabled = false;
+        PlayerPrefs.SetInt("Mission", 0);
     }
     void Update()
     {
@@ -44,7 +45,6 @@ public class Prologue : MonoBehaviour
                 Debug.Log("Mission Complete");
                 MissionTrigger.Reference.Fade();
                 audioSource.PlayOneShot(Dialogue[1]);
-                PlayerPrefs.SetInt("Mission", 1);
                 Invoke("EnableCutscene", 5f);
             }
         }

@@ -15,5 +15,5 @@ MonoBehaviour:
   ItemName: Kilo
   itemType: 1
   ID: 7
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 34e19709115ec724fa2af95096f544ba, type: 3}
   Prefab: {fileID: 2970412004997015049, guid: d69aacd3fc781bb49bac2cedc6220cc9, type: 3}

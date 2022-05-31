@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
                     {
                         Debug.Log(BodyHit.transform.gameObject.name);
                         if (BodyHit.transform.GetComponent<BulletDamage>() != null)
-                            BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
+                            BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth((int)Damage);
                         BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(20, BodyHit.point, 50f, 70f, ForceMode.Impulse);
                         GameObject bEffect = BulletFleshImpactPool.Reference.GetBulletFleshImpactFromPool(); //Instantiate(BulletFleshImpactPool.Reference.GetBulletFleshImpactFromPool(), hit.point, Quaternion.LookRotation(-hit.normal));
                         bEffect.transform.position = BodyHit.point;
@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour
                 else if (Physics.Raycast(hit.point, transform.forward, out BodyHit, 4f, BodyMask))
                 {
                     if (BodyHit.transform.GetComponent<BulletDamage>() != null)
-                        BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth();
+                        BodyHit.transform.GetComponent<BulletDamage>().ModifyHealth((int)Damage);
                     BodyHit.transform.gameObject.GetComponent<Rigidbody>().AddExplosionForce(20, BodyHit.point, 50f, 70f, ForceMode.Impulse);
                     GameObject bEffect = BulletFleshImpactPool.Reference.GetBulletFleshImpactFromPool(); //Instantiate(BulletFleshImpactPool.Reference.GetBulletFleshImpactFromPool(), hit.point, Quaternion.LookRotation(-hit.normal));
                     bEffect.transform.position = BodyHit.point;

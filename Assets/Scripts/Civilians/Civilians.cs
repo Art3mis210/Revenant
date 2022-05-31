@@ -22,7 +22,7 @@ public class Civilians : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, WanderPosition) < 5f)
         {
-            EnemyAgent.SetDestination(WanderPosition = RandomNavSphere(transform.position, Random.Range(100, 200)));
+            EnemyAgent.SetDestination(WanderPosition = RandomNavSphere(transform.position, Random.Range(10, 20)));
         }
     }
     public Vector3 RandomNavSphere(Vector3 origin, float dist)

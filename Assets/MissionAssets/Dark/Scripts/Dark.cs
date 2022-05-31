@@ -14,6 +14,7 @@ public class Dark : MonoBehaviour
         MissionCount = 0;
         MissionTrigger.Reference.ChangePos(Locations[0], Objectives[0]);
         audioS = GetComponent<AudioSource>();
+        PlayerPrefs.SetInt("Mission", 1);
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class Dark : MonoBehaviour
             {
                 
                 audioS.PlayOneShot(audioC[MissionCount]);
+                PlayerDataSaver.SaveGame(PlayerInventory.InventoryReference);
                 MissionTrigger.Reference.Fade();
                 MissionTrigger.Reference.LoadNewScene("Cliff", 5f);
                 MissionCount = -1;

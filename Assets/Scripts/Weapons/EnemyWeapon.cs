@@ -14,6 +14,7 @@ public class EnemyWeapon : MonoBehaviour
 
     public Transform Muzzle;
     public ParticleSystem MuzzleFlash;
+    int Damage = 1;
     private void Start()
     {
         EnemyController = transform.GetComponentInParent<Enemy>();
@@ -37,6 +38,7 @@ public class EnemyWeapon : MonoBehaviour
         newBullet.transform.position = Muzzle.position;
         newBullet.transform.rotation = Muzzle.rotation;
         newBullet.transform.gameObject.SetActive(true);
+        newBullet.Damage = Damage;
         newBullet.GetComponent<Rigidbody>().AddForce(BulletSpeed * Muzzle.transform.forward);
         MuzzleFlash.Play();
     }

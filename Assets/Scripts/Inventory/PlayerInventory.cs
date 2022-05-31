@@ -76,6 +76,10 @@ public class PlayerInventory : MonoBehaviour
         {
             Inventory.SetActive(!Inventory.activeInHierarchy);
         }
+        if(Input.GetKey(KeyCode.P))
+        {
+            PlayerDataSaver.SaveGame(this);
+        }
     }
     public static PlayerInventory InventoryReference
     { 
@@ -176,6 +180,8 @@ public class PlayerInventory : MonoBehaviour
             item.UseItem = Medkit;
         else if (item.ID == 1)
             item.UseItem = Bandage;
+        else if (item.ID == 9)
+            item.UseItem = EnergyDrink;
         else if (item.ID == 2)
             item.UseItem = EquipWeapon;
         else
@@ -188,13 +194,14 @@ public class PlayerInventory : MonoBehaviour
     }
     void Bandage()
     {
+        PlayerController.Player.GetComponent<BulletHit>().ChangeHealth(25);
         Debug.Log("Health Increase by 25");
-        if (MaxHealth - Health > 25)
-        {
-            Health += 25;
-        }
-        else
-            Health = MaxHealth;
+    }
+    void EnergyDrink()
+    {
+        PlayerController.Player.Stamina = 100;
+        if (StaminaManager.Reference != null)
+            StaminaManager.Reference.UpdateStamina(100);
     }
     void EquipWeapon()
     {

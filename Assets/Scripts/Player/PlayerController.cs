@@ -60,7 +60,8 @@ public class PlayerController : MonoBehaviour
         LockRotation = false;
         playerWeapon = GetComponent<PlayerWeapon>();
         playerCollider = GetComponent<CharacterController>();
-        StaminaManager.Reference.UpdateStamina(Stamina);
+        if(StaminaManager.Reference!=null)
+            StaminaManager.Reference.UpdateStamina(Stamina);
     }
 
     // Update is called once per frame

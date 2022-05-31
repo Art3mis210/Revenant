@@ -27,9 +27,13 @@ public class Weapon : MonoBehaviour
     public Vector3 NonAimStealthRot;
     public int ReticleType;
     public bool Suppressed;
+    public float Damage = 1f;
     bool AimPosEnabled;
     bool Aiming;
     bool StealthPos;
+    public ParticleSystem MuzzleEffect;
+    public AudioClip GunSound;
+    AudioSource audioS;
     RaycastHit hit;
     #endregion
     private void OnEnable()
@@ -51,6 +55,9 @@ public class Weapon : MonoBehaviour
             transform.localPosition = NonAimStandPos;
             transform.localRotation = Quaternion.Euler(NonAimStandRot);
         }
+        if(transform.GetComponentInChildren<ParticleSystem>()!=null)
+            MuzzleEffect = transform.GetComponentInChildren<ParticleSystem>();
+        audioS = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -96,8 +103,12 @@ public class Weapon : MonoBehaviour
             BulletToFire.transform.position = Muzzle.transform.position;
             BulletToFire.transform.rotation = Muzzle.transform.rotation;
             BulletToFire.gameObject.SetActive(true);
+            BulletToFire.Damage = Damage;
+            if (MuzzleEffect != null)
+                MuzzleEffect.Play();
+            audioS.PlayOneShot(GunSound);
             if (Suppressed == false)
-                NoiseManager.Noise.CreateNoise(transform.position, 50f);
+                NoiseManager.Noise.CreateNoise(transform.position, 50f*Damage);
             BulletToFire.GetComponent<Rigidbody>().AddForce(BulletSpeed * Muzzle.transform.forward);
             LoadedBullets--;
         }

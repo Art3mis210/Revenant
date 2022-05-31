@@ -12,6 +12,7 @@ public class Industrial : MonoBehaviour
         PlayerController.Player.EnableMovement = false;
         MissionTrigger.Reference.ChangePos(JackLocation, "Rescue Jack");
         Invoke("PlayDialogue", 10f);
+        PlayerPrefs.SetInt("Mission", 3);
     }
     private void Update()
     {

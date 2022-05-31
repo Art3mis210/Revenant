@@ -10,8 +10,8 @@ public class BulletDamage : MonoBehaviour
     {
         ragdoll = transform.GetComponentInParent<RagdollManager>();
     }
-    public void ModifyHealth()
+    public void ModifyHealth(int Damage)
     {
-        ragdoll.ChangeHealth(HealthChange);
+        ragdoll.ChangeHealth(HealthChange-Damage);
     }
 }

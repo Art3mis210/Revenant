@@ -17,6 +17,7 @@ public class Cliff : MonoBehaviour
         MissionTrigger.Reference.ChangePos(Locations[MissionCount],Objectives[MissionCount]);
         MissionTrigger.Reference.DisableTriggerChange = true;
         audioS = GetComponent<AudioSource>();
+        PlayerPrefs.SetInt("Mission", 2);
     }
     void Update()
     {
@@ -57,6 +58,7 @@ public class Cliff : MonoBehaviour
         audioS.PlayOneShot(audioC[MissionCount]);
         MissionCount++;
         MissionTrigger.Reference.Fade();
+        PlayerDataSaver.SaveGame(PlayerInventory.InventoryReference);
         Invoke("LoadNextScene", 3f);
     }
     void LoadNextScene()

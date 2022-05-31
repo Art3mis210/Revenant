@@ -70,6 +70,7 @@ public class Item : MonoBehaviour
             DecreaseQuantity();
         }
         PlayerInventory.InventoryReference.Count[ID]--;
+        PlayerInventory.InventoryReference.AddedItems--;
     }
     public void OnUseItem()
     {

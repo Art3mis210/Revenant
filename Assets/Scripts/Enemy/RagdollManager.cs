@@ -120,7 +120,8 @@ public class RagdollManager : MonoBehaviour
         else
         {
             Root.transform.parent = RootParent;
-            EnemyTracker.Reference.Count++;
+            if(EnemyTracker.Reference!=null)
+                EnemyTracker.Reference.Count++;
             gameObject.SetActive(false);
         }
 
